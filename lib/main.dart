@@ -1,4 +1,4 @@
-import 'package:ane_buddy/presentation/pages/profile_page.dart';
+import 'package:ane_buddy/presentation/profile/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
