@@ -26,6 +26,8 @@ dependencies:
   datetime_picker_formfield: ^1.0.0
   freezed_annotation: ^0.11.0
   flutter_bloc: ^6.0.1
+  injectable: ^1.0.2
+  get_it: ^4.0.4
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -37,6 +39,7 @@ dev_dependencies:
     sdk: flutter
   build_runner:
   freezed: ^0.11.4
+  injectable_generator: ^1.0.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
