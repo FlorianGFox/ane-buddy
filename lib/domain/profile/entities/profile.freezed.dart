@@ -8,6 +8,9 @@ part of 'profile.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+Profile _$ProfileFromJson(Map<String, dynamic> json) {
+  return _Profile.fromJson(json);
+}
 
 class _$ProfileTearOff {
   const _$ProfileTearOff();
@@ -57,6 +60,7 @@ mixin _$Profile {
   DateTime get dentalExamDate;
   DateTime get approvalDate;
 
+  Map<String, dynamic> toJson();
   $ProfileCopyWith<Profile> get copyWith;
 }
 
@@ -196,6 +200,7 @@ class __$ProfileCopyWithImpl<$Res> extends _$ProfileCopyWithImpl<$Res>
   }
 }
 
+@JsonSerializable()
 class _$_Profile implements _Profile {
   const _$_Profile(
       {this.firstName,
@@ -209,6 +214,9 @@ class _$_Profile implements _Profile {
       this.medicalExamDate,
       this.dentalExamDate,
       this.approvalDate});
+
+  factory _$_Profile.fromJson(Map<String, dynamic> json) =>
+      _$_$_ProfileFromJson(json);
 
   @override
   final String firstName;
@@ -295,6 +303,11 @@ class _$_Profile implements _Profile {
   @override
   _$ProfileCopyWith<_Profile> get copyWith =>
       __$ProfileCopyWithImpl<_Profile>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_ProfileToJson(this);
+  }
 }
 
 abstract class _Profile implements Profile {
@@ -310,6 +323,8 @@ abstract class _Profile implements Profile {
       DateTime medicalExamDate,
       DateTime dentalExamDate,
       DateTime approvalDate}) = _$_Profile;
+
+  factory _Profile.fromJson(Map<String, dynamic> json) = _$_Profile.fromJson;
 
   @override
   String get firstName;

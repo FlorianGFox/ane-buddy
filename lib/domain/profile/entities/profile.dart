@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'profile.freezed.dart';
+part 'profile.g.dart';
 
 @freezed
 abstract class Profile with _$Profile {
@@ -17,4 +18,6 @@ abstract class Profile with _$Profile {
     DateTime dentalExamDate,
     DateTime approvalDate,
   }) = _Profile;
+  factory Profile.fromJson(Map<String, dynamic> json) =>
+      _$ProfileFromJson(json);
 }
