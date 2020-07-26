@@ -1,13 +1,21 @@
+import 'package:hive/hive.dart';
+
 class HiveRepo {
-  void save(String key, String json) {
-    //Todo implement
+  final Box hiveBox;
+
+  HiveRepo.box(this.hiveBox);
+
+  HiveRepo.name(String boxName) : hiveBox = Hive.box(boxName);
+
+  void save(String key, String value) {
+    hiveBox.put(key, value);
   }
 
-  void update(String key, String json) {
-    //Todo implement
+  dynamic load(String key) {
+    return hiveBox.get(key);
   }
 
   void delete(String key) {
-    //Todo implement
+    hiveBox.delete(key);
   }
 }
