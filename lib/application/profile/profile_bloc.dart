@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
-import '../../domain/entities/profile.dart';
+import '../../domain/profile/entities/profile.dart';
 
 part 'profile_bloc.freezed.dart';
 part 'profile_event.dart';
