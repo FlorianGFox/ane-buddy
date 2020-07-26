@@ -5,6 +5,7 @@ import 'injection.dart';
 import 'presentation/profile/pages/profile_page.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   configureInjection(Environment.prod);
   runApp(MyApp());
 }
