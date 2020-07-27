@@ -8,7 +8,7 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/get_it_helper.dart';
 
 import 'application/profile/profile_bloc.dart';
-import 'infrastructure/profile/profile_repo.dart';
+import 'infrastructure/profile/profile_dao_impl.dart';
 
 /// adds generated dependencies
 /// to the provided [GetIt] instance
@@ -16,5 +16,5 @@ import 'infrastructure/profile/profile_repo.dart';
 void $initGetIt(GetIt g, {String environment}) {
   final gh = GetItHelper(g, environment);
   gh.factory<ProfileBloc>(() => ProfileBloc());
-  gh.lazySingleton<ProfileRepo>(() => ProfileRepo());
+  gh.lazySingleton<ProfileDaoImpl>(() => ProfileDaoImpl());
 }

@@ -6,7 +6,7 @@ import '../../domain/profile/repositories/profile_dao.dart';
 import '../../domain/profile/repositories/repo_failure.dart';
 
 @lazySingleton
-class ProfileRepo implements ProfileDao {
+class ProfileDaoImpl implements ProfileDao {
   @override
   Future<Either<RepoFailure, Profile>> load() {
     // TODO: implement load
