@@ -8,15 +8,15 @@ abstract class Profile with _$Profile {
   const factory Profile({
     String firstName,
     String lastName,
-    DateTime birthday,
+    String birthday,
     String birthPlace,
     bool hasDrMed,
     String otherDegrees,
     bool hasForeignDegree,
-    bool foreignDegrees,
-    DateTime medicalExamDate,
-    DateTime dentalExamDate,
-    DateTime approvalDate,
+    String foreignDegrees,
+    String medicalExamDate,
+    String dentalExamDate,
+    String approvalDate,
   }) = _Profile;
   factory Profile.fromJson(Map<String, dynamic> json) =>
       _$ProfileFromJson(json);

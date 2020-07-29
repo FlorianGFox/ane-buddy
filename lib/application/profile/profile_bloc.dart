@@ -33,8 +33,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   Stream<ProfileState> _mapSave(ProfileEvent event) async* {
     yield ProfileState.saving();
     var result = await profileDao.save(event.profile);
-    var profile = await profileDao.load();
-    profile.fold((l) => print(l), (r) => print(r));
     yield result.fold(
       (failure) => ProfileState.ready(
         profile: event.profile,

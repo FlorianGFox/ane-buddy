@@ -23,7 +23,7 @@ void main() {
       birthPlace: 'tBirthplace',
       firstName: 'tFirstName',
       lastName: 'tLastName',
-      birthday: DateTime(1995),
+      birthday: DateTime(1995).toString(),
       hasDrMed: true,
     );
 
@@ -60,7 +60,7 @@ void main() {
       birthPlace: 'tBirthplace',
       firstName: 'tFirstName',
       lastName: 'tLastName',
-      birthday: DateTime(1995),
+      birthday: DateTime(1995).toString(),
       hasDrMed: true,
     );
     test('Returns Right(profile) from repo.', () async {

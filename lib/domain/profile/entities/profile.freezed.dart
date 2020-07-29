@@ -19,15 +19,15 @@ class _$ProfileTearOff {
   _Profile call(
       {String firstName,
       String lastName,
-      DateTime birthday,
+      String birthday,
       String birthPlace,
       bool hasDrMed,
       String otherDegrees,
       bool hasForeignDegree,
-      bool foreignDegrees,
-      DateTime medicalExamDate,
-      DateTime dentalExamDate,
-      DateTime approvalDate}) {
+      String foreignDegrees,
+      String medicalExamDate,
+      String dentalExamDate,
+      String approvalDate}) {
     return _Profile(
       firstName: firstName,
       lastName: lastName,
@@ -50,15 +50,15 @@ const $Profile = _$ProfileTearOff();
 mixin _$Profile {
   String get firstName;
   String get lastName;
-  DateTime get birthday;
+  String get birthday;
   String get birthPlace;
   bool get hasDrMed;
   String get otherDegrees;
   bool get hasForeignDegree;
-  bool get foreignDegrees;
-  DateTime get medicalExamDate;
-  DateTime get dentalExamDate;
-  DateTime get approvalDate;
+  String get foreignDegrees;
+  String get medicalExamDate;
+  String get dentalExamDate;
+  String get approvalDate;
 
   Map<String, dynamic> toJson();
   $ProfileCopyWith<Profile> get copyWith;
@@ -70,15 +70,15 @@ abstract class $ProfileCopyWith<$Res> {
   $Res call(
       {String firstName,
       String lastName,
-      DateTime birthday,
+      String birthday,
       String birthPlace,
       bool hasDrMed,
       String otherDegrees,
       bool hasForeignDegree,
-      bool foreignDegrees,
-      DateTime medicalExamDate,
-      DateTime dentalExamDate,
-      DateTime approvalDate});
+      String foreignDegrees,
+      String medicalExamDate,
+      String dentalExamDate,
+      String approvalDate});
 }
 
 class _$ProfileCopyWithImpl<$Res> implements $ProfileCopyWith<$Res> {
@@ -105,7 +105,7 @@ class _$ProfileCopyWithImpl<$Res> implements $ProfileCopyWith<$Res> {
     return _then(_value.copyWith(
       firstName: firstName == freezed ? _value.firstName : firstName as String,
       lastName: lastName == freezed ? _value.lastName : lastName as String,
-      birthday: birthday == freezed ? _value.birthday : birthday as DateTime,
+      birthday: birthday == freezed ? _value.birthday : birthday as String,
       birthPlace:
           birthPlace == freezed ? _value.birthPlace : birthPlace as String,
       hasDrMed: hasDrMed == freezed ? _value.hasDrMed : hasDrMed as bool,
@@ -117,16 +117,16 @@ class _$ProfileCopyWithImpl<$Res> implements $ProfileCopyWith<$Res> {
           : hasForeignDegree as bool,
       foreignDegrees: foreignDegrees == freezed
           ? _value.foreignDegrees
-          : foreignDegrees as bool,
+          : foreignDegrees as String,
       medicalExamDate: medicalExamDate == freezed
           ? _value.medicalExamDate
-          : medicalExamDate as DateTime,
+          : medicalExamDate as String,
       dentalExamDate: dentalExamDate == freezed
           ? _value.dentalExamDate
-          : dentalExamDate as DateTime,
+          : dentalExamDate as String,
       approvalDate: approvalDate == freezed
           ? _value.approvalDate
-          : approvalDate as DateTime,
+          : approvalDate as String,
     ));
   }
 }
@@ -138,15 +138,15 @@ abstract class _$ProfileCopyWith<$Res> implements $ProfileCopyWith<$Res> {
   $Res call(
       {String firstName,
       String lastName,
-      DateTime birthday,
+      String birthday,
       String birthPlace,
       bool hasDrMed,
       String otherDegrees,
       bool hasForeignDegree,
-      bool foreignDegrees,
-      DateTime medicalExamDate,
-      DateTime dentalExamDate,
-      DateTime approvalDate});
+      String foreignDegrees,
+      String medicalExamDate,
+      String dentalExamDate,
+      String approvalDate});
 }
 
 class __$ProfileCopyWithImpl<$Res> extends _$ProfileCopyWithImpl<$Res>
@@ -174,7 +174,7 @@ class __$ProfileCopyWithImpl<$Res> extends _$ProfileCopyWithImpl<$Res>
     return _then(_Profile(
       firstName: firstName == freezed ? _value.firstName : firstName as String,
       lastName: lastName == freezed ? _value.lastName : lastName as String,
-      birthday: birthday == freezed ? _value.birthday : birthday as DateTime,
+      birthday: birthday == freezed ? _value.birthday : birthday as String,
       birthPlace:
           birthPlace == freezed ? _value.birthPlace : birthPlace as String,
       hasDrMed: hasDrMed == freezed ? _value.hasDrMed : hasDrMed as bool,
@@ -186,16 +186,16 @@ class __$ProfileCopyWithImpl<$Res> extends _$ProfileCopyWithImpl<$Res>
           : hasForeignDegree as bool,
       foreignDegrees: foreignDegrees == freezed
           ? _value.foreignDegrees
-          : foreignDegrees as bool,
+          : foreignDegrees as String,
       medicalExamDate: medicalExamDate == freezed
           ? _value.medicalExamDate
-          : medicalExamDate as DateTime,
+          : medicalExamDate as String,
       dentalExamDate: dentalExamDate == freezed
           ? _value.dentalExamDate
-          : dentalExamDate as DateTime,
+          : dentalExamDate as String,
       approvalDate: approvalDate == freezed
           ? _value.approvalDate
-          : approvalDate as DateTime,
+          : approvalDate as String,
     ));
   }
 }
@@ -223,7 +223,7 @@ class _$_Profile implements _Profile {
   @override
   final String lastName;
   @override
-  final DateTime birthday;
+  final String birthday;
   @override
   final String birthPlace;
   @override
@@ -233,13 +233,13 @@ class _$_Profile implements _Profile {
   @override
   final bool hasForeignDegree;
   @override
-  final bool foreignDegrees;
+  final String foreignDegrees;
   @override
-  final DateTime medicalExamDate;
+  final String medicalExamDate;
   @override
-  final DateTime dentalExamDate;
+  final String dentalExamDate;
   @override
-  final DateTime approvalDate;
+  final String approvalDate;
 
   @override
   String toString() {
@@ -314,15 +314,15 @@ abstract class _Profile implements Profile {
   const factory _Profile(
       {String firstName,
       String lastName,
-      DateTime birthday,
+      String birthday,
       String birthPlace,
       bool hasDrMed,
       String otherDegrees,
       bool hasForeignDegree,
-      bool foreignDegrees,
-      DateTime medicalExamDate,
-      DateTime dentalExamDate,
-      DateTime approvalDate}) = _$_Profile;
+      String foreignDegrees,
+      String medicalExamDate,
+      String dentalExamDate,
+      String approvalDate}) = _$_Profile;
 
   factory _Profile.fromJson(Map<String, dynamic> json) = _$_Profile.fromJson;
 
@@ -331,7 +331,7 @@ abstract class _Profile implements Profile {
   @override
   String get lastName;
   @override
-  DateTime get birthday;
+  String get birthday;
   @override
   String get birthPlace;
   @override
@@ -341,13 +341,13 @@ abstract class _Profile implements Profile {
   @override
   bool get hasForeignDegree;
   @override
-  bool get foreignDegrees;
+  String get foreignDegrees;
   @override
-  DateTime get medicalExamDate;
+  String get medicalExamDate;
   @override
-  DateTime get dentalExamDate;
+  String get dentalExamDate;
   @override
-  DateTime get approvalDate;
+  String get approvalDate;
   @override
   _$ProfileCopyWith<_Profile> get copyWith;
 }

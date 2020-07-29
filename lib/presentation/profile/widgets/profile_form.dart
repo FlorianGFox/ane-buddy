@@ -23,6 +23,20 @@ class _ProfileFormState extends State<ProfileForm> {
     final SizedBox mediumDistance = SizedBox(height: 30.0);
     final TextStyle subTitle = Theme.of(context).textTheme.subtitle1;
 
+    final firstNameController = TextEditingController();
+    final lastNameController = TextEditingController();
+    final birthDayController = TextEditingController();
+    final birthplaceController = TextEditingController();
+
+    bool hasDrMed;
+    final otherDegreesController = TextEditingController();
+    bool hasForeignDegree;
+    final foreignDegreesController = TextEditingController();
+
+    final medicalExamDateController = TextEditingController();
+    final dentalExamDateController = TextEditingController();
+    final approvalDateController = TextEditingController();
+
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
@@ -33,22 +47,26 @@ class _ProfileFormState extends State<ProfileForm> {
           smallDistance,
           AneTextField(
             labelText: 'Vorname',
+            controller: firstNameController,
           ),
           smallDistance,
           AneTextField(
             labelText: 'Nachname',
+            controller: lastNameController,
           ),
           smallDistance,
           AneDateTimeField(
+            labelText: 'Geburtstag',
             dateFormat: dateFormat,
             firstDate: DateTime(1900),
             initialDate: DateTime(1995),
             lastDate: DateTime.now(),
-            labelText: 'Geburtstag',
+            controller: birthDayController,
           ),
           smallDistance,
           AneTextField(
             labelText: 'Geburtsort/ggf. -land',
+            controller: birthplaceController,
           ),
           mediumDistance,
           Text(
@@ -59,19 +77,25 @@ class _ProfileFormState extends State<ProfileForm> {
           CheckboxListTile(
             value: false,
             title: Text('Dr. med.'),
-            onChanged: (value) {},
+            onChanged: (value) {
+              hasDrMed = value;
+            },
           ),
           AneTextField(
             labelText: 'Sonstige akademische Grade',
+            controller: otherDegreesController,
           ),
           smallDistance,
           CheckboxListTile(
             title: Text('Ausländische Grade'),
             value: false,
-            onChanged: (value) {},
+            onChanged: (value) {
+              hasForeignDegree = value;
+            },
           ),
           AneTextField(
             labelText: 'Welche ausländische Grade',
+            controller: foreignDegreesController,
           ),
           mediumDistance,
           Text(
@@ -85,6 +109,7 @@ class _ProfileFormState extends State<ProfileForm> {
             firstDate: DateTime(1900),
             initialDate: DateTime.now(),
             lastDate: DateTime.now(),
+            controller: medicalExamDateController,
           ),
           smallDistance,
           AneDateTimeField(
@@ -93,6 +118,7 @@ class _ProfileFormState extends State<ProfileForm> {
             firstDate: DateTime(1900),
             initialDate: DateTime.now(),
             lastDate: DateTime.now(),
+            controller: dentalExamDateController,
           ),
           smallDistance,
           AneDateTimeField(
@@ -101,11 +127,25 @@ class _ProfileFormState extends State<ProfileForm> {
             firstDate: DateTime(1900),
             initialDate: DateTime.now(),
             lastDate: DateTime.now(),
+            controller: approvalDateController,
           ),
           mediumDistance,
           RaisedButton(
             onPressed: () {
-              context.bloc<ProfileBloc>().add(ProfileEvent.save(_profile));
+              Profile profile = Profile(
+                firstName: firstNameController.text,
+                lastName: lastNameController.text,
+                birthday: birthDayController.text,
+                birthPlace: birthplaceController.text,
+                hasDrMed: hasDrMed,
+                otherDegrees: otherDegreesController.text,
+                hasForeignDegree: hasForeignDegree,
+                foreignDegrees: foreignDegreesController.text,
+                medicalExamDate: medicalExamDateController.text,
+                dentalExamDate: dentalExamDateController.text,
+                approvalDate: approvalDateController.text,
+              );
+              context.bloc<ProfileBloc>().add(ProfileEvent.save(profile));
             },
             child: Text('Speichern'),
           ),
