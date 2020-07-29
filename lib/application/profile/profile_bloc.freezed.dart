@@ -207,9 +207,11 @@ class _$ProfileStateTearOff {
   }
 
 // ignore: unused_element
-  _Ready ready(Profile profile) {
+  _Ready ready({Profile profile, bool failed = false, RepoFailure failure}) {
     return _Ready(
-      profile,
+      profile: profile,
+      failed: failed,
+      failure: failure,
     );
   }
 
@@ -227,14 +229,14 @@ mixin _$ProfileState {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result ready(Profile profile),
+    @required Result ready(Profile profile, bool failed, RepoFailure failure),
     @required Result saving(),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result ready(Profile profile),
+    Result ready(Profile profile, bool failed, RepoFailure failure),
     Result saving(),
     @required Result orElse(),
   });
@@ -304,7 +306,7 @@ class _$_Initial implements _Initial {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result ready(Profile profile),
+    @required Result ready(Profile profile, bool failed, RepoFailure failure),
     @required Result saving(),
   }) {
     assert(initial != null);
@@ -319,7 +321,7 @@ class _$_Initial implements _Initial {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result ready(Profile profile),
+    Result ready(Profile profile, bool failed, RepoFailure failure),
     Result saving(),
     @required Result orElse(),
   }) {
@@ -401,7 +403,7 @@ class _$_Loading implements _Loading {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result ready(Profile profile),
+    @required Result ready(Profile profile, bool failed, RepoFailure failure),
     @required Result saving(),
   }) {
     assert(initial != null);
@@ -416,7 +418,7 @@ class _$_Loading implements _Loading {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result ready(Profile profile),
+    Result ready(Profile profile, bool failed, RepoFailure failure),
     Result saving(),
     @required Result orElse(),
   }) {
@@ -466,9 +468,10 @@ abstract class _Loading implements ProfileState {
 abstract class _$ReadyCopyWith<$Res> {
   factory _$ReadyCopyWith(_Ready value, $Res Function(_Ready) then) =
       __$ReadyCopyWithImpl<$Res>;
-  $Res call({Profile profile});
+  $Res call({Profile profile, bool failed, RepoFailure failure});
 
   $ProfileCopyWith<$Res> get profile;
+  $RepoFailureCopyWith<$Res> get failure;
 }
 
 class __$ReadyCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
@@ -482,9 +485,13 @@ class __$ReadyCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object profile = freezed,
+    Object failed = freezed,
+    Object failure = freezed,
   }) {
     return _then(_Ready(
-      profile == freezed ? _value.profile : profile as Profile,
+      profile: profile == freezed ? _value.profile : profile as Profile,
+      failed: failed == freezed ? _value.failed : failed as bool,
+      failure: failure == freezed ? _value.failure : failure as RepoFailure,
     ));
   }
 
@@ -497,17 +504,33 @@ class __$ReadyCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
       return _then(_value.copyWith(profile: value));
     });
   }
+
+  @override
+  $RepoFailureCopyWith<$Res> get failure {
+    if (_value.failure == null) {
+      return null;
+    }
+    return $RepoFailureCopyWith<$Res>(_value.failure, (value) {
+      return _then(_value.copyWith(failure: value));
+    });
+  }
 }
 
 class _$_Ready implements _Ready {
-  const _$_Ready(this.profile) : assert(profile != null);
+  const _$_Ready({this.profile, this.failed = false, this.failure})
+      : assert(failed != null);
 
   @override
   final Profile profile;
+  @JsonKey(defaultValue: false)
+  @override
+  final bool failed;
+  @override
+  final RepoFailure failure;
 
   @override
   String toString() {
-    return 'ProfileState.ready(profile: $profile)';
+    return 'ProfileState.ready(profile: $profile, failed: $failed, failure: $failure)';
   }
 
   @override
@@ -515,12 +538,20 @@ class _$_Ready implements _Ready {
     return identical(this, other) ||
         (other is _Ready &&
             (identical(other.profile, profile) ||
-                const DeepCollectionEquality().equals(other.profile, profile)));
+                const DeepCollectionEquality()
+                    .equals(other.profile, profile)) &&
+            (identical(other.failed, failed) ||
+                const DeepCollectionEquality().equals(other.failed, failed)) &&
+            (identical(other.failure, failure) ||
+                const DeepCollectionEquality().equals(other.failure, failure)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(profile);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(profile) ^
+      const DeepCollectionEquality().hash(failed) ^
+      const DeepCollectionEquality().hash(failure);
 
   @override
   _$ReadyCopyWith<_Ready> get copyWith =>
@@ -531,14 +562,14 @@ class _$_Ready implements _Ready {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result ready(Profile profile),
+    @required Result ready(Profile profile, bool failed, RepoFailure failure),
     @required Result saving(),
   }) {
     assert(initial != null);
     assert(loading != null);
     assert(ready != null);
     assert(saving != null);
-    return ready(profile);
+    return ready(profile, failed, failure);
   }
 
   @override
@@ -546,13 +577,13 @@ class _$_Ready implements _Ready {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result ready(Profile profile),
+    Result ready(Profile profile, bool failed, RepoFailure failure),
     Result saving(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (ready != null) {
-      return ready(profile);
+      return ready(profile, failed, failure);
     }
     return orElse();
   }
@@ -590,9 +621,12 @@ class _$_Ready implements _Ready {
 }
 
 abstract class _Ready implements ProfileState {
-  const factory _Ready(Profile profile) = _$_Ready;
+  const factory _Ready({Profile profile, bool failed, RepoFailure failure}) =
+      _$_Ready;
 
   Profile get profile;
+  bool get failed;
+  RepoFailure get failure;
   _$ReadyCopyWith<_Ready> get copyWith;
 }
 
@@ -631,7 +665,7 @@ class _$_Saving implements _Saving {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result ready(Profile profile),
+    @required Result ready(Profile profile, bool failed, RepoFailure failure),
     @required Result saving(),
   }) {
     assert(initial != null);
@@ -646,7 +680,7 @@ class _$_Saving implements _Saving {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result ready(Profile profile),
+    Result ready(Profile profile, bool failed, RepoFailure failure),
     Result saving(),
     @required Result orElse(),
   }) {

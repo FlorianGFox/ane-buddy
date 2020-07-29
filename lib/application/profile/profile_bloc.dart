@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:ane_buddy/domain/profile/repositories/profile_dao.dart';
+import 'package:ane_buddy/domain/profile/repositories/repo_failure.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -24,6 +25,23 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   Stream<ProfileState> mapEventToState(
     ProfileEvent event,
   ) async* {
-    // TODO: implement mapEventToState
+    yield* event.map(
+      save: _mapSave,
+    );
+  }
+
+  Stream<ProfileState> _mapSave(ProfileEvent event) async* {
+    yield ProfileState.saving();
+    var result = await profileDao.save(event.profile);
+    var profile = await profileDao.load();
+    profile.fold((l) => print(l), (r) => print(r));
+    yield result.fold(
+      (failure) => ProfileState.ready(
+        profile: event.profile,
+        failed: true,
+        failure: failure,
+      ),
+      (_) => ProfileState.ready(profile: event.profile),
+    );
   }
 }
