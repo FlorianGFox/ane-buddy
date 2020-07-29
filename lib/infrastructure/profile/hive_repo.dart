@@ -1,16 +1,25 @@
-import 'package:ane_buddy/infrastructure/profile/profile_repo.dart';
 import 'package:hive/hive.dart';
 
+import 'profile_repo.dart';
+
 class HiveRepo implements ProfileRepo {
-  final Box hiveBox;
+  Box _hiveBox;
 
-  HiveRepo.box(this.hiveBox);
+  HiveRepo.box(Box hiveBox) {
+    _hiveBox = hiveBox;
+  }
 
-  HiveRepo.name(String boxName) : hiveBox = Hive.box(boxName);
+  HiveRepo.name(String boxName) {
+    openBox(boxName);
+  }
+
+  void openBox(String boxName) async {
+    _hiveBox = await Hive.openBox(boxName);
+  }
 
   @override
   void save(String key, String value) {
-    hiveBox.put(key, value);
+    _hiveBox.put(key, value);
   }
 
   @override
@@ -20,10 +29,14 @@ class HiveRepo implements ProfileRepo {
 
   @override
   String load(String key) {
-    return hiveBox.get(key);
+    return _hiveBox.get(key);
   }
 
   void delete(String key) {
-    hiveBox.delete(key);
+    _hiveBox.delete(key);
+  }
+
+  void dispose() {
+    Hive.close();
   }
 }
