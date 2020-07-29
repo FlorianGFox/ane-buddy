@@ -13,29 +13,28 @@ class ProfileForm extends StatefulWidget {
 }
 
 class _ProfileFormState extends State<ProfileForm> {
-  final DateFormat dateFormat = DateFormat('dd.MM.yyyy');
-
   Profile _profile = Profile();
+
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final birthDayController = TextEditingController();
+  final birthplaceController = TextEditingController();
+
+  bool hasDrMed = false;
+  final otherDegreesController = TextEditingController();
+  bool hasForeignDegree = false;
+  final foreignDegreesController = TextEditingController();
+
+  final medicalExamDateController = TextEditingController();
+  final dentalExamDateController = TextEditingController();
+  final approvalDateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final DateFormat dateFormat = DateFormat('dd.MM.yyyy');
     final SizedBox smallDistance = SizedBox(height: 15.0);
     final SizedBox mediumDistance = SizedBox(height: 30.0);
     final TextStyle subTitle = Theme.of(context).textTheme.subtitle1;
-
-    final firstNameController = TextEditingController();
-    final lastNameController = TextEditingController();
-    final birthDayController = TextEditingController();
-    final birthplaceController = TextEditingController();
-
-    bool hasDrMed;
-    final otherDegreesController = TextEditingController();
-    bool hasForeignDegree;
-    final foreignDegreesController = TextEditingController();
-
-    final medicalExamDateController = TextEditingController();
-    final dentalExamDateController = TextEditingController();
-    final approvalDateController = TextEditingController();
 
     return SingleChildScrollView(
       child: Column(
@@ -75,10 +74,12 @@ class _ProfileFormState extends State<ProfileForm> {
           ),
           smallDistance,
           CheckboxListTile(
-            value: false,
+            value: hasDrMed,
             title: Text('Dr. med.'),
             onChanged: (value) {
-              hasDrMed = value;
+              setState(() {
+                hasDrMed = value;
+              });
             },
           ),
           AneTextField(
@@ -88,9 +89,11 @@ class _ProfileFormState extends State<ProfileForm> {
           smallDistance,
           CheckboxListTile(
             title: Text('Ausländische Grade'),
-            value: false,
+            value: hasForeignDegree,
             onChanged: (value) {
-              hasForeignDegree = value;
+              setState(() {
+                hasForeignDegree = value;
+              });
             },
           ),
           AneTextField(
