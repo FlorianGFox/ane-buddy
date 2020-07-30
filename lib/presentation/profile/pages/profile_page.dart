@@ -28,7 +28,9 @@ class ProfilePageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<ProfileBloc>(),
+      create: (context) {
+        return getIt<ProfileBloc>()..add(ProfileEvent.load());
+      },
       child: ProfileForm(),
     );
   }

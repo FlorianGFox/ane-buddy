@@ -44,5 +44,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     );
   }
 
-  Stream<ProfileState> _mapLoad(_Load event) async* {}
+  Stream<ProfileState> _mapLoad(_Load event) async* {
+    //TODO implement _mapLoad
+    print("Load event called.");
+  }
 }

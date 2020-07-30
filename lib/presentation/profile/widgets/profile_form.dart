@@ -12,11 +12,12 @@ class ProfileForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<ProfileBloc, ProfileState>(
       listener: (context, state) {
+        print('listening');
         state.map(
-          initial: (_) {
-            //context.bloc<ProfileBloc>().add(ProfileEvent.load());
+          initial: (_) {},
+          loading: (_) {
+            print('loading');
           },
-          loading: (_) {},
           ready: (_) {},
           saving: (_) {},
         );
