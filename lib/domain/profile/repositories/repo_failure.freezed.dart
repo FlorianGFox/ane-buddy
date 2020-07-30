@@ -17,6 +17,11 @@ class _$RepoFailureTearOff {
   _Unknown unknown() {
     return const _Unknown();
   }
+
+// ignore: unused_element
+  _NotFound notFound() {
+    return const _NotFound();
+  }
 }
 
 // ignore: unused_element
@@ -26,19 +31,23 @@ mixin _$RepoFailure {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result unknown(),
+    @required Result notFound(),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result unknown(),
+    Result notFound(),
     @required Result orElse(),
   });
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result unknown(_Unknown value),
+    @required Result notFound(_NotFound value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result unknown(_Unknown value),
+    Result notFound(_NotFound value),
     @required Result orElse(),
   });
 }
@@ -91,8 +100,10 @@ class _$_Unknown implements _Unknown {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result unknown(),
+    @required Result notFound(),
   }) {
     assert(unknown != null);
+    assert(notFound != null);
     return unknown();
   }
 
@@ -100,6 +111,7 @@ class _$_Unknown implements _Unknown {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result unknown(),
+    Result notFound(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -113,8 +125,10 @@ class _$_Unknown implements _Unknown {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result unknown(_Unknown value),
+    @required Result notFound(_NotFound value),
   }) {
     assert(unknown != null);
+    assert(notFound != null);
     return unknown(this);
   }
 
@@ -122,6 +136,7 @@ class _$_Unknown implements _Unknown {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result unknown(_Unknown value),
+    Result notFound(_NotFound value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -134,4 +149,89 @@ class _$_Unknown implements _Unknown {
 
 abstract class _Unknown implements RepoFailure {
   const factory _Unknown() = _$_Unknown;
+}
+
+abstract class _$NotFoundCopyWith<$Res> {
+  factory _$NotFoundCopyWith(_NotFound value, $Res Function(_NotFound) then) =
+      __$NotFoundCopyWithImpl<$Res>;
+}
+
+class __$NotFoundCopyWithImpl<$Res> extends _$RepoFailureCopyWithImpl<$Res>
+    implements _$NotFoundCopyWith<$Res> {
+  __$NotFoundCopyWithImpl(_NotFound _value, $Res Function(_NotFound) _then)
+      : super(_value, (v) => _then(v as _NotFound));
+
+  @override
+  _NotFound get _value => super._value as _NotFound;
+}
+
+class _$_NotFound implements _NotFound {
+  const _$_NotFound();
+
+  @override
+  String toString() {
+    return 'RepoFailure.notFound()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _NotFound);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result unknown(),
+    @required Result notFound(),
+  }) {
+    assert(unknown != null);
+    assert(notFound != null);
+    return notFound();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result unknown(),
+    Result notFound(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (notFound != null) {
+      return notFound();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result unknown(_Unknown value),
+    @required Result notFound(_NotFound value),
+  }) {
+    assert(unknown != null);
+    assert(notFound != null);
+    return notFound(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result unknown(_Unknown value),
+    Result notFound(_NotFound value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (notFound != null) {
+      return notFound(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _NotFound implements RepoFailure {
+  const factory _NotFound() = _$_NotFound;
 }

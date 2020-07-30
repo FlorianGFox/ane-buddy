@@ -45,7 +45,18 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   Stream<ProfileState> _mapLoad(_Load event) async* {
-    //TODO implement _mapLoad
-    print("Load event called.");
+    yield ProfileState.loading();
+    var result = await profileDao.load();
+    yield result.fold(
+      (failure) => failure.map(
+        unknown: (_) => ProfileState.ready(failed: true, failure: failure),
+        notFound: (_) => ProfileState.ready(
+          failed: true,
+          failure: failure,
+          profile: Profile(),
+        ),
+      ),
+      (profile) => ProfileState.ready(failed: false, profile: profile),
+    );
   }
 }

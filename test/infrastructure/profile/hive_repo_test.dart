@@ -27,7 +27,7 @@ void main() {
     });
   });
 
-  group('load', () {
+  group('Load', () {
     final String key = 'testKey';
     final String value = 'testJson';
     test('Calls box.get with key', () {
@@ -41,13 +41,13 @@ void main() {
       //arrange
       when(mockBox.get(any)).thenReturn(value);
       //act
-      var result = repo.load(key);
+      var result = await repo.load(key);
       //assert
       expect(result, value);
     });
   });
 
-  group('delete', () {
+  group('Delete', () {
     final String key = 'testKey';
     test('Calls box.delete', () async {
       //arrange

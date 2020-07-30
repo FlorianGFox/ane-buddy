@@ -62,4 +62,52 @@ void main() {
       bloc.add(ProfileEvent.save(tProfile));
     });
   });
+
+  group('Load', () {
+    final tProfile = Profile();
+
+    test('Calls dao.load', () async {
+      //arrange
+      when(mockDao.load())
+          .thenAnswer((realInvocation) async => Right(tProfile));
+      //act
+      bloc.add(ProfileEvent.load());
+      await untilCalled(mockDao.load());
+      //assert
+      verify(mockDao.load());
+    });
+
+    final expected = [
+      ProfileState.loading(),
+      ProfileState.ready(failed: false, profile: tProfile)
+    ];
+    test('Emits [Loading, Ready] with loaded profile when no error happens.',
+        () async {
+      //arrange
+      when(mockDao.load())
+          .thenAnswer((realInvocation) async => Right(tProfile));
+      //assert
+      expectLater(bloc, emitsInAnyOrder(expected));
+      //act
+      bloc.add(ProfileEvent.load());
+    });
+
+    final tFailure = RepoFailure.unknown();
+    final expectedWithFailure = [
+      ProfileState.loading(),
+      ProfileState.ready(
+        failed: true,
+        profile: null,
+        failure: tFailure,
+      )
+    ];
+    test('Emits [Loading, Ready] with failure when error happens.', () async {
+      //arrange
+      when(mockDao.load()).thenAnswer((realInvocation) async => Left(tFailure));
+      //assert
+      expectLater(bloc, emitsInAnyOrder(expectedWithFailure));
+      //act
+      bloc.add(ProfileEvent.load());
+    });
+  });
 }

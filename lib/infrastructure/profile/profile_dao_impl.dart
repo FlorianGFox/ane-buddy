@@ -20,8 +20,12 @@ class ProfileDaoImpl implements ProfileDao {
   @override
   Future<Either<RepoFailure, Profile>> load() async {
     try {
-      Profile result =
-          Profile.fromJson(json.decode(await repo.load(_profileKey)));
+      String jsonString = await repo.load(_profileKey);
+      if (jsonString == null) {
+        return Left(RepoFailure.notFound());
+      }
+      var decodedJson = json.decode(jsonString);
+      Profile result = Profile.fromJson(decodedJson);
       return Right(result);
     } catch (e) {
       return handleException(e);

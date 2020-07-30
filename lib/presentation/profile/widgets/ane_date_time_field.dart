@@ -9,6 +9,7 @@ class AneDateTimeField extends StatelessWidget {
   final DateTime lastDate;
   final String labelText;
   final TextEditingController controller;
+  final Function(DateTime) onChanged;
 
   const AneDateTimeField({
     Key key,
@@ -18,6 +19,7 @@ class AneDateTimeField extends StatelessWidget {
     @required this.lastDate,
     this.labelText,
     this.controller,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -28,6 +30,7 @@ class AneDateTimeField extends StatelessWidget {
       ),
       format: dateFormat,
       controller: controller,
+      onChanged: onChanged,
       onShowPicker: (context, currentValue) {
         return showDatePicker(
           context: context,

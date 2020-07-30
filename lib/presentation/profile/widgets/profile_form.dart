@@ -5,49 +5,36 @@ import 'package:intl/intl.dart' show DateFormat;
 import '../../../application/profile/profile_bloc.dart';
 import '../../../domain/profile/entities/profile.dart';
 import 'ane_date_time_field.dart';
-import 'ane_textfield.dart';
 
 class ProfileForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ProfileBloc, ProfileState>(
-      listener: (context, state) {
-        print('listening');
-        state.map(
-          initial: (_) {},
-          loading: (_) {
-            print('loading');
-          },
-          ready: (_) {},
-          saving: (_) {},
-        );
-      },
+    return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
-        return _Form();
+        return state.map(
+          initial: (_) => Container(),
+          loading: (_) => Container(),
+          ready: (state) => _Form(profile: state.profile),
+          saving: (_) => Container(),
+        );
       },
     );
   }
 }
 
 class _Form extends StatefulWidget {
-  const _Form({Key key}) : super(key: key);
+  final Profile profile;
+
+  const _Form({Key key, this.profile = const Profile()}) : super(key: key);
 
   @override
-  __FormState createState() => __FormState();
+  _FormState createState() => _FormState(profile);
 }
 
-class __FormState extends State<_Form> {
-  final firstNameController = TextEditingController();
-  final lastNameController = TextEditingController();
-  final birthDayController = TextEditingController();
-  final birthplaceController = TextEditingController();
-  bool hasDrMed = false;
-  final otherDegreesController = TextEditingController();
-  bool hasForeignDegree = false;
-  final foreignDegreesController = TextEditingController();
-  final medicalExamDateController = TextEditingController();
-  final dentalExamDateController = TextEditingController();
-  final approvalDateController = TextEditingController();
+class _FormState extends State<_Form> {
+  Profile profile;
+
+  _FormState([this.profile = const Profile()]);
 
   @override
   Widget build(BuildContext context) {
@@ -65,14 +52,28 @@ class __FormState extends State<_Form> {
               style: subTitle,
             ),
             smallDistance,
-            AneTextField(
-              labelText: 'Vorname',
-              controller: firstNameController,
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Vorname',
+              ),
+              controller: TextEditingController(text: profile.firstName),
+              onChanged: (value) {
+                profile = profile.copyWith(
+                  firstName: value,
+                );
+              },
             ),
             smallDistance,
-            AneTextField(
-              labelText: 'Nachname',
-              controller: lastNameController,
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Nachname',
+              ),
+              controller: TextEditingController(text: profile.lastName),
+              onChanged: (value) {
+                profile = profile.copyWith(
+                  lastName: value,
+                );
+              },
             ),
             smallDistance,
             AneDateTimeField(
@@ -81,12 +82,24 @@ class __FormState extends State<_Form> {
               firstDate: DateTime(1900),
               initialDate: DateTime(1995),
               lastDate: DateTime.now(),
-              controller: birthDayController,
+              controller: TextEditingController(text: profile?.birthday),
+              onChanged: (value) {
+                profile = profile.copyWith(
+                  birthday: dateFormat.format(value),
+                );
+              },
             ),
             smallDistance,
-            AneTextField(
-              labelText: 'Geburtsort/ggf. -land',
-              controller: birthplaceController,
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Geburtsort/ggf. -land',
+              ),
+              controller: TextEditingController(text: profile?.birthPlace),
+              onChanged: (value) {
+                profile = profile.copyWith(
+                  birthPlace: value,
+                );
+              },
             ),
             mediumDistance,
             Text(
@@ -95,31 +108,45 @@ class __FormState extends State<_Form> {
             ),
             smallDistance,
             CheckboxListTile(
-              value: hasDrMed,
+              value: profile.hasDrMed ?? false,
               title: Text('Dr. med.'),
               onChanged: (value) {
-                setState(() {
-                  hasDrMed = value;
-                });
+                profile = profile.copyWith(
+                  hasDrMed: value,
+                );
               },
             ),
-            AneTextField(
-              labelText: 'Sonstige akademische Grade',
-              controller: otherDegreesController,
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Sonstige akademische Grade',
+              ),
+              controller: TextEditingController(text: profile.otherDegrees),
+              onChanged: (value) {
+                profile = profile.copyWith(
+                  otherDegrees: value,
+                );
+              },
             ),
             smallDistance,
             CheckboxListTile(
               title: Text('Ausländische Grade'),
-              value: hasForeignDegree,
+              value: profile.hasForeignDegree ?? false,
               onChanged: (value) {
-                setState(() {
-                  hasForeignDegree = value;
-                });
+                profile = profile.copyWith(
+                  hasForeignDegree: value,
+                );
               },
             ),
-            AneTextField(
-              labelText: 'Welche ausländische Grade',
-              controller: foreignDegreesController,
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Welche ausländische Grade',
+              ),
+              controller: TextEditingController(text: profile.foreignDegrees),
+              onChanged: (value) {
+                profile = profile.copyWith(
+                  foreignDegrees: value,
+                );
+              },
             ),
             mediumDistance,
             Text(
@@ -133,7 +160,12 @@ class __FormState extends State<_Form> {
               firstDate: DateTime(1900),
               initialDate: DateTime.now(),
               lastDate: DateTime.now(),
-              controller: medicalExamDateController,
+              controller: TextEditingController(text: profile.medicalExamDate),
+              onChanged: (value) {
+                profile = profile.copyWith(
+                  medicalExamDate: dateFormat.format(value),
+                );
+              },
             ),
             smallDistance,
             AneDateTimeField(
@@ -142,7 +174,12 @@ class __FormState extends State<_Form> {
               firstDate: DateTime(1900),
               initialDate: DateTime.now(),
               lastDate: DateTime.now(),
-              controller: dentalExamDateController,
+              controller: TextEditingController(text: profile.dentalExamDate),
+              onChanged: (value) {
+                profile = profile.copyWith(
+                  dentalExamDate: dateFormat.format(value),
+                );
+              },
             ),
             smallDistance,
             AneDateTimeField(
@@ -151,24 +188,16 @@ class __FormState extends State<_Form> {
               firstDate: DateTime(1900),
               initialDate: DateTime.now(),
               lastDate: DateTime.now(),
-              controller: approvalDateController,
+              controller: TextEditingController(text: profile.approvalDate),
+              onChanged: (value) {
+                profile = profile.copyWith(
+                  approvalDate: dateFormat.format(value),
+                );
+              },
             ),
             mediumDistance,
             RaisedButton(
               onPressed: () {
-                Profile profile = Profile(
-                  firstName: firstNameController.text,
-                  lastName: lastNameController.text,
-                  birthday: birthDayController.text,
-                  birthPlace: birthplaceController.text,
-                  hasDrMed: hasDrMed,
-                  otherDegrees: otherDegreesController.text,
-                  hasForeignDegree: hasForeignDegree,
-                  foreignDegrees: foreignDegreesController.text,
-                  medicalExamDate: medicalExamDateController.text,
-                  dentalExamDate: dentalExamDateController.text,
-                  approvalDate: approvalDateController.text,
-                );
                 context.bloc<ProfileBloc>().add(ProfileEvent.save(profile));
               },
               child: Text('Speichern'),

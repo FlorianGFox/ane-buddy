@@ -66,7 +66,7 @@ void main() {
     test('Returns Right(profile) from repo.', () async {
       //arrange
       when(mockHive.load(any))
-          .thenReturn(Future.value(jsonEncode(tProfile.toJson())));
+          .thenAnswer((_) async => jsonEncode(tProfile.toJson()));
       //act
       var result = await dao.load();
       //assert
