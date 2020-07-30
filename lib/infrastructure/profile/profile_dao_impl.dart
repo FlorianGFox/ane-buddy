@@ -20,7 +20,8 @@ class ProfileDaoImpl implements ProfileDao {
   @override
   Future<Either<RepoFailure, Profile>> load() async {
     try {
-      Profile result = Profile.fromJson(json.decode(repo.load(_profileKey)));
+      Profile result =
+          Profile.fromJson(json.decode(await repo.load(_profileKey)));
       return Right(result);
     } catch (e) {
       return handleException(e);
@@ -30,7 +31,7 @@ class ProfileDaoImpl implements ProfileDao {
   @override
   Future<Either<RepoFailure, void>> save(Profile profile) async {
     try {
-      repo.save(_profileKey, json.encode(profile.toJson()));
+      await repo.save(_profileKey, json.encode(profile.toJson()));
       return Right(null);
     } catch (e) {
       return handleException(e);

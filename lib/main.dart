@@ -4,9 +4,10 @@ import 'package:injectable/injectable.dart';
 import 'injection.dart';
 import 'presentation/profile/pages/profile_page.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  configureInjection(Environment.prod);
+  await configureInjection(Environment.prod);
+
   runApp(MyApp());
 }
 

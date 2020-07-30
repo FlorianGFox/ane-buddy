@@ -18,43 +18,45 @@ class _$ProfileEventTearOff {
       profile,
     );
   }
+
+// ignore: unused_element
+  _Load load() {
+    return const _Load();
+  }
 }
 
 // ignore: unused_element
 const $ProfileEvent = _$ProfileEventTearOff();
 
 mixin _$ProfileEvent {
-  Profile get profile;
-
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result save(Profile profile),
+    @required Result load(),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result save(Profile profile),
+    Result load(),
     @required Result orElse(),
   });
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result save(_Save value),
+    @required Result load(_Load value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result save(_Save value),
+    Result load(_Load value),
     @required Result orElse(),
   });
-
-  $ProfileEventCopyWith<ProfileEvent> get copyWith;
 }
 
 abstract class $ProfileEventCopyWith<$Res> {
   factory $ProfileEventCopyWith(
           ProfileEvent value, $Res Function(ProfileEvent) then) =
       _$ProfileEventCopyWithImpl<$Res>;
-  $Res call({Profile profile});
-
-  $ProfileCopyWith<$Res> get profile;
 }
 
 class _$ProfileEventCopyWithImpl<$Res> implements $ProfileEventCopyWith<$Res> {
@@ -63,34 +65,13 @@ class _$ProfileEventCopyWithImpl<$Res> implements $ProfileEventCopyWith<$Res> {
   final ProfileEvent _value;
   // ignore: unused_field
   final $Res Function(ProfileEvent) _then;
-
-  @override
-  $Res call({
-    Object profile = freezed,
-  }) {
-    return _then(_value.copyWith(
-      profile: profile == freezed ? _value.profile : profile as Profile,
-    ));
-  }
-
-  @override
-  $ProfileCopyWith<$Res> get profile {
-    if (_value.profile == null) {
-      return null;
-    }
-    return $ProfileCopyWith<$Res>(_value.profile, (value) {
-      return _then(_value.copyWith(profile: value));
-    });
-  }
 }
 
-abstract class _$SaveCopyWith<$Res> implements $ProfileEventCopyWith<$Res> {
+abstract class _$SaveCopyWith<$Res> {
   factory _$SaveCopyWith(_Save value, $Res Function(_Save) then) =
       __$SaveCopyWithImpl<$Res>;
-  @override
   $Res call({Profile profile});
 
-  @override
   $ProfileCopyWith<$Res> get profile;
 }
 
@@ -109,6 +90,16 @@ class __$SaveCopyWithImpl<$Res> extends _$ProfileEventCopyWithImpl<$Res>
     return _then(_Save(
       profile == freezed ? _value.profile : profile as Profile,
     ));
+  }
+
+  @override
+  $ProfileCopyWith<$Res> get profile {
+    if (_value.profile == null) {
+      return null;
+    }
+    return $ProfileCopyWith<$Res>(_value.profile, (value) {
+      return _then(_value.copyWith(profile: value));
+    });
   }
 }
 
@@ -143,8 +134,10 @@ class _$_Save implements _Save {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result save(Profile profile),
+    @required Result load(),
   }) {
     assert(save != null);
+    assert(load != null);
     return save(profile);
   }
 
@@ -152,6 +145,7 @@ class _$_Save implements _Save {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result save(Profile profile),
+    Result load(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -165,8 +159,10 @@ class _$_Save implements _Save {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result save(_Save value),
+    @required Result load(_Load value),
   }) {
     assert(save != null);
+    assert(load != null);
     return save(this);
   }
 
@@ -174,6 +170,7 @@ class _$_Save implements _Save {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result save(_Save value),
+    Result load(_Load value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -187,10 +184,93 @@ class _$_Save implements _Save {
 abstract class _Save implements ProfileEvent {
   const factory _Save(Profile profile) = _$_Save;
 
-  @override
   Profile get profile;
-  @override
   _$SaveCopyWith<_Save> get copyWith;
+}
+
+abstract class _$LoadCopyWith<$Res> {
+  factory _$LoadCopyWith(_Load value, $Res Function(_Load) then) =
+      __$LoadCopyWithImpl<$Res>;
+}
+
+class __$LoadCopyWithImpl<$Res> extends _$ProfileEventCopyWithImpl<$Res>
+    implements _$LoadCopyWith<$Res> {
+  __$LoadCopyWithImpl(_Load _value, $Res Function(_Load) _then)
+      : super(_value, (v) => _then(v as _Load));
+
+  @override
+  _Load get _value => super._value as _Load;
+}
+
+class _$_Load implements _Load {
+  const _$_Load();
+
+  @override
+  String toString() {
+    return 'ProfileEvent.load()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _Load);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result save(Profile profile),
+    @required Result load(),
+  }) {
+    assert(save != null);
+    assert(load != null);
+    return load();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result save(Profile profile),
+    Result load(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (load != null) {
+      return load();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result save(_Save value),
+    @required Result load(_Load value),
+  }) {
+    assert(save != null);
+    assert(load != null);
+    return load(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result save(_Save value),
+    Result load(_Load value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (load != null) {
+      return load(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Load implements ProfileEvent {
+  const factory _Load() = _$_Load;
 }
 
 class _$ProfileStateTearOff {

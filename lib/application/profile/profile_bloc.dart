@@ -13,7 +13,7 @@ part 'profile_bloc.freezed.dart';
 part 'profile_event.dart';
 part 'profile_state.dart';
 
-@injectable
+@lazySingleton
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final ProfileDao profileDao;
 
@@ -27,10 +27,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ) async* {
     yield* event.map(
       save: _mapSave,
+      load: _mapLoad,
     );
   }
 
-  Stream<ProfileState> _mapSave(ProfileEvent event) async* {
+  Stream<ProfileState> _mapSave(_Save event) async* {
     yield ProfileState.saving();
     var result = await profileDao.save(event.profile);
     yield result.fold(
@@ -42,4 +43,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       (_) => ProfileState.ready(profile: event.profile),
     );
   }
+
+  Stream<ProfileState> _mapLoad(_Load event) async* {}
 }
