@@ -11,27 +11,41 @@ import 'pdf_repo.dart';
 @LazySingleton(as: PdfDao)
 class PdfDaoImpl implements PdfDao {
   PdfRepo _repo;
-  final String fileName = 'anelog.pdf';
+  String _path;
+
+  final String _fileName = 'anelog.pdf';
 
   PdfDaoImpl.repo(PdfRepo repo) : _repo = repo;
   PdfDaoImpl();
 
   @override
-  Future<Either<RepoFailure, void>> save(Document pdf) async {
+  Future<String> get path async {
+    if (_path == null) {
+      _path = await _createPath();
+    }
+    return _path;
+  }
+
+  @override
+  Future<Either<RepoFailure, String>> save(Document pdf) async {
     try {
       if (_repo == null) {
-        final String dir = (await getApplicationDocumentsDirectory()).path;
-        final String path = '$dir/$fileName';
-        _repo = LocalPdfRepo(path);
+        String _path = await _createPath();
+        _repo = LocalPdfRepo(_path);
       }
       await _repo.save(pdf);
-      return Right(null);
+      return Right(_path);
     } catch (e) {
       return _handleExceptions(e);
     }
   }
 
-  Left<RepoFailure, dynamic> _handleExceptions(Exception e) {
+  Left<RepoFailure, String> _handleExceptions(Exception e) {
     return Left(RepoFailure.unknown());
+  }
+
+  Future<String> _createPath() async {
+    final String dir = (await getApplicationDocumentsDirectory()).path;
+    return '$dir/$_fileName';
   }
 }

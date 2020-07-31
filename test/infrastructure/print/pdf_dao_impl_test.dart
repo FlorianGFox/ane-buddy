@@ -9,6 +9,8 @@ import 'package:pdf/widgets.dart';
 class MockLocalPdfRepo extends Mock implements LocalPdfRepo {}
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   PdfDaoImpl dao;
   MockLocalPdfRepo mockRepo;
 
@@ -36,12 +38,12 @@ void main() {
       expect(result, Left(RepoFailure.unknown()));
     });
 
-    test('Returns null when no exception happens', () async {
+    test('Returns Right when no exception happens', () async {
       //arrange
       //act
       final result = await dao.save(tDocument);
       //assert
-      expect(result, Right(null));
+      expect(result, isA<Right>());
     });
   });
 }

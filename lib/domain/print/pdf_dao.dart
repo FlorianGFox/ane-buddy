@@ -4,5 +4,6 @@ import 'package:pdf/widgets.dart';
 import '../core/repositories/repo_failure.dart';
 
 abstract class PdfDao {
-  Future<Either<RepoFailure, void>> save(Document document);
+  Future<Either<RepoFailure, String>> save(Document document);
+  Future<String> get path;
 }
