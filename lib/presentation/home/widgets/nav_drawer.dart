@@ -1,3 +1,4 @@
+import 'package:ane_buddy/presentation/profile/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 
 class NavDrawer extends StatelessWidget {
@@ -19,10 +20,15 @@ class NavDrawer extends StatelessWidget {
                     image: AssetImage('assets/images/cover.jpg'))),*/
           ),
           ListTile(
-            leading: Icon(Icons.person),
-            title: Text('Profile'),
-            onTap: () => {},
-          ),
+              leading: Icon(Icons.person),
+              title: Text('Profile'),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfilePage()),
+                );
+              }),
           ListTile(
             leading: Icon(Icons.print),
             title: Text('Profile'),
