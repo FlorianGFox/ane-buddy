@@ -32,6 +32,8 @@ dependencies:
   hive: ^1.4.2
   hive_flutter: ^0.3.1
   path_provider: ^1.6.11
+  pdf: ^1.9.0
+  flutter_full_pdf_viewer: ^1.0.6
 
 
   # The following adds the Cupertino Icons font to your application.
