@@ -1,7 +1,7 @@
 import 'package:ane_buddy/application/profile/profile_bloc.dart';
+import 'package:ane_buddy/domain/core/repositories/repo_failure.dart';
 import 'package:ane_buddy/domain/profile/entities/profile.dart';
 import 'package:ane_buddy/domain/profile/repositories/profile_dao.dart';
-import 'package:ane_buddy/domain/profile/repositories/repo_failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';

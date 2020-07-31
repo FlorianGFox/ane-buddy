@@ -1,5 +1,5 @@
+import 'package:ane_buddy/domain/core/repositories/repo_failure.dart';
 import 'package:ane_buddy/domain/profile/entities/profile.dart';
-import 'package:ane_buddy/domain/profile/repositories/repo_failure.dart';
 import 'package:ane_buddy/infrastructure/profile/hive_repo.dart';
 import 'package:ane_buddy/infrastructure/profile/profile_dao_impl.dart';
 import 'package:dartz/dartz.dart';

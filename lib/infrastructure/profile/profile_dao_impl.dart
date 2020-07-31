@@ -1,12 +1,13 @@
-import 'package:ane_buddy/infrastructure/profile/hive_repo.dart';
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../domain/core/repositories/repo_failure.dart';
 import '../../domain/profile/entities/profile.dart';
 import '../../domain/profile/repositories/profile_dao.dart';
-import '../../domain/profile/repositories/repo_failure.dart';
+import 'hive_repo.dart';
 import 'profile_repo.dart';
-import 'dart:convert';
 
 @LazySingleton(as: ProfileDao)
 class ProfileDaoImpl implements ProfileDao {

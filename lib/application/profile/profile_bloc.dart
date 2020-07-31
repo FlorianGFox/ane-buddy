@@ -1,13 +1,13 @@
 import 'dart:async';
 
-import 'package:ane_buddy/domain/profile/repositories/profile_dao.dart';
-import 'package:ane_buddy/domain/profile/repositories/repo_failure.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
+import '../../domain/core/repositories/repo_failure.dart';
 import '../../domain/profile/entities/profile.dart';
+import '../../domain/profile/repositories/profile_dao.dart';
 
 part 'profile_bloc.freezed.dart';
 part 'profile_event.dart';
