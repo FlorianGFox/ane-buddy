@@ -1,6 +1,8 @@
+import 'package:injectable/injectable.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 
+@lazySingleton
 class PdfCreator {
   PdfPageFormat pageFormat = PdfPageFormat.a4;
   Document createPdf() {

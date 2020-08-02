@@ -13,7 +13,7 @@ part 'profile_bloc.freezed.dart';
 part 'profile_event.dart';
 part 'profile_state.dart';
 
-@lazySingleton
+@injectable
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final ProfileDao profileDao;
 

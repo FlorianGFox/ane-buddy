@@ -14,7 +14,7 @@ part 'print_bloc.freezed.dart';
 part 'print_event.dart';
 part 'print_state.dart';
 
-@lazySingleton
+@injectable
 class PrintBloc extends Bloc<PrintEvent, PrintState> {
   final PdfDao pdfDao;
   final PdfCreator pdfCreator;
@@ -39,8 +39,6 @@ class PrintBloc extends Bloc<PrintEvent, PrintState> {
       (failure) => PrintState.failed(failure),
       (path) => PrintState.pdfCreated(path: path),
     );
-
-    yield PrintState.pdfCreated();
   }
 
   Stream<PrintState> _mapViewPdf(_ViewPdf state) async* {

@@ -22,8 +22,9 @@ import 'infrastructure/profile/profile_dao_impl.dart';
 void $initGetIt(GetIt g, {String environment}) {
   final gh = GetItHelper(g, environment);
   gh.lazySingleton<PathProvider>(() => PathProvider());
+  gh.lazySingleton<PdfCreator>(() => PdfCreator());
   gh.lazySingleton<PdfDao>(() => PdfDaoImpl(pathProvider: g<PathProvider>()));
-  gh.lazySingleton<PrintBloc>(() => PrintBloc(g<PdfDao>(), g<PdfCreator>()));
+  gh.factory<PrintBloc>(() => PrintBloc(g<PdfDao>(), g<PdfCreator>()));
   gh.lazySingleton<ProfileDao>(() => ProfileDaoImpl());
-  gh.lazySingleton<ProfileBloc>(() => ProfileBloc(profileDao: g<ProfileDao>()));
+  gh.factory<ProfileBloc>(() => ProfileBloc(profileDao: g<ProfileDao>()));
 }

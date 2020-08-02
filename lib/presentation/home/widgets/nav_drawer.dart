@@ -1,3 +1,4 @@
+import 'package:ane_buddy/presentation/print/print_page.dart';
 import 'package:ane_buddy/presentation/profile/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 
@@ -31,8 +32,17 @@ class NavDrawer extends StatelessWidget {
               }),
           ListTile(
             leading: Icon(Icons.print),
-            title: Text('Profile'),
-            onTap: () => {Navigator.of(context).pop()},
+            title: Text('Print'),
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => PrintPage(
+                          key: UniqueKey(),
+                        )),
+              );
+            },
           ),
         ],
       ),

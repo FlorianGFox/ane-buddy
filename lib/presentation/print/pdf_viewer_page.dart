@@ -8,6 +8,9 @@ class PdfViewerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PDFViewerScaffold(
+      appBar: AppBar(
+        title: Text('Vorschau'),
+      ),
       path: path,
     );
   }
