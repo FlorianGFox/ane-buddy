@@ -43,7 +43,11 @@ class PrintBloc extends Bloc<PrintEvent, PrintState> {
     yield PrintState.pdfCreated();
   }
 
-  Stream<PrintState> _mapViewPdf(_ViewPdf state) {
-    //TODO implement
+  Stream<PrintState> _mapViewPdf(_ViewPdf state) async* {
+    final path = await pdfDao.path;
+    bool exists = await pdfDao.exists(path);
+    yield exists
+        ? PrintState.viewingPdf(path: path)
+        : PrintState.failed(RepoFailure.notFound());
   }
 }

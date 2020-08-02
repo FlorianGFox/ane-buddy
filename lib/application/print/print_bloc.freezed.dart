@@ -18,8 +18,10 @@ class _$PrintEventTearOff {
   }
 
 // ignore: unused_element
-  _ViewPdf viewPdf() {
-    return const _ViewPdf();
+  _ViewPdf viewPdf({String path}) {
+    return _ViewPdf(
+      path: path,
+    );
   }
 }
 
@@ -30,12 +32,12 @@ mixin _$PrintEvent {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result createPdf(),
-    @required Result viewPdf(),
+    @required Result viewPdf(String path),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result createPdf(),
-    Result viewPdf(),
+    Result viewPdf(String path),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -100,7 +102,7 @@ class _$_CreatePdf implements _CreatePdf {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result createPdf(),
-    @required Result viewPdf(),
+    @required Result viewPdf(String path),
   }) {
     assert(createPdf != null);
     assert(viewPdf != null);
@@ -111,7 +113,7 @@ class _$_CreatePdf implements _CreatePdf {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result createPdf(),
-    Result viewPdf(),
+    Result viewPdf(String path),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -154,6 +156,7 @@ abstract class _CreatePdf implements PrintEvent {
 abstract class _$ViewPdfCopyWith<$Res> {
   factory _$ViewPdfCopyWith(_ViewPdf value, $Res Function(_ViewPdf) then) =
       __$ViewPdfCopyWithImpl<$Res>;
+  $Res call({String path});
 }
 
 class __$ViewPdfCopyWithImpl<$Res> extends _$PrintEventCopyWithImpl<$Res>
@@ -163,45 +166,65 @@ class __$ViewPdfCopyWithImpl<$Res> extends _$PrintEventCopyWithImpl<$Res>
 
   @override
   _ViewPdf get _value => super._value as _ViewPdf;
+
+  @override
+  $Res call({
+    Object path = freezed,
+  }) {
+    return _then(_ViewPdf(
+      path: path == freezed ? _value.path : path as String,
+    ));
+  }
 }
 
 class _$_ViewPdf implements _ViewPdf {
-  const _$_ViewPdf();
+  const _$_ViewPdf({this.path});
+
+  @override
+  final String path;
 
   @override
   String toString() {
-    return 'PrintEvent.viewPdf()';
+    return 'PrintEvent.viewPdf(path: $path)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _ViewPdf);
+    return identical(this, other) ||
+        (other is _ViewPdf &&
+            (identical(other.path, path) ||
+                const DeepCollectionEquality().equals(other.path, path)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(path);
+
+  @override
+  _$ViewPdfCopyWith<_ViewPdf> get copyWith =>
+      __$ViewPdfCopyWithImpl<_ViewPdf>(this, _$identity);
 
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result createPdf(),
-    @required Result viewPdf(),
+    @required Result viewPdf(String path),
   }) {
     assert(createPdf != null);
     assert(viewPdf != null);
-    return viewPdf();
+    return viewPdf(path);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result createPdf(),
-    Result viewPdf(),
+    Result viewPdf(String path),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (viewPdf != null) {
-      return viewPdf();
+      return viewPdf(path);
     }
     return orElse();
   }
@@ -233,7 +256,10 @@ class _$_ViewPdf implements _ViewPdf {
 }
 
 abstract class _ViewPdf implements PrintEvent {
-  const factory _ViewPdf() = _$_ViewPdf;
+  const factory _ViewPdf({String path}) = _$_ViewPdf;
+
+  String get path;
+  _$ViewPdfCopyWith<_ViewPdf> get copyWith;
 }
 
 class _$PrintStateTearOff {
@@ -262,8 +288,10 @@ class _$PrintStateTearOff {
   }
 
 // ignore: unused_element
-  _ViewingPdf viewingPdf() {
-    return const _ViewingPdf();
+  _ViewingPdf viewingPdf({@required String path}) {
+    return _ViewingPdf(
+      path: path,
+    );
   }
 
 // ignore: unused_element
@@ -284,7 +312,7 @@ mixin _$PrintState {
     @required Result creatingPdf(),
     @required Result pdfCreated(String path),
     @required Result readingPdf(),
-    @required Result viewingPdf(),
+    @required Result viewingPdf(String path),
     @required Result failed(RepoFailure failure),
   });
   @optionalTypeArgs
@@ -293,7 +321,7 @@ mixin _$PrintState {
     Result creatingPdf(),
     Result pdfCreated(String path),
     Result readingPdf(),
-    Result viewingPdf(),
+    Result viewingPdf(String path),
     Result failed(RepoFailure failure),
     @required Result orElse(),
   });
@@ -369,7 +397,7 @@ class _$_Initial implements _Initial {
     @required Result creatingPdf(),
     @required Result pdfCreated(String path),
     @required Result readingPdf(),
-    @required Result viewingPdf(),
+    @required Result viewingPdf(String path),
     @required Result failed(RepoFailure failure),
   }) {
     assert(initial != null);
@@ -388,7 +416,7 @@ class _$_Initial implements _Initial {
     Result creatingPdf(),
     Result pdfCreated(String path),
     Result readingPdf(),
-    Result viewingPdf(),
+    Result viewingPdf(String path),
     Result failed(RepoFailure failure),
     @required Result orElse(),
   }) {
@@ -480,7 +508,7 @@ class _$_CreatingPdf implements _CreatingPdf {
     @required Result creatingPdf(),
     @required Result pdfCreated(String path),
     @required Result readingPdf(),
-    @required Result viewingPdf(),
+    @required Result viewingPdf(String path),
     @required Result failed(RepoFailure failure),
   }) {
     assert(initial != null);
@@ -499,7 +527,7 @@ class _$_CreatingPdf implements _CreatingPdf {
     Result creatingPdf(),
     Result pdfCreated(String path),
     Result readingPdf(),
-    Result viewingPdf(),
+    Result viewingPdf(String path),
     Result failed(RepoFailure failure),
     @required Result orElse(),
   }) {
@@ -612,7 +640,7 @@ class _$_PdfCreated implements _PdfCreated {
     @required Result creatingPdf(),
     @required Result pdfCreated(String path),
     @required Result readingPdf(),
-    @required Result viewingPdf(),
+    @required Result viewingPdf(String path),
     @required Result failed(RepoFailure failure),
   }) {
     assert(initial != null);
@@ -631,7 +659,7 @@ class _$_PdfCreated implements _PdfCreated {
     Result creatingPdf(),
     Result pdfCreated(String path),
     Result readingPdf(),
-    Result viewingPdf(),
+    Result viewingPdf(String path),
     Result failed(RepoFailure failure),
     @required Result orElse(),
   }) {
@@ -726,7 +754,7 @@ class _$_ReadingPdf implements _ReadingPdf {
     @required Result creatingPdf(),
     @required Result pdfCreated(String path),
     @required Result readingPdf(),
-    @required Result viewingPdf(),
+    @required Result viewingPdf(String path),
     @required Result failed(RepoFailure failure),
   }) {
     assert(initial != null);
@@ -745,7 +773,7 @@ class _$_ReadingPdf implements _ReadingPdf {
     Result creatingPdf(),
     Result pdfCreated(String path),
     Result readingPdf(),
-    Result viewingPdf(),
+    Result viewingPdf(String path),
     Result failed(RepoFailure failure),
     @required Result orElse(),
   }) {
@@ -802,6 +830,7 @@ abstract class _$ViewingPdfCopyWith<$Res> {
   factory _$ViewingPdfCopyWith(
           _ViewingPdf value, $Res Function(_ViewingPdf) then) =
       __$ViewingPdfCopyWithImpl<$Res>;
+  $Res call({String path});
 }
 
 class __$ViewingPdfCopyWithImpl<$Res> extends _$PrintStateCopyWithImpl<$Res>
@@ -812,23 +841,43 @@ class __$ViewingPdfCopyWithImpl<$Res> extends _$PrintStateCopyWithImpl<$Res>
 
   @override
   _ViewingPdf get _value => super._value as _ViewingPdf;
+
+  @override
+  $Res call({
+    Object path = freezed,
+  }) {
+    return _then(_ViewingPdf(
+      path: path == freezed ? _value.path : path as String,
+    ));
+  }
 }
 
 class _$_ViewingPdf implements _ViewingPdf {
-  const _$_ViewingPdf();
+  const _$_ViewingPdf({@required this.path}) : assert(path != null);
+
+  @override
+  final String path;
 
   @override
   String toString() {
-    return 'PrintState.viewingPdf()';
+    return 'PrintState.viewingPdf(path: $path)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _ViewingPdf);
+    return identical(this, other) ||
+        (other is _ViewingPdf &&
+            (identical(other.path, path) ||
+                const DeepCollectionEquality().equals(other.path, path)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(path);
+
+  @override
+  _$ViewingPdfCopyWith<_ViewingPdf> get copyWith =>
+      __$ViewingPdfCopyWithImpl<_ViewingPdf>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -837,7 +886,7 @@ class _$_ViewingPdf implements _ViewingPdf {
     @required Result creatingPdf(),
     @required Result pdfCreated(String path),
     @required Result readingPdf(),
-    @required Result viewingPdf(),
+    @required Result viewingPdf(String path),
     @required Result failed(RepoFailure failure),
   }) {
     assert(initial != null);
@@ -846,7 +895,7 @@ class _$_ViewingPdf implements _ViewingPdf {
     assert(readingPdf != null);
     assert(viewingPdf != null);
     assert(failed != null);
-    return viewingPdf();
+    return viewingPdf(path);
   }
 
   @override
@@ -856,13 +905,13 @@ class _$_ViewingPdf implements _ViewingPdf {
     Result creatingPdf(),
     Result pdfCreated(String path),
     Result readingPdf(),
-    Result viewingPdf(),
+    Result viewingPdf(String path),
     Result failed(RepoFailure failure),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (viewingPdf != null) {
-      return viewingPdf();
+      return viewingPdf(path);
     }
     return orElse();
   }
@@ -906,7 +955,10 @@ class _$_ViewingPdf implements _ViewingPdf {
 }
 
 abstract class _ViewingPdf implements PrintState {
-  const factory _ViewingPdf() = _$_ViewingPdf;
+  const factory _ViewingPdf({@required String path}) = _$_ViewingPdf;
+
+  String get path;
+  _$ViewingPdfCopyWith<_ViewingPdf> get copyWith;
 }
 
 abstract class _$FailedCopyWith<$Res> {
@@ -979,7 +1031,7 @@ class _$_Failed implements _Failed {
     @required Result creatingPdf(),
     @required Result pdfCreated(String path),
     @required Result readingPdf(),
-    @required Result viewingPdf(),
+    @required Result viewingPdf(String path),
     @required Result failed(RepoFailure failure),
   }) {
     assert(initial != null);
@@ -998,7 +1050,7 @@ class _$_Failed implements _Failed {
     Result creatingPdf(),
     Result pdfCreated(String path),
     Result readingPdf(),
-    Result viewingPdf(),
+    Result viewingPdf(String path),
     Result failed(RepoFailure failure),
     @required Result orElse(),
   }) {

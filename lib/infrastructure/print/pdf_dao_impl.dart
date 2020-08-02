@@ -1,28 +1,33 @@
-import 'package:ane_buddy/infrastructure/print/local_pdf_repo.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:pdf/widgets.dart';
 
 import '../../domain/core/repositories/repo_failure.dart';
 import '../../domain/print/pdf_dao.dart';
+import 'local_pdf_repo.dart';
+import 'path_provider.dart';
 import 'pdf_repo.dart';
 
 @LazySingleton(as: PdfDao)
 class PdfDaoImpl implements PdfDao {
   PdfRepo _repo;
+  PathProvider _pathProvider;
   String _path;
 
   final String _fileName = 'anelog.pdf';
 
-  PdfDaoImpl.repo(PdfRepo repo) : _repo = repo;
-  PdfDaoImpl();
+  PdfDaoImpl.repo({
+    @required PdfRepo repo,
+    @required PathProvider pathProvider,
+  })  : _repo = repo,
+        _pathProvider = pathProvider;
+  PdfDaoImpl({@required PathProvider pathProvider})
+      : _pathProvider = pathProvider;
 
   @override
   Future<String> get path async {
-    if (_path == null) {
-      _path = await _createPath();
-    }
+    _path ??= await _pathProvider.createPathToFile(_fileName);
     return _path;
   }
 
@@ -30,11 +35,10 @@ class PdfDaoImpl implements PdfDao {
   Future<Either<RepoFailure, String>> save(Document pdf) async {
     try {
       if (_repo == null) {
-        String _path = await _createPath();
-        _repo = LocalPdfRepo(_path);
+        _repo = LocalPdfRepo(await path);
       }
       await _repo.save(pdf);
-      return Right(_path);
+      return Right(await path);
     } catch (e) {
       return _handleExceptions(e);
     }
@@ -44,8 +48,8 @@ class PdfDaoImpl implements PdfDao {
     return Left(RepoFailure.unknown());
   }
 
-  Future<String> _createPath() async {
-    final String dir = (await getApplicationDocumentsDirectory()).path;
-    return '$dir/$_fileName';
+  @override
+  Future<bool> exists(String path) {
+    return _pathProvider.fileExists(path);
   }
 }

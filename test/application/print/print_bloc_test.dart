@@ -77,4 +77,55 @@ void main() {
       bloc.add(PrintEvent.createPdf());
     });
   });
+
+  group('View Pdf', () {
+    final tPath = 'testPath';
+    test('Calls dao to get path.', () async {
+      //arrange
+      when(mockDao.path).thenAnswer((realInvocation) async => tPath);
+      when(mockDao.exists(any)).thenAnswer((realInvocation) async => true);
+      //act
+      bloc.add(PrintEvent.viewPdf());
+      await untilCalled(mockDao.path);
+      //assert
+      verify(mockDao.path);
+    });
+
+    test('Calls dao to check if file exists.', () async {
+      //arrange
+      when(mockDao.path).thenAnswer((realInvocation) async => tPath);
+      when(mockDao.exists(any)).thenAnswer((realInvocation) async => true);
+      //act
+      bloc.add(PrintEvent.viewPdf());
+      await untilCalled(mockDao.exists(any));
+      //assert
+      verify(mockDao.exists(tPath));
+    });
+
+    final expected = [PrintState.viewingPdf(path: tPath)];
+    test('Returns [ViewingPdf] with path if file exists', () async {
+      //arrange
+      when(mockDao.path).thenAnswer((realInvocation) async => tPath);
+      when(mockDao.exists(any)).thenAnswer((realInvocation) async => true);
+      //act
+      bloc.add(PrintEvent.viewPdf());
+      await untilCalled(mockDao.exists(any));
+      //assert
+      expectLater(bloc, emitsInOrder(expected));
+    });
+
+    final RepoFailure failure = RepoFailure.notFound();
+    final expectedFailure = [PrintState.failed(failure)];
+    test('Returns [Failed] with FileNotFoundFailure if file does not exists.',
+        () async {
+      //arrange
+      when(mockDao.path).thenAnswer((realInvocation) async => tPath);
+      when(mockDao.exists(any)).thenAnswer((realInvocation) async => false);
+      //act
+      bloc.add(PrintEvent.viewPdf());
+      await untilCalled(mockDao.exists(any));
+      //assert
+      expectLater(bloc, emitsInOrder(expectedFailure));
+    });
+  });
 }
