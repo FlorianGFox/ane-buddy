@@ -2,75 +2,49 @@ import 'package:injectable/injectable.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 
+import '../profile/entities/profile.dart';
+
+part 'widgets/pdf_title.dart';
+part 'widgets/pdf_profile.dart';
+
 @lazySingleton
 class PdfCreator {
   PdfPageFormat pageFormat = PdfPageFormat.a4;
+
+  Profile profile = Profile(
+    firstName: 'Max',
+    lastName: 'Mustermann',
+    approvalDate: '01.01.2010',
+    birthPlace: 'Musterstadt, Deutschland',
+    birthday: '01.01.1990',
+    dentalExamDate: '01.01.2010',
+    foreignDegrees: 'Test Degree',
+    hasDrMed: null,
+    hasForeignDegree: true,
+    medicalExamDate: '01.01.2010',
+    otherDegrees: null,
+  );
+
   Document createPdf() {
     final pdf = Document();
-
-    _addTitle(pdf);
-
+    _buildPdf(pdf);
     return pdf;
   }
 
-  void _addTitle(Document pdf) {
+  void _buildPdf(Document pdf) {
     pdf.addPage(
       Page(
         pageFormat: pageFormat,
         build: (Context context) {
-          return _buildTitles(context); // Center
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              _PdfTitle(),
+              SizedBox(height: 30.0),
+              _PdfProfile(profile),
+            ],
+          );
         },
-      ),
-    );
-  }
-
-  Widget _buildTitles(Context context) {
-    return Center(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            'Logbuch',
-            style: TextStyle(
-              color: PdfColors.black,
-              fontSize: 36.0,
-              letterSpacing: 7.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: 15.0),
-          Text(
-            'Dokumentation der Weiterbildung gemäß Weiterbildungsordnung (WBO)',
-            style: TextStyle(
-              color: PdfColors.black,
-              fontSize: 12.0,
-              letterSpacing: 1.0,
-              decoration: TextDecoration.underline,
-            ),
-          ),
-          SizedBox(height: 30.0),
-          Text(
-            'über die Facharztweiterbildung',
-            style: TextStyle(
-              color: PdfColors.black,
-              fontSize: 12.0,
-              letterSpacing: 1.0,
-              decoration: TextDecoration.underline,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: 15.0),
-          Text(
-            'Anästhesiologie',
-            style: TextStyle(
-              color: PdfColors.black,
-              fontSize: 20.0,
-              letterSpacing: 1.0,
-              decoration: TextDecoration.underline,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
       ),
     );
   }
