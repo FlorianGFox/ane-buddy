@@ -36,6 +36,7 @@ class _PrintPageBody extends StatelessWidget {
       listener: (context, state) {
         state.map(
           initial: (_) {},
+          loadingData: (_) {},
           creatingPdf: (_) {},
           pdfCreated: (state) {
             context.bloc<PrintBloc>().add(PrintEvent.viewPdf());

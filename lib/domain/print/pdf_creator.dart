@@ -11,27 +11,13 @@ part 'widgets/pdf_profile.dart';
 class PdfCreator {
   PdfPageFormat pageFormat = PdfPageFormat.a4;
 
-  Profile profile = Profile(
-    firstName: 'Max',
-    lastName: 'Mustermann',
-    approvalDate: '01.01.2010',
-    birthPlace: 'Musterstadt, Deutschland',
-    birthday: '01.01.1990',
-    dentalExamDate: '01.01.2010',
-    foreignDegrees: 'Test Degree',
-    hasDrMed: null,
-    hasForeignDegree: true,
-    medicalExamDate: '01.01.2010',
-    otherDegrees: null,
-  );
-
-  Document createPdf() {
+  Document createPdf(Profile profile) {
     final pdf = Document();
-    _buildPdf(pdf);
+    _buildPdf(pdf, profile);
     return pdf;
   }
 
-  void _buildPdf(Document pdf) {
+  void _buildPdf(Document pdf, Profile profile) {
     pdf.addPage(
       Page(
         pageFormat: pageFormat,

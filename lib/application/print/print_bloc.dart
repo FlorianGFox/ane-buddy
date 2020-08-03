@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:ane_buddy/domain/profile/entities/profile.dart';
+import 'package:ane_buddy/domain/profile/repositories/profile_dao.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -18,8 +20,13 @@ part 'print_state.dart';
 class PrintBloc extends Bloc<PrintEvent, PrintState> {
   final PdfDao pdfDao;
   final PdfCreator pdfCreator;
+  final ProfileDao profileDao;
 
-  PrintBloc(this.pdfDao, this.pdfCreator) : super(PrintState.initial());
+  PrintBloc({
+    @required this.pdfDao,
+    @required this.pdfCreator,
+    @required this.profileDao,
+  }) : super(PrintState.initial());
 
   @override
   Stream<PrintState> mapEventToState(
@@ -32,8 +39,19 @@ class PrintBloc extends Bloc<PrintEvent, PrintState> {
   }
 
   Stream<PrintState> _mapCreatePdf(_CreatePdf state) async* {
+    yield PrintState.loadingData();
+    final profile = await profileDao.load();
+    yield* profile.fold(
+      (failure) async* {
+        yield PrintState.failed(failure);
+      },
+      _createPdf,
+    );
+  }
+
+  Stream<PrintState> _createPdf(Profile profile) async* {
     yield PrintState.creatingPdf();
-    Document pdf = pdfCreator.createPdf();
+    Document pdf = pdfCreator.createPdf(profile);
     Either<RepoFailure, String> result = await pdfDao.save(pdf);
     yield result.fold(
       (failure) => PrintState.failed(failure),

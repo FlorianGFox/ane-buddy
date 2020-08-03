@@ -271,6 +271,11 @@ class _$PrintStateTearOff {
   }
 
 // ignore: unused_element
+  _LoadingData loadingData() {
+    return const _LoadingData();
+  }
+
+// ignore: unused_element
   _CreatingPdf creatingPdf() {
     return const _CreatingPdf();
   }
@@ -309,6 +314,7 @@ mixin _$PrintState {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result initial(),
+    @required Result loadingData(),
     @required Result creatingPdf(),
     @required Result pdfCreated(String path),
     @required Result readingPdf(),
@@ -318,6 +324,7 @@ mixin _$PrintState {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
+    Result loadingData(),
     Result creatingPdf(),
     Result pdfCreated(String path),
     Result readingPdf(),
@@ -328,6 +335,7 @@ mixin _$PrintState {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result initial(_Initial value),
+    @required Result loadingData(_LoadingData value),
     @required Result creatingPdf(_CreatingPdf value),
     @required Result pdfCreated(_PdfCreated value),
     @required Result readingPdf(_ReadingPdf value),
@@ -337,6 +345,7 @@ mixin _$PrintState {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result initial(_Initial value),
+    Result loadingData(_LoadingData value),
     Result creatingPdf(_CreatingPdf value),
     Result pdfCreated(_PdfCreated value),
     Result readingPdf(_ReadingPdf value),
@@ -394,6 +403,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result initial(),
+    @required Result loadingData(),
     @required Result creatingPdf(),
     @required Result pdfCreated(String path),
     @required Result readingPdf(),
@@ -401,6 +411,7 @@ class _$_Initial implements _Initial {
     @required Result failed(RepoFailure failure),
   }) {
     assert(initial != null);
+    assert(loadingData != null);
     assert(creatingPdf != null);
     assert(pdfCreated != null);
     assert(readingPdf != null);
@@ -413,6 +424,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
+    Result loadingData(),
     Result creatingPdf(),
     Result pdfCreated(String path),
     Result readingPdf(),
@@ -431,6 +443,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result initial(_Initial value),
+    @required Result loadingData(_LoadingData value),
     @required Result creatingPdf(_CreatingPdf value),
     @required Result pdfCreated(_PdfCreated value),
     @required Result readingPdf(_ReadingPdf value),
@@ -438,6 +451,7 @@ class _$_Initial implements _Initial {
     @required Result failed(_Failed value),
   }) {
     assert(initial != null);
+    assert(loadingData != null);
     assert(creatingPdf != null);
     assert(pdfCreated != null);
     assert(readingPdf != null);
@@ -450,6 +464,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result initial(_Initial value),
+    Result loadingData(_LoadingData value),
     Result creatingPdf(_CreatingPdf value),
     Result pdfCreated(_PdfCreated value),
     Result readingPdf(_ReadingPdf value),
@@ -467,6 +482,123 @@ class _$_Initial implements _Initial {
 
 abstract class _Initial implements PrintState {
   const factory _Initial() = _$_Initial;
+}
+
+abstract class _$LoadingDataCopyWith<$Res> {
+  factory _$LoadingDataCopyWith(
+          _LoadingData value, $Res Function(_LoadingData) then) =
+      __$LoadingDataCopyWithImpl<$Res>;
+}
+
+class __$LoadingDataCopyWithImpl<$Res> extends _$PrintStateCopyWithImpl<$Res>
+    implements _$LoadingDataCopyWith<$Res> {
+  __$LoadingDataCopyWithImpl(
+      _LoadingData _value, $Res Function(_LoadingData) _then)
+      : super(_value, (v) => _then(v as _LoadingData));
+
+  @override
+  _LoadingData get _value => super._value as _LoadingData;
+}
+
+class _$_LoadingData implements _LoadingData {
+  const _$_LoadingData();
+
+  @override
+  String toString() {
+    return 'PrintState.loadingData()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _LoadingData);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result initial(),
+    @required Result loadingData(),
+    @required Result creatingPdf(),
+    @required Result pdfCreated(String path),
+    @required Result readingPdf(),
+    @required Result viewingPdf(String path),
+    @required Result failed(RepoFailure failure),
+  }) {
+    assert(initial != null);
+    assert(loadingData != null);
+    assert(creatingPdf != null);
+    assert(pdfCreated != null);
+    assert(readingPdf != null);
+    assert(viewingPdf != null);
+    assert(failed != null);
+    return loadingData();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result initial(),
+    Result loadingData(),
+    Result creatingPdf(),
+    Result pdfCreated(String path),
+    Result readingPdf(),
+    Result viewingPdf(String path),
+    Result failed(RepoFailure failure),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (loadingData != null) {
+      return loadingData();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result initial(_Initial value),
+    @required Result loadingData(_LoadingData value),
+    @required Result creatingPdf(_CreatingPdf value),
+    @required Result pdfCreated(_PdfCreated value),
+    @required Result readingPdf(_ReadingPdf value),
+    @required Result viewingPdf(_ViewingPdf value),
+    @required Result failed(_Failed value),
+  }) {
+    assert(initial != null);
+    assert(loadingData != null);
+    assert(creatingPdf != null);
+    assert(pdfCreated != null);
+    assert(readingPdf != null);
+    assert(viewingPdf != null);
+    assert(failed != null);
+    return loadingData(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result initial(_Initial value),
+    Result loadingData(_LoadingData value),
+    Result creatingPdf(_CreatingPdf value),
+    Result pdfCreated(_PdfCreated value),
+    Result readingPdf(_ReadingPdf value),
+    Result viewingPdf(_ViewingPdf value),
+    Result failed(_Failed value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (loadingData != null) {
+      return loadingData(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadingData implements PrintState {
+  const factory _LoadingData() = _$_LoadingData;
 }
 
 abstract class _$CreatingPdfCopyWith<$Res> {
@@ -505,6 +637,7 @@ class _$_CreatingPdf implements _CreatingPdf {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result initial(),
+    @required Result loadingData(),
     @required Result creatingPdf(),
     @required Result pdfCreated(String path),
     @required Result readingPdf(),
@@ -512,6 +645,7 @@ class _$_CreatingPdf implements _CreatingPdf {
     @required Result failed(RepoFailure failure),
   }) {
     assert(initial != null);
+    assert(loadingData != null);
     assert(creatingPdf != null);
     assert(pdfCreated != null);
     assert(readingPdf != null);
@@ -524,6 +658,7 @@ class _$_CreatingPdf implements _CreatingPdf {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
+    Result loadingData(),
     Result creatingPdf(),
     Result pdfCreated(String path),
     Result readingPdf(),
@@ -542,6 +677,7 @@ class _$_CreatingPdf implements _CreatingPdf {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result initial(_Initial value),
+    @required Result loadingData(_LoadingData value),
     @required Result creatingPdf(_CreatingPdf value),
     @required Result pdfCreated(_PdfCreated value),
     @required Result readingPdf(_ReadingPdf value),
@@ -549,6 +685,7 @@ class _$_CreatingPdf implements _CreatingPdf {
     @required Result failed(_Failed value),
   }) {
     assert(initial != null);
+    assert(loadingData != null);
     assert(creatingPdf != null);
     assert(pdfCreated != null);
     assert(readingPdf != null);
@@ -561,6 +698,7 @@ class _$_CreatingPdf implements _CreatingPdf {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result initial(_Initial value),
+    Result loadingData(_LoadingData value),
     Result creatingPdf(_CreatingPdf value),
     Result pdfCreated(_PdfCreated value),
     Result readingPdf(_ReadingPdf value),
@@ -637,6 +775,7 @@ class _$_PdfCreated implements _PdfCreated {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result initial(),
+    @required Result loadingData(),
     @required Result creatingPdf(),
     @required Result pdfCreated(String path),
     @required Result readingPdf(),
@@ -644,6 +783,7 @@ class _$_PdfCreated implements _PdfCreated {
     @required Result failed(RepoFailure failure),
   }) {
     assert(initial != null);
+    assert(loadingData != null);
     assert(creatingPdf != null);
     assert(pdfCreated != null);
     assert(readingPdf != null);
@@ -656,6 +796,7 @@ class _$_PdfCreated implements _PdfCreated {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
+    Result loadingData(),
     Result creatingPdf(),
     Result pdfCreated(String path),
     Result readingPdf(),
@@ -674,6 +815,7 @@ class _$_PdfCreated implements _PdfCreated {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result initial(_Initial value),
+    @required Result loadingData(_LoadingData value),
     @required Result creatingPdf(_CreatingPdf value),
     @required Result pdfCreated(_PdfCreated value),
     @required Result readingPdf(_ReadingPdf value),
@@ -681,6 +823,7 @@ class _$_PdfCreated implements _PdfCreated {
     @required Result failed(_Failed value),
   }) {
     assert(initial != null);
+    assert(loadingData != null);
     assert(creatingPdf != null);
     assert(pdfCreated != null);
     assert(readingPdf != null);
@@ -693,6 +836,7 @@ class _$_PdfCreated implements _PdfCreated {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result initial(_Initial value),
+    Result loadingData(_LoadingData value),
     Result creatingPdf(_CreatingPdf value),
     Result pdfCreated(_PdfCreated value),
     Result readingPdf(_ReadingPdf value),
@@ -751,6 +895,7 @@ class _$_ReadingPdf implements _ReadingPdf {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result initial(),
+    @required Result loadingData(),
     @required Result creatingPdf(),
     @required Result pdfCreated(String path),
     @required Result readingPdf(),
@@ -758,6 +903,7 @@ class _$_ReadingPdf implements _ReadingPdf {
     @required Result failed(RepoFailure failure),
   }) {
     assert(initial != null);
+    assert(loadingData != null);
     assert(creatingPdf != null);
     assert(pdfCreated != null);
     assert(readingPdf != null);
@@ -770,6 +916,7 @@ class _$_ReadingPdf implements _ReadingPdf {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
+    Result loadingData(),
     Result creatingPdf(),
     Result pdfCreated(String path),
     Result readingPdf(),
@@ -788,6 +935,7 @@ class _$_ReadingPdf implements _ReadingPdf {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result initial(_Initial value),
+    @required Result loadingData(_LoadingData value),
     @required Result creatingPdf(_CreatingPdf value),
     @required Result pdfCreated(_PdfCreated value),
     @required Result readingPdf(_ReadingPdf value),
@@ -795,6 +943,7 @@ class _$_ReadingPdf implements _ReadingPdf {
     @required Result failed(_Failed value),
   }) {
     assert(initial != null);
+    assert(loadingData != null);
     assert(creatingPdf != null);
     assert(pdfCreated != null);
     assert(readingPdf != null);
@@ -807,6 +956,7 @@ class _$_ReadingPdf implements _ReadingPdf {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result initial(_Initial value),
+    Result loadingData(_LoadingData value),
     Result creatingPdf(_CreatingPdf value),
     Result pdfCreated(_PdfCreated value),
     Result readingPdf(_ReadingPdf value),
@@ -883,6 +1033,7 @@ class _$_ViewingPdf implements _ViewingPdf {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result initial(),
+    @required Result loadingData(),
     @required Result creatingPdf(),
     @required Result pdfCreated(String path),
     @required Result readingPdf(),
@@ -890,6 +1041,7 @@ class _$_ViewingPdf implements _ViewingPdf {
     @required Result failed(RepoFailure failure),
   }) {
     assert(initial != null);
+    assert(loadingData != null);
     assert(creatingPdf != null);
     assert(pdfCreated != null);
     assert(readingPdf != null);
@@ -902,6 +1054,7 @@ class _$_ViewingPdf implements _ViewingPdf {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
+    Result loadingData(),
     Result creatingPdf(),
     Result pdfCreated(String path),
     Result readingPdf(),
@@ -920,6 +1073,7 @@ class _$_ViewingPdf implements _ViewingPdf {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result initial(_Initial value),
+    @required Result loadingData(_LoadingData value),
     @required Result creatingPdf(_CreatingPdf value),
     @required Result pdfCreated(_PdfCreated value),
     @required Result readingPdf(_ReadingPdf value),
@@ -927,6 +1081,7 @@ class _$_ViewingPdf implements _ViewingPdf {
     @required Result failed(_Failed value),
   }) {
     assert(initial != null);
+    assert(loadingData != null);
     assert(creatingPdf != null);
     assert(pdfCreated != null);
     assert(readingPdf != null);
@@ -939,6 +1094,7 @@ class _$_ViewingPdf implements _ViewingPdf {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result initial(_Initial value),
+    Result loadingData(_LoadingData value),
     Result creatingPdf(_CreatingPdf value),
     Result pdfCreated(_PdfCreated value),
     Result readingPdf(_ReadingPdf value),
@@ -1028,6 +1184,7 @@ class _$_Failed implements _Failed {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result initial(),
+    @required Result loadingData(),
     @required Result creatingPdf(),
     @required Result pdfCreated(String path),
     @required Result readingPdf(),
@@ -1035,6 +1192,7 @@ class _$_Failed implements _Failed {
     @required Result failed(RepoFailure failure),
   }) {
     assert(initial != null);
+    assert(loadingData != null);
     assert(creatingPdf != null);
     assert(pdfCreated != null);
     assert(readingPdf != null);
@@ -1047,6 +1205,7 @@ class _$_Failed implements _Failed {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
+    Result loadingData(),
     Result creatingPdf(),
     Result pdfCreated(String path),
     Result readingPdf(),
@@ -1065,6 +1224,7 @@ class _$_Failed implements _Failed {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result initial(_Initial value),
+    @required Result loadingData(_LoadingData value),
     @required Result creatingPdf(_CreatingPdf value),
     @required Result pdfCreated(_PdfCreated value),
     @required Result readingPdf(_ReadingPdf value),
@@ -1072,6 +1232,7 @@ class _$_Failed implements _Failed {
     @required Result failed(_Failed value),
   }) {
     assert(initial != null);
+    assert(loadingData != null);
     assert(creatingPdf != null);
     assert(pdfCreated != null);
     assert(readingPdf != null);
@@ -1084,6 +1245,7 @@ class _$_Failed implements _Failed {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result initial(_Initial value),
+    Result loadingData(_LoadingData value),
     Result creatingPdf(_CreatingPdf value),
     Result pdfCreated(_PdfCreated value),
     Result readingPdf(_ReadingPdf value),

@@ -24,7 +24,11 @@ void $initGetIt(GetIt g, {String environment}) {
   gh.lazySingleton<PathProvider>(() => PathProvider());
   gh.lazySingleton<PdfCreator>(() => PdfCreator());
   gh.lazySingleton<PdfDao>(() => PdfDaoImpl(pathProvider: g<PathProvider>()));
-  gh.factory<PrintBloc>(() => PrintBloc(g<PdfDao>(), g<PdfCreator>()));
   gh.lazySingleton<ProfileDao>(() => ProfileDaoImpl());
+  gh.factory<PrintBloc>(() => PrintBloc(
+        pdfDao: g<PdfDao>(),
+        pdfCreator: g<PdfCreator>(),
+        profileDao: g<ProfileDao>(),
+      ));
   gh.factory<ProfileBloc>(() => ProfileBloc(profileDao: g<ProfileDao>()));
 }
