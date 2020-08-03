@@ -111,9 +111,11 @@ class _FormState extends State<_Form> {
               value: profile.hasDrMed ?? false,
               title: Text('Dr. med.'),
               onChanged: (value) {
-                profile = profile.copyWith(
-                  hasDrMed: value,
-                );
+                setState(() {
+                  profile = profile.copyWith(
+                    hasDrMed: value,
+                  );
+                });
               },
             ),
             TextField(
@@ -132,9 +134,11 @@ class _FormState extends State<_Form> {
               title: Text('Ausländische Grade'),
               value: profile.hasForeignDegree ?? false,
               onChanged: (value) {
-                profile = profile.copyWith(
-                  hasForeignDegree: value,
-                );
+                setState(() {
+                  profile = profile.copyWith(
+                    hasForeignDegree: value,
+                  );
+                });
               },
             ),
             TextField(
