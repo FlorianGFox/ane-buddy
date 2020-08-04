@@ -1,3 +1,4 @@
+import 'package:ane_buddy/presentation/education/education_page.dart';
 import 'package:ane_buddy/presentation/print/print_page.dart';
 import 'package:ane_buddy/presentation/profile/pages/profile_page.dart';
 import 'package:flutter/material.dart';
@@ -21,18 +22,30 @@ class NavDrawer extends StatelessWidget {
                     image: AssetImage('assets/images/cover.jpg'))),*/
           ),
           ListTile(
-              leading: Icon(Icons.person),
-              title: Text('Profile'),
-              onTap: () {
-                Navigator.of(context).pop();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ProfilePage()),
-                );
-              }),
+            leading: Icon(Icons.person),
+            title: Text('Profil'),
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.school),
+            title: Text('Weiterbildung'),
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => EducationPage()),
+              );
+            },
+          ),
           ListTile(
             leading: Icon(Icons.print),
-            title: Text('Print'),
+            title: Text('Drucken'),
             onTap: () {
               Navigator.of(context).pop();
               Navigator.push(
