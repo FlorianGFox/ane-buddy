@@ -12,7 +12,7 @@ _$_FurtherEducation _$_$_FurtherEducationFromJson(Map<String, dynamic> json) {
     (json['entries'] as List)
         ?.map((e) => e == null
             ? null
-            : FutherEducationEntry.fromJson(e as Map<String, dynamic>))
+            : FurtherEducationEntry.fromJson(e as Map<String, dynamic>))
         ?.toList(),
   );
 }

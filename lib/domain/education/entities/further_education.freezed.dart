@@ -16,7 +16,7 @@ class _$FurtherEducationTearOff {
   const _$FurtherEducationTearOff();
 
 // ignore: unused_element
-  _FurtherEducation call(List<FutherEducationEntry> entries) {
+  _FurtherEducation call(List<FurtherEducationEntry> entries) {
     return _FurtherEducation(
       entries,
     );
@@ -27,7 +27,7 @@ class _$FurtherEducationTearOff {
 const $FurtherEducation = _$FurtherEducationTearOff();
 
 mixin _$FurtherEducation {
-  List<FutherEducationEntry> get entries;
+  List<FurtherEducationEntry> get entries;
 
   Map<String, dynamic> toJson();
   $FurtherEducationCopyWith<FurtherEducation> get copyWith;
@@ -37,7 +37,7 @@ abstract class $FurtherEducationCopyWith<$Res> {
   factory $FurtherEducationCopyWith(
           FurtherEducation value, $Res Function(FurtherEducation) then) =
       _$FurtherEducationCopyWithImpl<$Res>;
-  $Res call({List<FutherEducationEntry> entries});
+  $Res call({List<FurtherEducationEntry> entries});
 }
 
 class _$FurtherEducationCopyWithImpl<$Res>
@@ -55,7 +55,7 @@ class _$FurtherEducationCopyWithImpl<$Res>
     return _then(_value.copyWith(
       entries: entries == freezed
           ? _value.entries
-          : entries as List<FutherEducationEntry>,
+          : entries as List<FurtherEducationEntry>,
     ));
   }
 }
@@ -66,7 +66,7 @@ abstract class _$FurtherEducationCopyWith<$Res>
           _FurtherEducation value, $Res Function(_FurtherEducation) then) =
       __$FurtherEducationCopyWithImpl<$Res>;
   @override
-  $Res call({List<FutherEducationEntry> entries});
+  $Res call({List<FurtherEducationEntry> entries});
 }
 
 class __$FurtherEducationCopyWithImpl<$Res>
@@ -86,7 +86,7 @@ class __$FurtherEducationCopyWithImpl<$Res>
     return _then(_FurtherEducation(
       entries == freezed
           ? _value.entries
-          : entries as List<FutherEducationEntry>,
+          : entries as List<FurtherEducationEntry>,
     ));
   }
 }
@@ -99,7 +99,7 @@ class _$_FurtherEducation implements _FurtherEducation {
       _$_$_FurtherEducationFromJson(json);
 
   @override
-  final List<FutherEducationEntry> entries;
+  final List<FurtherEducationEntry> entries;
 
   @override
   String toString() {
@@ -129,14 +129,14 @@ class _$_FurtherEducation implements _FurtherEducation {
 }
 
 abstract class _FurtherEducation implements FurtherEducation {
-  const factory _FurtherEducation(List<FutherEducationEntry> entries) =
+  const factory _FurtherEducation(List<FurtherEducationEntry> entries) =
       _$_FurtherEducation;
 
   factory _FurtherEducation.fromJson(Map<String, dynamic> json) =
       _$_FurtherEducation.fromJson;
 
   @override
-  List<FutherEducationEntry> get entries;
+  List<FurtherEducationEntry> get entries;
   @override
   _$FurtherEducationCopyWith<_FurtherEducation> get copyWith;
 }

@@ -7,9 +7,9 @@ part of 'further_education_entry.dart';
 // **************************************************************************
 
 // ignore: non_constant_identifier_names
-_$_FutherEducationEntry _$_$_FutherEducationEntryFromJson(
+_$_FurtherEducationEntry _$_$_FurtherEducationEntryFromJson(
     Map<String, dynamic> json) {
-  return _$_FutherEducationEntry(
+  return _$_FurtherEducationEntry(
     institution: json['institution'] as String,
     place: json['place'] as String,
     educator: json['educator'] as String,
@@ -20,8 +20,8 @@ _$_FutherEducationEntry _$_$_FutherEducationEntryFromJson(
 }
 
 // ignore: non_constant_identifier_names
-Map<String, dynamic> _$_$_FutherEducationEntryToJson(
-        _$_FutherEducationEntry instance) =>
+Map<String, dynamic> _$_$_FurtherEducationEntryToJson(
+        _$_FurtherEducationEntry instance) =>
     <String, dynamic>{
       'institution': instance.institution,
       'place': instance.place,

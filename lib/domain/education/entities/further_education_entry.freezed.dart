@@ -8,22 +8,23 @@ part of 'further_education_entry.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
-FutherEducationEntry _$FutherEducationEntryFromJson(Map<String, dynamic> json) {
-  return _FutherEducationEntry.fromJson(json);
+FurtherEducationEntry _$FurtherEducationEntryFromJson(
+    Map<String, dynamic> json) {
+  return _FurtherEducationEntry.fromJson(json);
 }
 
-class _$FutherEducationEntryTearOff {
-  const _$FutherEducationEntryTearOff();
+class _$FurtherEducationEntryTearOff {
+  const _$FurtherEducationEntryTearOff();
 
 // ignore: unused_element
-  _FutherEducationEntry call(
+  _FurtherEducationEntry call(
       {String institution,
       String place,
       String educator,
       String topic,
       String startDate,
       String endDate}) {
-    return _FutherEducationEntry(
+    return _FurtherEducationEntry(
       institution: institution,
       place: place,
       educator: educator,
@@ -35,9 +36,9 @@ class _$FutherEducationEntryTearOff {
 }
 
 // ignore: unused_element
-const $FutherEducationEntry = _$FutherEducationEntryTearOff();
+const $FurtherEducationEntry = _$FurtherEducationEntryTearOff();
 
-mixin _$FutherEducationEntry {
+mixin _$FurtherEducationEntry {
   String get institution;
   String get place;
   String get educator;
@@ -46,13 +47,13 @@ mixin _$FutherEducationEntry {
   String get endDate;
 
   Map<String, dynamic> toJson();
-  $FutherEducationEntryCopyWith<FutherEducationEntry> get copyWith;
+  $FurtherEducationEntryCopyWith<FurtherEducationEntry> get copyWith;
 }
 
-abstract class $FutherEducationEntryCopyWith<$Res> {
-  factory $FutherEducationEntryCopyWith(FutherEducationEntry value,
-          $Res Function(FutherEducationEntry) then) =
-      _$FutherEducationEntryCopyWithImpl<$Res>;
+abstract class $FurtherEducationEntryCopyWith<$Res> {
+  factory $FurtherEducationEntryCopyWith(FurtherEducationEntry value,
+          $Res Function(FurtherEducationEntry) then) =
+      _$FurtherEducationEntryCopyWithImpl<$Res>;
   $Res call(
       {String institution,
       String place,
@@ -62,13 +63,13 @@ abstract class $FutherEducationEntryCopyWith<$Res> {
       String endDate});
 }
 
-class _$FutherEducationEntryCopyWithImpl<$Res>
-    implements $FutherEducationEntryCopyWith<$Res> {
-  _$FutherEducationEntryCopyWithImpl(this._value, this._then);
+class _$FurtherEducationEntryCopyWithImpl<$Res>
+    implements $FurtherEducationEntryCopyWith<$Res> {
+  _$FurtherEducationEntryCopyWithImpl(this._value, this._then);
 
-  final FutherEducationEntry _value;
+  final FurtherEducationEntry _value;
   // ignore: unused_field
-  final $Res Function(FutherEducationEntry) _then;
+  final $Res Function(FurtherEducationEntry) _then;
 
   @override
   $Res call({
@@ -91,11 +92,11 @@ class _$FutherEducationEntryCopyWithImpl<$Res>
   }
 }
 
-abstract class _$FutherEducationEntryCopyWith<$Res>
-    implements $FutherEducationEntryCopyWith<$Res> {
-  factory _$FutherEducationEntryCopyWith(_FutherEducationEntry value,
-          $Res Function(_FutherEducationEntry) then) =
-      __$FutherEducationEntryCopyWithImpl<$Res>;
+abstract class _$FurtherEducationEntryCopyWith<$Res>
+    implements $FurtherEducationEntryCopyWith<$Res> {
+  factory _$FurtherEducationEntryCopyWith(_FurtherEducationEntry value,
+          $Res Function(_FurtherEducationEntry) then) =
+      __$FurtherEducationEntryCopyWithImpl<$Res>;
   @override
   $Res call(
       {String institution,
@@ -106,15 +107,15 @@ abstract class _$FutherEducationEntryCopyWith<$Res>
       String endDate});
 }
 
-class __$FutherEducationEntryCopyWithImpl<$Res>
-    extends _$FutherEducationEntryCopyWithImpl<$Res>
-    implements _$FutherEducationEntryCopyWith<$Res> {
-  __$FutherEducationEntryCopyWithImpl(
-      _FutherEducationEntry _value, $Res Function(_FutherEducationEntry) _then)
-      : super(_value, (v) => _then(v as _FutherEducationEntry));
+class __$FurtherEducationEntryCopyWithImpl<$Res>
+    extends _$FurtherEducationEntryCopyWithImpl<$Res>
+    implements _$FurtherEducationEntryCopyWith<$Res> {
+  __$FurtherEducationEntryCopyWithImpl(_FurtherEducationEntry _value,
+      $Res Function(_FurtherEducationEntry) _then)
+      : super(_value, (v) => _then(v as _FurtherEducationEntry));
 
   @override
-  _FutherEducationEntry get _value => super._value as _FutherEducationEntry;
+  _FurtherEducationEntry get _value => super._value as _FurtherEducationEntry;
 
   @override
   $Res call({
@@ -125,7 +126,7 @@ class __$FutherEducationEntryCopyWithImpl<$Res>
     Object startDate = freezed,
     Object endDate = freezed,
   }) {
-    return _then(_FutherEducationEntry(
+    return _then(_FurtherEducationEntry(
       institution:
           institution == freezed ? _value.institution : institution as String,
       place: place == freezed ? _value.place : place as String,
@@ -138,8 +139,8 @@ class __$FutherEducationEntryCopyWithImpl<$Res>
 }
 
 @JsonSerializable()
-class _$_FutherEducationEntry implements _FutherEducationEntry {
-  const _$_FutherEducationEntry(
+class _$_FurtherEducationEntry implements _FurtherEducationEntry {
+  const _$_FurtherEducationEntry(
       {this.institution,
       this.place,
       this.educator,
@@ -147,8 +148,8 @@ class _$_FutherEducationEntry implements _FutherEducationEntry {
       this.startDate,
       this.endDate});
 
-  factory _$_FutherEducationEntry.fromJson(Map<String, dynamic> json) =>
-      _$_$_FutherEducationEntryFromJson(json);
+  factory _$_FurtherEducationEntry.fromJson(Map<String, dynamic> json) =>
+      _$_$_FurtherEducationEntryFromJson(json);
 
   @override
   final String institution;
@@ -165,13 +166,13 @@ class _$_FutherEducationEntry implements _FutherEducationEntry {
 
   @override
   String toString() {
-    return 'FutherEducationEntry(institution: $institution, place: $place, educator: $educator, topic: $topic, startDate: $startDate, endDate: $endDate)';
+    return 'FurtherEducationEntry(institution: $institution, place: $place, educator: $educator, topic: $topic, startDate: $startDate, endDate: $endDate)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _FutherEducationEntry &&
+        (other is _FurtherEducationEntry &&
             (identical(other.institution, institution) ||
                 const DeepCollectionEquality()
                     .equals(other.institution, institution)) &&
@@ -200,27 +201,27 @@ class _$_FutherEducationEntry implements _FutherEducationEntry {
       const DeepCollectionEquality().hash(endDate);
 
   @override
-  _$FutherEducationEntryCopyWith<_FutherEducationEntry> get copyWith =>
-      __$FutherEducationEntryCopyWithImpl<_FutherEducationEntry>(
+  _$FurtherEducationEntryCopyWith<_FurtherEducationEntry> get copyWith =>
+      __$FurtherEducationEntryCopyWithImpl<_FurtherEducationEntry>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_FutherEducationEntryToJson(this);
+    return _$_$_FurtherEducationEntryToJson(this);
   }
 }
 
-abstract class _FutherEducationEntry implements FutherEducationEntry {
-  const factory _FutherEducationEntry(
+abstract class _FurtherEducationEntry implements FurtherEducationEntry {
+  const factory _FurtherEducationEntry(
       {String institution,
       String place,
       String educator,
       String topic,
       String startDate,
-      String endDate}) = _$_FutherEducationEntry;
+      String endDate}) = _$_FurtherEducationEntry;
 
-  factory _FutherEducationEntry.fromJson(Map<String, dynamic> json) =
-      _$_FutherEducationEntry.fromJson;
+  factory _FurtherEducationEntry.fromJson(Map<String, dynamic> json) =
+      _$_FurtherEducationEntry.fromJson;
 
   @override
   String get institution;
@@ -235,5 +236,5 @@ abstract class _FutherEducationEntry implements FutherEducationEntry {
   @override
   String get endDate;
   @override
-  _$FutherEducationEntryCopyWith<_FutherEducationEntry> get copyWith;
+  _$FurtherEducationEntryCopyWith<_FurtherEducationEntry> get copyWith;
 }

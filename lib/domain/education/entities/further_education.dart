@@ -7,7 +7,7 @@ part 'further_education.g.dart';
 
 @freezed
 abstract class FurtherEducation with _$FurtherEducation {
-  const factory FurtherEducation(List<FutherEducationEntry> entries) =
+  const factory FurtherEducation(List<FurtherEducationEntry> entries) =
       _FurtherEducation;
   factory FurtherEducation.fromJson(Map<String, dynamic> json) =>
       _$FurtherEducationFromJson(json);
