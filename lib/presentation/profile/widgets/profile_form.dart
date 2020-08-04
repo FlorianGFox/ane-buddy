@@ -4,7 +4,7 @@ import 'package:intl/intl.dart' show DateFormat;
 
 import '../../../application/profile/profile_bloc.dart';
 import '../../../domain/profile/entities/profile.dart';
-import 'ane_date_time_field.dart';
+import '../../core/widgets/ane_date_time_field.dart';
 
 class ProfileForm extends StatelessWidget {
   @override

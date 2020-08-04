@@ -1,5 +1,6 @@
 import 'package:ane_buddy/domain/education/entities/further_education.dart';
 import 'package:ane_buddy/domain/education/entities/further_education_entry.dart';
+import 'package:ane_buddy/presentation/education/education_edit_page.dart';
 import 'package:flutter/material.dart';
 
 class EducationPage extends StatelessWidget {
@@ -43,7 +44,13 @@ class EducationPage extends StatelessWidget {
               );
             } else {
               return RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => EducationEditPage()),
+                  );
+                },
                 child: Text('Weiterbildung hinzufügen'),
               );
             }
