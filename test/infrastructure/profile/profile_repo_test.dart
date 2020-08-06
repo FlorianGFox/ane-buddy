@@ -1,21 +1,20 @@
 import 'package:ane_buddy/domain/core/repositories/repo_failure.dart';
 import 'package:ane_buddy/domain/profile/entities/profile.dart';
-import 'package:ane_buddy/infrastructure/profile/hive_repo.dart';
+import 'package:ane_buddy/infrastructure/core/json_map_dao.dart';
 import 'package:ane_buddy/infrastructure/profile/profile_dao_impl.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'dart:convert';
 
-class MockHiveRepo extends Mock implements HiveRepo {}
+class MockJsonMapDao extends Mock implements JsonMapDao {}
 
 void main() {
-  MockHiveRepo mockHive;
+  MockJsonMapDao mockJsonMapDao;
   ProfileDaoImpl dao;
 
   setUp(() {
-    mockHive = MockHiveRepo();
-    dao = ProfileDaoImpl.customRepo(mockHive);
+    mockJsonMapDao = MockJsonMapDao();
+    dao = ProfileDaoImpl(mockJsonMapDao);
   });
 
   group('Save', () {
@@ -27,16 +26,20 @@ void main() {
       hasDrMed: true,
     );
 
-    test('Calls repo.save', () async {
+    test('Calls jsonDao.save', () async {
       //arrange
+      when(mockJsonMapDao.save(any, any, any))
+          .thenAnswer((_) async => Right(null));
       //act
       dao.save(tProfile);
       //assert
-      verify(mockHive.save(any, json.encode(tProfile.toJson())));
+      verify(mockJsonMapDao.save(tProfile.toJson(), any, any));
     });
 
     test('Calls returns Right(null) when successful.', () async {
       //arrange
+      when(mockJsonMapDao.save(any, any, any))
+          .thenAnswer((_) async => Right(null));
       //act
       var result = await dao.save(tProfile);
       //assert
@@ -47,7 +50,7 @@ void main() {
         'Calls returns Left(RepoFailure.unknown) when unknown exception happens.',
         () async {
       //arrange
-      when(mockHive.save(any, any)).thenThrow(Exception());
+      when(mockJsonMapDao.save(any, any, any)).thenThrow(Exception());
       //act
       var result = await dao.save(tProfile);
       //assert
@@ -65,8 +68,8 @@ void main() {
     );
     test('Returns Right(profile) from repo.', () async {
       //arrange
-      when(mockHive.load(any))
-          .thenAnswer((_) async => jsonEncode(tProfile.toJson()));
+      when(mockJsonMapDao.load(any, any))
+          .thenAnswer((_) async => Right(tProfile.toJson()));
       //act
       var result = await dao.load();
       //assert
@@ -75,7 +78,7 @@ void main() {
     test('Returns Left(RepoFailure.unknown) when unknown exception happens.',
         () async {
       //arrange
-      when(mockHive.load(any)).thenThrow(Exception());
+      when(mockJsonMapDao.load(any, any)).thenThrow(Exception());
       //act
       var result = await dao.load();
       //assert

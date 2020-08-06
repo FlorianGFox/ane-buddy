@@ -6,7 +6,6 @@ part of 'profile.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-// ignore: non_constant_identifier_names
 _$_Profile _$_$_ProfileFromJson(Map<String, dynamic> json) {
   return _$_Profile(
     firstName: json['firstName'] as String,
@@ -23,7 +22,6 @@ _$_Profile _$_$_ProfileFromJson(Map<String, dynamic> json) {
   );
 }
 
-// ignore: non_constant_identifier_names
 Map<String, dynamic> _$_$_ProfileToJson(_$_Profile instance) =>
     <String, dynamic>{
       'firstName': instance.firstName,

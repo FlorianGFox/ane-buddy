@@ -12,6 +12,9 @@ import 'application/profile/profile_bloc.dart';
 import 'domain/print/pdf_creator.dart';
 import 'domain/print/pdf_dao.dart';
 import 'domain/profile/repositories/profile_dao.dart';
+import 'infrastructure/core/hive_repo.dart';
+import 'infrastructure/core/json_map_dao.dart';
+import 'infrastructure/core/json_repo.dart';
 import 'infrastructure/print/path_provider.dart';
 import 'infrastructure/print/pdf_dao_impl.dart';
 import 'infrastructure/profile/profile_dao_impl.dart';
@@ -21,10 +24,12 @@ import 'infrastructure/profile/profile_dao_impl.dart';
 
 void $initGetIt(GetIt g, {String environment}) {
   final gh = GetItHelper(g, environment);
+  gh.factory<JsonRepo>(() => HiveRepo());
   gh.lazySingleton<PathProvider>(() => PathProvider());
   gh.lazySingleton<PdfCreator>(() => PdfCreator());
   gh.lazySingleton<PdfDao>(() => PdfDaoImpl(pathProvider: g<PathProvider>()));
-  gh.lazySingleton<ProfileDao>(() => ProfileDaoImpl());
+  gh.factory<JsonMapDao>(() => JsonMapDao(g<JsonRepo>()));
+  gh.lazySingleton<ProfileDao>(() => ProfileDaoImpl(g<JsonMapDao>()));
   gh.factory<PrintBloc>(() => PrintBloc(
         pdfDao: g<PdfDao>(),
         pdfCreator: g<PdfCreator>(),

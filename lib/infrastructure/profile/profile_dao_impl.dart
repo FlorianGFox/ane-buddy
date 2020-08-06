@@ -1,49 +1,58 @@
-import 'dart:convert';
-
+import 'package:ane_buddy/infrastructure/core/json_map_dao.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../domain/core/repositories/repo_failure.dart';
 import '../../domain/profile/entities/profile.dart';
 import '../../domain/profile/repositories/profile_dao.dart';
-import 'hive_repo.dart';
-import 'profile_repo.dart';
 
 @LazySingleton(as: ProfileDao)
 class ProfileDaoImpl implements ProfileDao {
-  static const String defaultHiveBoxName = 'profile';
-  static const String _profileKey = 'profile0';
-  final ProfileRepo repo;
+  final String _tableName = 'profile';
+  final String _profileKey = 'profile0';
+  final JsonMapDao jsonMapDao;
 
-  ProfileDaoImpl() : repo = HiveRepo.name(defaultHiveBoxName);
-  ProfileDaoImpl.customRepo(this.repo);
+  ProfileDaoImpl(this.jsonMapDao);
 
   @override
   Future<Either<RepoFailure, Profile>> load() async {
     try {
-      String jsonString = await repo.load(_profileKey);
-      if (jsonString == null) {
-        return Left(RepoFailure.notFound());
-      }
-      var decodedJson = json.decode(jsonString);
-      Profile result = Profile.fromJson(decodedJson);
-      return Right(result);
+      var eitherFailureOrMap = await jsonMapDao.load(_tableName, _profileKey);
+      return eitherFailureOrMap.fold(
+        (failure) => Left(failure),
+        (map) {
+          Profile result = Profile.fromJson(map);
+          return Right(result);
+        },
+      );
     } catch (e) {
-      return handleException(e);
+      return _handleException(e);
     }
   }
 
   @override
   Future<Either<RepoFailure, void>> save(Profile profile) async {
     try {
-      await repo.save(_profileKey, json.encode(profile.toJson()));
-      return Right(null);
+      Either<RepoFailure, void> mayFailed = await jsonMapDao.save(
+        profile.toJson(),
+        _tableName,
+        _profileKey,
+      );
+      return mayFailed.fold(
+        (failure) => Left(failure),
+        (r) => Right(null),
+      );
     } catch (e) {
-      return handleException(e);
+      return _handleException(e);
     }
   }
 
-  Left<RepoFailure, Profile> handleException(Exception e) {
+  Left<RepoFailure, Profile> _handleException(Exception e) {
     return Left(RepoFailure.unknown());
+  }
+
+  @override
+  Future<void> dispose() {
+    return jsonMapDao.dispose();
   }
 }
