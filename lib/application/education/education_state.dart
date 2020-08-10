@@ -4,9 +4,12 @@ part of 'education_bloc.dart';
 abstract class EducationState with _$EducationState {
   const factory EducationState.initial() = _Initial;
   const factory EducationState.loading() = _Loading;
-  const factory EducationState.viewing() = _Viewing;
+  const factory EducationState.viewing({
+    bool failed,
+    RepoFailure failure,
+  }) = _Viewing;
   const factory EducationState.editing({
-    @required bool failed,
+    bool failed,
     RepoFailure failure,
   }) = _Editing;
   const factory EducationState.deleting() = _Deleting;

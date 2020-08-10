@@ -5,38 +5,43 @@
 // **************************************************************************
 
 import 'package:get_it/get_it.dart';
-import 'package:injectable/get_it_helper.dart';
+import 'package:injectable/injectable.dart';
 
 import 'application/education/education_bloc.dart';
-import 'application/print/print_bloc.dart';
-import 'application/profile/profile_bloc.dart';
 import 'domain/education/repositories/education_dao.dart';
-import 'domain/print/pdf_creator.dart';
-import 'domain/print/pdf_dao.dart';
-import 'domain/profile/repositories/profile_dao.dart';
 import 'infrastructure/core/hive_repo.dart';
 import 'infrastructure/core/json_map_dao.dart';
 import 'infrastructure/core/json_repo.dart';
 import 'infrastructure/print/path_provider.dart';
+import 'domain/print/pdf_creator.dart';
+import 'domain/print/pdf_dao.dart';
 import 'infrastructure/print/pdf_dao_impl.dart';
+import 'application/print/print_bloc.dart';
+import 'application/profile/profile_bloc.dart';
+import 'domain/profile/repositories/profile_dao.dart';
 import 'infrastructure/profile/profile_dao_impl.dart';
 
 /// adds generated dependencies
 /// to the provided [GetIt] instance
 
-void $initGetIt(GetIt g, {String environment}) {
-  final gh = GetItHelper(g, environment);
-  gh.factory<EducationBloc>(() => EducationBloc(g<EducationDao>()));
+GetIt $initGetIt(
+  GetIt get, {
+  String environment,
+  EnvironmentFilter environmentFilter,
+}) {
+  final gh = GetItHelper(get, environment, environmentFilter);
+  gh.factory<EducationBloc>(() => EducationBloc(get<EducationDao>()));
   gh.factory<JsonRepo>(() => HiveRepo());
   gh.lazySingleton<PathProvider>(() => PathProvider());
   gh.lazySingleton<PdfCreator>(() => PdfCreator());
-  gh.lazySingleton<PdfDao>(() => PdfDaoImpl(pathProvider: g<PathProvider>()));
-  gh.factory<JsonMapDao>(() => JsonMapDao(g<JsonRepo>()));
-  gh.lazySingleton<ProfileDao>(() => ProfileDaoImpl(g<JsonMapDao>()));
+  gh.lazySingleton<PdfDao>(() => PdfDaoImpl(pathProvider: get<PathProvider>()));
+  gh.factory<JsonMapDao>(() => JsonMapDao(get<JsonRepo>()));
+  gh.lazySingleton<ProfileDao>(() => ProfileDaoImpl(get<JsonMapDao>()));
   gh.factory<PrintBloc>(() => PrintBloc(
-        pdfDao: g<PdfDao>(),
-        pdfCreator: g<PdfCreator>(),
-        profileDao: g<ProfileDao>(),
+        pdfDao: get<PdfDao>(),
+        pdfCreator: get<PdfCreator>(),
+        profileDao: get<ProfileDao>(),
       ));
-  gh.factory<ProfileBloc>(() => ProfileBloc(profileDao: g<ProfileDao>()));
+  gh.factory<ProfileBloc>(() => ProfileBloc(profileDao: get<ProfileDao>()));
+  return get;
 }

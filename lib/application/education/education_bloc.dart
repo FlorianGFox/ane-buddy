@@ -31,12 +31,19 @@ class EducationBloc extends Bloc<EducationEvent, EducationState> {
     );
   }
 
-  Stream<EducationState> _mapLoad(_Load event) {
-    //Todo implement _mapLoad
+  Stream<EducationState> _mapLoad(_Load event) async* {
+    yield EducationState.loading();
+    final failureOrEducation = await dao.load();
+    yield failureOrEducation.fold(
+      (failure) => EducationState.viewing(failed: true, failure: failure),
+      (education) => EducationState.viewing(),
+    );
   }
+
   Stream<EducationState> _mapEdit(_Edit event) {
     //Todo implement _mapEdit
   }
+
   Stream<EducationState> _mapSave(_Save event) async* {
     yield EducationState.saving();
     final mayBeFailure = await dao.save(event.education);

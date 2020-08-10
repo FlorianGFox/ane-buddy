@@ -18,9 +18,9 @@ void main() {
     bloc = EducationBloc(mockDao);
   });
 
-  group('Save event', () {
+  group('When EducationEvent.save is added to EducationBloc', () {
     FurtherEducation tEducation = FurtherEducation([]);
-    test('Calls repo.save with education object.', () async {
+    test('dao.save() is called with correct education object.', () async {
       //arrange
       when(mockDao.save(any)).thenAnswer((_) async => Right(null));
       //act
@@ -30,7 +30,7 @@ void main() {
       verify(mockDao.save(tEducation));
     });
 
-    test('Emits [Saving, Viewing] if no failure.', () async {
+    test('[Saving, Viewing] is emitted, if no failure happened.', () async {
       //arrange
       final expected = [EducationState.saving(), EducationState.viewing()];
       when(mockDao.save(any)).thenAnswer((_) async => Right(null));
@@ -40,7 +40,9 @@ void main() {
       expectLater(bloc, emitsInOrder(expected));
     });
 
-    test('Emits [Saving, Editing] with failure if failure happens.', () async {
+    test(
+        '[Saving, Editing] is emitted with correct failure if a failure happens.',
+        () async {
       //arrange
       final expectedFailure = RepoFailure.unknown();
       final expected = [
@@ -53,6 +55,48 @@ void main() {
       when(mockDao.save(any)).thenAnswer((_) async => Left(expectedFailure));
       //act
       bloc.add(EducationEvent.save(tEducation));
+      //assert
+      expectLater(bloc, emitsInOrder(expected));
+    });
+  });
+
+  group('When EducationEvent.load is added to EducationBloc', () {
+    FurtherEducation tEducation = FurtherEducation([]);
+    test('dao.load() is called.', () async {
+      //arrange
+      when(mockDao.load()).thenAnswer((_) async => Right(tEducation));
+      //act
+      bloc.add(EducationEvent.load());
+      await untilCalled(mockDao.load());
+      //assert
+      verify(mockDao.load());
+    });
+
+    test('[Loading, Viewing] is emitted, if no failure happened.', () async {
+      //arrange
+      final expected = [EducationState.loading(), EducationState.viewing()];
+      when(mockDao.load()).thenAnswer((_) async => Right(tEducation));
+      //act
+      bloc.add(EducationEvent.load());
+      //assert
+      expectLater(bloc, emitsInOrder(expected));
+    });
+
+    test(
+        '[Loading, Viewing] is emitted with correct failure a failure happend.',
+        () async {
+      //arrange
+      final expectedFailure = RepoFailure.unknown();
+      final expected = [
+        EducationState.loading(),
+        EducationState.viewing(
+          failed: true,
+          failure: expectedFailure,
+        )
+      ];
+      when(mockDao.load()).thenAnswer((_) async => Left(expectedFailure));
+      //act
+      bloc.add(EducationEvent.load());
       //assert
       expectLater(bloc, emitsInOrder(expected));
     });
