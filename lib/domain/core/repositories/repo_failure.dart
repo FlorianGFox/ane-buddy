@@ -6,4 +6,5 @@ part 'repo_failure.freezed.dart';
 abstract class RepoFailure with _$RepoFailure {
   const factory RepoFailure.unknown() = _Unknown;
   const factory RepoFailure.notFound() = _NotFound;
+  const factory RepoFailure.conversion() = _Conversion;
 }

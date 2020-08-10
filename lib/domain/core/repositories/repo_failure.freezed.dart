@@ -7,7 +7,6 @@ part of 'repo_failure.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// ignore: unused_element
 T _$identity<T>(T value) => value;
 
 class _$RepoFailureTearOff {
@@ -22,6 +21,11 @@ class _$RepoFailureTearOff {
   _NotFound notFound() {
     return const _NotFound();
   }
+
+// ignore: unused_element
+  _Conversion conversion() {
+    return const _Conversion();
+  }
 }
 
 // ignore: unused_element
@@ -32,22 +36,26 @@ mixin _$RepoFailure {
   Result when<Result extends Object>({
     @required Result unknown(),
     @required Result notFound(),
+    @required Result conversion(),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result unknown(),
     Result notFound(),
+    Result conversion(),
     @required Result orElse(),
   });
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result unknown(_Unknown value),
     @required Result notFound(_NotFound value),
+    @required Result conversion(_Conversion value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result unknown(_Unknown value),
     Result notFound(_NotFound value),
+    Result conversion(_Conversion value),
     @required Result orElse(),
   });
 }
@@ -101,9 +109,11 @@ class _$_Unknown implements _Unknown {
   Result when<Result extends Object>({
     @required Result unknown(),
     @required Result notFound(),
+    @required Result conversion(),
   }) {
     assert(unknown != null);
     assert(notFound != null);
+    assert(conversion != null);
     return unknown();
   }
 
@@ -112,6 +122,7 @@ class _$_Unknown implements _Unknown {
   Result maybeWhen<Result extends Object>({
     Result unknown(),
     Result notFound(),
+    Result conversion(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -126,9 +137,11 @@ class _$_Unknown implements _Unknown {
   Result map<Result extends Object>({
     @required Result unknown(_Unknown value),
     @required Result notFound(_NotFound value),
+    @required Result conversion(_Conversion value),
   }) {
     assert(unknown != null);
     assert(notFound != null);
+    assert(conversion != null);
     return unknown(this);
   }
 
@@ -137,6 +150,7 @@ class _$_Unknown implements _Unknown {
   Result maybeMap<Result extends Object>({
     Result unknown(_Unknown value),
     Result notFound(_NotFound value),
+    Result conversion(_Conversion value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -186,9 +200,11 @@ class _$_NotFound implements _NotFound {
   Result when<Result extends Object>({
     @required Result unknown(),
     @required Result notFound(),
+    @required Result conversion(),
   }) {
     assert(unknown != null);
     assert(notFound != null);
+    assert(conversion != null);
     return notFound();
   }
 
@@ -197,6 +213,7 @@ class _$_NotFound implements _NotFound {
   Result maybeWhen<Result extends Object>({
     Result unknown(),
     Result notFound(),
+    Result conversion(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -211,9 +228,11 @@ class _$_NotFound implements _NotFound {
   Result map<Result extends Object>({
     @required Result unknown(_Unknown value),
     @required Result notFound(_NotFound value),
+    @required Result conversion(_Conversion value),
   }) {
     assert(unknown != null);
     assert(notFound != null);
+    assert(conversion != null);
     return notFound(this);
   }
 
@@ -222,6 +241,7 @@ class _$_NotFound implements _NotFound {
   Result maybeMap<Result extends Object>({
     Result unknown(_Unknown value),
     Result notFound(_NotFound value),
+    Result conversion(_Conversion value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -234,4 +254,97 @@ class _$_NotFound implements _NotFound {
 
 abstract class _NotFound implements RepoFailure {
   const factory _NotFound() = _$_NotFound;
+}
+
+abstract class _$ConversionCopyWith<$Res> {
+  factory _$ConversionCopyWith(
+          _Conversion value, $Res Function(_Conversion) then) =
+      __$ConversionCopyWithImpl<$Res>;
+}
+
+class __$ConversionCopyWithImpl<$Res> extends _$RepoFailureCopyWithImpl<$Res>
+    implements _$ConversionCopyWith<$Res> {
+  __$ConversionCopyWithImpl(
+      _Conversion _value, $Res Function(_Conversion) _then)
+      : super(_value, (v) => _then(v as _Conversion));
+
+  @override
+  _Conversion get _value => super._value as _Conversion;
+}
+
+class _$_Conversion implements _Conversion {
+  const _$_Conversion();
+
+  @override
+  String toString() {
+    return 'RepoFailure.conversion()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _Conversion);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result unknown(),
+    @required Result notFound(),
+    @required Result conversion(),
+  }) {
+    assert(unknown != null);
+    assert(notFound != null);
+    assert(conversion != null);
+    return conversion();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result unknown(),
+    Result notFound(),
+    Result conversion(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (conversion != null) {
+      return conversion();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result unknown(_Unknown value),
+    @required Result notFound(_NotFound value),
+    @required Result conversion(_Conversion value),
+  }) {
+    assert(unknown != null);
+    assert(notFound != null);
+    assert(conversion != null);
+    return conversion(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result unknown(_Unknown value),
+    Result notFound(_NotFound value),
+    Result conversion(_Conversion value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (conversion != null) {
+      return conversion(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Conversion implements RepoFailure {
+  const factory _Conversion() = _$_Conversion;
 }

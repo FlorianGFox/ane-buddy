@@ -50,13 +50,18 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     yield result.fold(
       (failure) => failure.map(
         unknown: (_) => ProfileState.ready(failed: true, failure: failure),
-        notFound: (_) => ProfileState.ready(
-          failed: true,
-          failure: failure,
-          profile: Profile(),
-        ),
+        notFound: (_) => _createReadyWithFailure(failure),
+        conversion: (_) => _createReadyWithFailure(failure),
       ),
       (profile) => ProfileState.ready(failed: false, profile: profile),
+    );
+  }
+
+  ProfileState _createReadyWithFailure(RepoFailure failure) {
+    return ProfileState.ready(
+      failed: true,
+      failure: failure,
+      profile: Profile(),
     );
   }
 }
