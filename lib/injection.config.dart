@@ -7,8 +7,10 @@
 import 'package:get_it/get_it.dart';
 import 'package:injectable/get_it_helper.dart';
 
+import 'application/education/education_bloc.dart';
 import 'application/print/print_bloc.dart';
 import 'application/profile/profile_bloc.dart';
+import 'domain/education/repositories/education_dao.dart';
 import 'domain/print/pdf_creator.dart';
 import 'domain/print/pdf_dao.dart';
 import 'domain/profile/repositories/profile_dao.dart';
@@ -24,6 +26,7 @@ import 'infrastructure/profile/profile_dao_impl.dart';
 
 void $initGetIt(GetIt g, {String environment}) {
   final gh = GetItHelper(g, environment);
+  gh.factory<EducationBloc>(() => EducationBloc(g<EducationDao>()));
   gh.factory<JsonRepo>(() => HiveRepo());
   gh.lazySingleton<PathProvider>(() => PathProvider());
   gh.lazySingleton<PdfCreator>(() => PdfCreator());
