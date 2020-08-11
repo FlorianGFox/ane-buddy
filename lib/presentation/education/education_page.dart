@@ -1,28 +1,11 @@
-import 'package:ane_buddy/domain/education/entities/further_education.dart';
-import 'package:ane_buddy/domain/education/entities/further_education_entry.dart';
-import 'package:ane_buddy/presentation/education/education_edit_page.dart';
+import 'package:ane_buddy/injection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../application/education/education_bloc.dart';
+import 'widgets/further_education_list_view.dart';
 
 class EducationPage extends StatelessWidget {
-  final FurtherEducation education = FurtherEducation([
-    FurtherEducationEntry(
-      educator: 'Test Educator',
-      endDate: '01.01.2000',
-      startDate: '01.01.2000',
-      institution: 'Test Institution',
-      place: 'Test Place',
-      topic: 'Test topic',
-    ),
-    FurtherEducationEntry(
-      educator: 'Test Educator 2',
-      endDate: '01.01.2000',
-      startDate: '01.01.2000',
-      institution: 'Test Institution',
-      place: 'Test Place',
-      topic: 'Test topic',
-    ),
-  ]);
-
   EducationPage({Key key}) : super(key: key);
 
   @override
@@ -33,38 +16,11 @@ class EducationPage extends StatelessWidget {
       ),
       body: SafeArea(
         minimum: const EdgeInsets.all(16.0),
-        child: ListView.builder(
-          itemCount: education.entries.length + 1,
-          itemBuilder: (context, index) {
-            if (index < education.entries.length) {
-              final entry = education.entries[index];
-              return ListTile(
-                title: _buildTile(context, entry),
-                subtitle: _buildSubtitle(context, entry),
-              );
-            } else {
-              return RaisedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => EducationEditPage()),
-                  );
-                },
-                child: Text('Weiterbildung hinzufügen'),
-              );
-            }
-          },
+        child: BlocProvider(
+          create: (context) => getIt<EducationBloc>(),
+          child: FurtherEducationListView(),
         ),
       ),
     );
-  }
-
-  Widget _buildTile(BuildContext context, FurtherEducationEntry entry) {
-    return Text(entry.educator);
-  }
-
-  Widget _buildSubtitle(BuildContext context, FurtherEducationEntry entry) {
-    return Text(entry.startDate + ' - ' + entry.endDate);
   }
 }

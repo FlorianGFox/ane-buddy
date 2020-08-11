@@ -1,10 +1,12 @@
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../domain/core/repositories/repo_failure.dart';
 import '../../domain/education/entities/further_education.dart';
 import '../../domain/education/repositories/education_dao.dart';
 import '../core/json_map_dao.dart';
 
+@LazySingleton(as: EducationDao)
 class EducationDaoImpl implements EducationDao {
   final JsonMapDao jsonMapDao;
   static const String table = 'further_education';
