@@ -15,28 +15,25 @@ class FurtherEducationListView extends StatefulWidget {
 }
 
 class _FurtherEducationListViewState extends State<FurtherEducationListView> {
-  /*final FurtherEducation education = FurtherEducation([
-    FurtherEducationEntry(
-      educator: 'Test Educator',
-      endDate: '01.01.2000',
-      startDate: '01.01.2000',
-      institution: 'Test Institution',
-      place: 'Test Place',
-      topic: 'Test topic',
-    ),
-    FurtherEducationEntry(
-      educator: 'Test Educator 2',
-      endDate: '01.01.2000',
-      startDate: '01.01.2000',
-      institution: 'Test Institution',
-      place: 'Test Place',
-      topic: 'Test topic',
-    ),
-  ]);*/
-
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<EducationBloc, EducationState>(
+    return BlocConsumer<EducationBloc, EducationState>(
+      listener: (context, state) {
+        state.map(
+          initial: (_) {},
+          loading: (_) {},
+          viewing: (viewingState) {
+            setState(() {});
+          },
+          editing: (editingState) {
+            context
+                .bloc<EducationBloc>()
+                .add(EducationEvent.view(editingState.education));
+          },
+          deleting: (_) {},
+          saving: (_) {},
+        );
+      },
       builder: (context, state) {
         return state.map(
           initial: (_) => Container(),

@@ -37,6 +37,13 @@ class _$EducationEventTearOff {
   _Delete delete() {
     return const _Delete();
   }
+
+// ignore: unused_element
+  _View view(FurtherEducation education) {
+    return _View(
+      education,
+    );
+  }
 }
 
 // ignore: unused_element
@@ -51,6 +58,7 @@ mixin _$EducationEvent {
     @required
         Result save(FurtherEducation education, FurtherEducationEntry newEntry),
     @required Result delete(),
+    @required Result view(FurtherEducation education),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
@@ -58,6 +66,7 @@ mixin _$EducationEvent {
     Result edit(FurtherEducation education, FurtherEducationEntry entry),
     Result save(FurtherEducation education, FurtherEducationEntry newEntry),
     Result delete(),
+    Result view(FurtherEducation education),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -66,6 +75,7 @@ mixin _$EducationEvent {
     @required Result edit(_Edit value),
     @required Result save(_Save value),
     @required Result delete(_Delete value),
+    @required Result view(_View value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
@@ -73,6 +83,7 @@ mixin _$EducationEvent {
     Result edit(_Edit value),
     Result save(_Save value),
     Result delete(_Delete value),
+    Result view(_View value),
     @required Result orElse(),
   });
 }
@@ -131,11 +142,13 @@ class _$_Load implements _Load {
     @required
         Result save(FurtherEducation education, FurtherEducationEntry newEntry),
     @required Result delete(),
+    @required Result view(FurtherEducation education),
   }) {
     assert(load != null);
     assert(edit != null);
     assert(save != null);
     assert(delete != null);
+    assert(view != null);
     return load();
   }
 
@@ -146,6 +159,7 @@ class _$_Load implements _Load {
     Result edit(FurtherEducation education, FurtherEducationEntry entry),
     Result save(FurtherEducation education, FurtherEducationEntry newEntry),
     Result delete(),
+    Result view(FurtherEducation education),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -162,11 +176,13 @@ class _$_Load implements _Load {
     @required Result edit(_Edit value),
     @required Result save(_Save value),
     @required Result delete(_Delete value),
+    @required Result view(_View value),
   }) {
     assert(load != null);
     assert(edit != null);
     assert(save != null);
     assert(delete != null);
+    assert(view != null);
     return load(this);
   }
 
@@ -177,6 +193,7 @@ class _$_Load implements _Load {
     Result edit(_Edit value),
     Result save(_Save value),
     Result delete(_Delete value),
+    Result view(_View value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -283,11 +300,13 @@ class _$_Edit implements _Edit {
     @required
         Result save(FurtherEducation education, FurtherEducationEntry newEntry),
     @required Result delete(),
+    @required Result view(FurtherEducation education),
   }) {
     assert(load != null);
     assert(edit != null);
     assert(save != null);
     assert(delete != null);
+    assert(view != null);
     return edit(education, entry);
   }
 
@@ -298,6 +317,7 @@ class _$_Edit implements _Edit {
     Result edit(FurtherEducation education, FurtherEducationEntry entry),
     Result save(FurtherEducation education, FurtherEducationEntry newEntry),
     Result delete(),
+    Result view(FurtherEducation education),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -314,11 +334,13 @@ class _$_Edit implements _Edit {
     @required Result edit(_Edit value),
     @required Result save(_Save value),
     @required Result delete(_Delete value),
+    @required Result view(_View value),
   }) {
     assert(load != null);
     assert(edit != null);
     assert(save != null);
     assert(delete != null);
+    assert(view != null);
     return edit(this);
   }
 
@@ -329,6 +351,7 @@ class _$_Edit implements _Edit {
     Result edit(_Edit value),
     Result save(_Save value),
     Result delete(_Delete value),
+    Result view(_View value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -443,11 +466,13 @@ class _$_Save implements _Save {
     @required
         Result save(FurtherEducation education, FurtherEducationEntry newEntry),
     @required Result delete(),
+    @required Result view(FurtherEducation education),
   }) {
     assert(load != null);
     assert(edit != null);
     assert(save != null);
     assert(delete != null);
+    assert(view != null);
     return save(education, newEntry);
   }
 
@@ -458,6 +483,7 @@ class _$_Save implements _Save {
     Result edit(FurtherEducation education, FurtherEducationEntry entry),
     Result save(FurtherEducation education, FurtherEducationEntry newEntry),
     Result delete(),
+    Result view(FurtherEducation education),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -474,11 +500,13 @@ class _$_Save implements _Save {
     @required Result edit(_Edit value),
     @required Result save(_Save value),
     @required Result delete(_Delete value),
+    @required Result view(_View value),
   }) {
     assert(load != null);
     assert(edit != null);
     assert(save != null);
     assert(delete != null);
+    assert(view != null);
     return save(this);
   }
 
@@ -489,6 +517,7 @@ class _$_Save implements _Save {
     Result edit(_Edit value),
     Result save(_Save value),
     Result delete(_Delete value),
+    Result view(_View value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -547,11 +576,13 @@ class _$_Delete implements _Delete {
     @required
         Result save(FurtherEducation education, FurtherEducationEntry newEntry),
     @required Result delete(),
+    @required Result view(FurtherEducation education),
   }) {
     assert(load != null);
     assert(edit != null);
     assert(save != null);
     assert(delete != null);
+    assert(view != null);
     return delete();
   }
 
@@ -562,6 +593,7 @@ class _$_Delete implements _Delete {
     Result edit(FurtherEducation education, FurtherEducationEntry entry),
     Result save(FurtherEducation education, FurtherEducationEntry newEntry),
     Result delete(),
+    Result view(FurtherEducation education),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -578,11 +610,13 @@ class _$_Delete implements _Delete {
     @required Result edit(_Edit value),
     @required Result save(_Save value),
     @required Result delete(_Delete value),
+    @required Result view(_View value),
   }) {
     assert(load != null);
     assert(edit != null);
     assert(save != null);
     assert(delete != null);
+    assert(view != null);
     return delete(this);
   }
 
@@ -593,6 +627,7 @@ class _$_Delete implements _Delete {
     Result edit(_Edit value),
     Result save(_Save value),
     Result delete(_Delete value),
+    Result view(_View value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -605,6 +640,148 @@ class _$_Delete implements _Delete {
 
 abstract class _Delete implements EducationEvent {
   const factory _Delete() = _$_Delete;
+}
+
+abstract class _$ViewCopyWith<$Res> {
+  factory _$ViewCopyWith(_View value, $Res Function(_View) then) =
+      __$ViewCopyWithImpl<$Res>;
+  $Res call({FurtherEducation education});
+
+  $FurtherEducationCopyWith<$Res> get education;
+}
+
+class __$ViewCopyWithImpl<$Res> extends _$EducationEventCopyWithImpl<$Res>
+    implements _$ViewCopyWith<$Res> {
+  __$ViewCopyWithImpl(_View _value, $Res Function(_View) _then)
+      : super(_value, (v) => _then(v as _View));
+
+  @override
+  _View get _value => super._value as _View;
+
+  @override
+  $Res call({
+    Object education = freezed,
+  }) {
+    return _then(_View(
+      education == freezed ? _value.education : education as FurtherEducation,
+    ));
+  }
+
+  @override
+  $FurtherEducationCopyWith<$Res> get education {
+    if (_value.education == null) {
+      return null;
+    }
+    return $FurtherEducationCopyWith<$Res>(_value.education, (value) {
+      return _then(_value.copyWith(education: value));
+    });
+  }
+}
+
+class _$_View implements _View {
+  const _$_View(this.education) : assert(education != null);
+
+  @override
+  final FurtherEducation education;
+
+  @override
+  String toString() {
+    return 'EducationEvent.view(education: $education)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _View &&
+            (identical(other.education, education) ||
+                const DeepCollectionEquality()
+                    .equals(other.education, education)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(education);
+
+  @override
+  _$ViewCopyWith<_View> get copyWith =>
+      __$ViewCopyWithImpl<_View>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result load(),
+    @required
+        Result edit(FurtherEducation education, FurtherEducationEntry entry),
+    @required
+        Result save(FurtherEducation education, FurtherEducationEntry newEntry),
+    @required Result delete(),
+    @required Result view(FurtherEducation education),
+  }) {
+    assert(load != null);
+    assert(edit != null);
+    assert(save != null);
+    assert(delete != null);
+    assert(view != null);
+    return view(education);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result load(),
+    Result edit(FurtherEducation education, FurtherEducationEntry entry),
+    Result save(FurtherEducation education, FurtherEducationEntry newEntry),
+    Result delete(),
+    Result view(FurtherEducation education),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (view != null) {
+      return view(education);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result load(_Load value),
+    @required Result edit(_Edit value),
+    @required Result save(_Save value),
+    @required Result delete(_Delete value),
+    @required Result view(_View value),
+  }) {
+    assert(load != null);
+    assert(edit != null);
+    assert(save != null);
+    assert(delete != null);
+    assert(view != null);
+    return view(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result load(_Load value),
+    Result edit(_Edit value),
+    Result save(_Save value),
+    Result delete(_Delete value),
+    Result view(_View value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (view != null) {
+      return view(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _View implements EducationEvent {
+  const factory _View(FurtherEducation education) = _$_View;
+
+  FurtherEducation get education;
+  _$ViewCopyWith<_View> get copyWith;
 }
 
 class _$EducationStateTearOff {

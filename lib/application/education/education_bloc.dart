@@ -29,7 +29,12 @@ class EducationBloc extends Bloc<EducationEvent, EducationState> {
       edit: _mapEdit,
       save: _mapSave,
       delete: _mapDelete,
+      view: _mapView,
     );
+  }
+
+  Stream<EducationState> _mapView(_View event) async* {
+    yield EducationState.viewing(education: event.education);
   }
 
   Stream<EducationState> _mapLoad(_Load event) async* {
