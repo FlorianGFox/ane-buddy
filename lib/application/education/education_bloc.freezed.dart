@@ -621,8 +621,10 @@ class _$EducationStateTearOff {
   }
 
 // ignore: unused_element
-  _Viewing viewing({bool failed, RepoFailure failure}) {
+  _Viewing viewing(
+      {FurtherEducation education, bool failed, RepoFailure failure}) {
     return _Viewing(
+      education: education,
       failed: failed,
       failure: failure,
     );
@@ -661,7 +663,9 @@ mixin _$EducationState {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result viewing(bool failed, RepoFailure failure),
+    @required
+        Result viewing(
+            FurtherEducation education, bool failed, RepoFailure failure),
     @required
         Result editing(
             FurtherEducation education,
@@ -675,7 +679,8 @@ mixin _$EducationState {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result viewing(bool failed, RepoFailure failure),
+    Result viewing(
+        FurtherEducation education, bool failed, RepoFailure failure),
     Result editing(FurtherEducation education,
         FurtherEducationEntry entryToEdit, bool failed, RepoFailure failure),
     Result deleting(),
@@ -753,7 +758,9 @@ class _$_Initial implements _Initial {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result viewing(bool failed, RepoFailure failure),
+    @required
+        Result viewing(
+            FurtherEducation education, bool failed, RepoFailure failure),
     @required
         Result editing(
             FurtherEducation education,
@@ -777,7 +784,8 @@ class _$_Initial implements _Initial {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result viewing(bool failed, RepoFailure failure),
+    Result viewing(
+        FurtherEducation education, bool failed, RepoFailure failure),
     Result editing(FurtherEducation education,
         FurtherEducationEntry entryToEdit, bool failed, RepoFailure failure),
     Result deleting(),
@@ -868,7 +876,9 @@ class _$_Loading implements _Loading {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result viewing(bool failed, RepoFailure failure),
+    @required
+        Result viewing(
+            FurtherEducation education, bool failed, RepoFailure failure),
     @required
         Result editing(
             FurtherEducation education,
@@ -892,7 +902,8 @@ class _$_Loading implements _Loading {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result viewing(bool failed, RepoFailure failure),
+    Result viewing(
+        FurtherEducation education, bool failed, RepoFailure failure),
     Result editing(FurtherEducation education,
         FurtherEducationEntry entryToEdit, bool failed, RepoFailure failure),
     Result deleting(),
@@ -951,8 +962,9 @@ abstract class _Loading implements EducationState {
 abstract class _$ViewingCopyWith<$Res> {
   factory _$ViewingCopyWith(_Viewing value, $Res Function(_Viewing) then) =
       __$ViewingCopyWithImpl<$Res>;
-  $Res call({bool failed, RepoFailure failure});
+  $Res call({FurtherEducation education, bool failed, RepoFailure failure});
 
+  $FurtherEducationCopyWith<$Res> get education;
   $RepoFailureCopyWith<$Res> get failure;
 }
 
@@ -966,13 +978,27 @@ class __$ViewingCopyWithImpl<$Res> extends _$EducationStateCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object education = freezed,
     Object failed = freezed,
     Object failure = freezed,
   }) {
     return _then(_Viewing(
+      education: education == freezed
+          ? _value.education
+          : education as FurtherEducation,
       failed: failed == freezed ? _value.failed : failed as bool,
       failure: failure == freezed ? _value.failure : failure as RepoFailure,
     ));
+  }
+
+  @override
+  $FurtherEducationCopyWith<$Res> get education {
+    if (_value.education == null) {
+      return null;
+    }
+    return $FurtherEducationCopyWith<$Res>(_value.education, (value) {
+      return _then(_value.copyWith(education: value));
+    });
   }
 
   @override
@@ -987,8 +1013,10 @@ class __$ViewingCopyWithImpl<$Res> extends _$EducationStateCopyWithImpl<$Res>
 }
 
 class _$_Viewing implements _Viewing {
-  const _$_Viewing({this.failed, this.failure});
+  const _$_Viewing({this.education, this.failed, this.failure});
 
+  @override
+  final FurtherEducation education;
   @override
   final bool failed;
   @override
@@ -996,13 +1024,16 @@ class _$_Viewing implements _Viewing {
 
   @override
   String toString() {
-    return 'EducationState.viewing(failed: $failed, failure: $failure)';
+    return 'EducationState.viewing(education: $education, failed: $failed, failure: $failure)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Viewing &&
+            (identical(other.education, education) ||
+                const DeepCollectionEquality()
+                    .equals(other.education, education)) &&
             (identical(other.failed, failed) ||
                 const DeepCollectionEquality().equals(other.failed, failed)) &&
             (identical(other.failure, failure) ||
@@ -1012,6 +1043,7 @@ class _$_Viewing implements _Viewing {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(education) ^
       const DeepCollectionEquality().hash(failed) ^
       const DeepCollectionEquality().hash(failure);
 
@@ -1024,7 +1056,9 @@ class _$_Viewing implements _Viewing {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result viewing(bool failed, RepoFailure failure),
+    @required
+        Result viewing(
+            FurtherEducation education, bool failed, RepoFailure failure),
     @required
         Result editing(
             FurtherEducation education,
@@ -1040,7 +1074,7 @@ class _$_Viewing implements _Viewing {
     assert(editing != null);
     assert(deleting != null);
     assert(saving != null);
-    return viewing(failed, failure);
+    return viewing(education, failed, failure);
   }
 
   @override
@@ -1048,7 +1082,8 @@ class _$_Viewing implements _Viewing {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result viewing(bool failed, RepoFailure failure),
+    Result viewing(
+        FurtherEducation education, bool failed, RepoFailure failure),
     Result editing(FurtherEducation education,
         FurtherEducationEntry entryToEdit, bool failed, RepoFailure failure),
     Result deleting(),
@@ -1057,7 +1092,7 @@ class _$_Viewing implements _Viewing {
   }) {
     assert(orElse != null);
     if (viewing != null) {
-      return viewing(failed, failure);
+      return viewing(education, failed, failure);
     }
     return orElse();
   }
@@ -1101,8 +1136,12 @@ class _$_Viewing implements _Viewing {
 }
 
 abstract class _Viewing implements EducationState {
-  const factory _Viewing({bool failed, RepoFailure failure}) = _$_Viewing;
+  const factory _Viewing(
+      {FurtherEducation education,
+      bool failed,
+      RepoFailure failure}) = _$_Viewing;
 
+  FurtherEducation get education;
   bool get failed;
   RepoFailure get failure;
   _$ViewingCopyWith<_Viewing> get copyWith;
@@ -1232,7 +1271,9 @@ class _$_Editing implements _Editing {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result viewing(bool failed, RepoFailure failure),
+    @required
+        Result viewing(
+            FurtherEducation education, bool failed, RepoFailure failure),
     @required
         Result editing(
             FurtherEducation education,
@@ -1256,7 +1297,8 @@ class _$_Editing implements _Editing {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result viewing(bool failed, RepoFailure failure),
+    Result viewing(
+        FurtherEducation education, bool failed, RepoFailure failure),
     Result editing(FurtherEducation education,
         FurtherEducationEntry entryToEdit, bool failed, RepoFailure failure),
     Result deleting(),
@@ -1357,7 +1399,9 @@ class _$_Deleting implements _Deleting {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result viewing(bool failed, RepoFailure failure),
+    @required
+        Result viewing(
+            FurtherEducation education, bool failed, RepoFailure failure),
     @required
         Result editing(
             FurtherEducation education,
@@ -1381,7 +1425,8 @@ class _$_Deleting implements _Deleting {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result viewing(bool failed, RepoFailure failure),
+    Result viewing(
+        FurtherEducation education, bool failed, RepoFailure failure),
     Result editing(FurtherEducation education,
         FurtherEducationEntry entryToEdit, bool failed, RepoFailure failure),
     Result deleting(),
@@ -1472,7 +1517,9 @@ class _$_Saving implements _Saving {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result viewing(bool failed, RepoFailure failure),
+    @required
+        Result viewing(
+            FurtherEducation education, bool failed, RepoFailure failure),
     @required
         Result editing(
             FurtherEducation education,
@@ -1496,7 +1543,8 @@ class _$_Saving implements _Saving {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result viewing(bool failed, RepoFailure failure),
+    Result viewing(
+        FurtherEducation education, bool failed, RepoFailure failure),
     Result editing(FurtherEducation education,
         FurtherEducationEntry entryToEdit, bool failed, RepoFailure failure),
     Result deleting(),

@@ -17,7 +17,8 @@ class EducationPage extends StatelessWidget {
       body: SafeArea(
         minimum: const EdgeInsets.all(16.0),
         child: BlocProvider(
-          create: (context) => getIt<EducationBloc>(),
+          create: (context) =>
+              getIt<EducationBloc>()..add(EducationEvent.load()),
           child: FurtherEducationListView(),
         ),
       ),

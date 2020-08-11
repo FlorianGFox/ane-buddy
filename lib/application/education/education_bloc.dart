@@ -36,8 +36,9 @@ class EducationBloc extends Bloc<EducationEvent, EducationState> {
     yield EducationState.loading();
     final failureOrEducation = await dao.load();
     yield failureOrEducation.fold(
-      (failure) => EducationState.viewing(failed: true, failure: failure),
-      (education) => EducationState.viewing(),
+      (failure) => EducationState.viewing(
+          education: null, failed: true, failure: failure),
+      (education) => EducationState.viewing(education: education),
     );
   }
 
@@ -58,7 +59,7 @@ class EducationBloc extends Bloc<EducationEvent, EducationState> {
         failed: true,
         failure: failure,
       ),
-      (_) => EducationState.viewing(),
+      (_) => EducationState.viewing(education: event.education),
     );
   }
 

@@ -5,6 +5,7 @@ abstract class EducationState with _$EducationState {
   const factory EducationState.initial() = _Initial;
   const factory EducationState.loading() = _Loading;
   const factory EducationState.viewing({
+    FurtherEducation education,
     bool failed,
     RepoFailure failure,
   }) = _Viewing;
