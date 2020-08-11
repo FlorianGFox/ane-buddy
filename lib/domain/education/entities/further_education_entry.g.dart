@@ -6,6 +6,7 @@ part of 'further_education_entry.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+// ignore: non_constant_identifier_names
 _$_FurtherEducationEntry _$_$_FurtherEducationEntryFromJson(
     Map<String, dynamic> json) {
   return _$_FurtherEducationEntry(
@@ -18,6 +19,7 @@ _$_FurtherEducationEntry _$_$_FurtherEducationEntryFromJson(
   );
 }
 
+// ignore: non_constant_identifier_names
 Map<String, dynamic> _$_$_FurtherEducationEntryToJson(
         _$_FurtherEducationEntry instance) =>
     <String, dynamic>{

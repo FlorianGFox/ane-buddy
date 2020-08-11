@@ -9,6 +9,8 @@ abstract class EducationState with _$EducationState {
     RepoFailure failure,
   }) = _Viewing;
   const factory EducationState.editing({
+    @required FurtherEducation education,
+    FurtherEducationEntry entryToEdit,
     bool failed,
     RepoFailure failure,
   }) = _Editing;

@@ -1,6 +1,7 @@
 import 'package:ane_buddy/application/education/education_bloc.dart';
 import 'package:ane_buddy/domain/core/repositories/repo_failure.dart';
 import 'package:ane_buddy/domain/education/entities/further_education.dart';
+import 'package:ane_buddy/domain/education/entities/further_education_entry.dart';
 import 'package:ane_buddy/domain/education/repositories/education_dao.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -18,13 +19,14 @@ void main() {
     bloc = EducationBloc(mockDao);
   });
 
-  group('When EducationEvent.save is added to EducationBloc', () {
-    FurtherEducation tEducation = FurtherEducation([]);
+  group('When EducationEvent.save is added to EducationBloc,', () {
+    FurtherEducationEntry tEntry = FurtherEducationEntry();
+    FurtherEducation tEducation = FurtherEducation([tEntry]);
     test('dao.save() is called with correct education object.', () async {
       //arrange
       when(mockDao.save(any)).thenAnswer((_) async => Right(null));
       //act
-      bloc.add(EducationEvent.save(tEducation));
+      bloc.add(EducationEvent.save(tEducation, tEntry));
       await untilCalled(mockDao.save(any));
       //assert
       verify(mockDao.save(tEducation));
@@ -35,7 +37,7 @@ void main() {
       final expected = [EducationState.saving(), EducationState.viewing()];
       when(mockDao.save(any)).thenAnswer((_) async => Right(null));
       //act
-      bloc.add(EducationEvent.save(tEducation));
+      bloc.add(EducationEvent.save(tEducation, tEntry));
       //assert
       expectLater(bloc, emitsInOrder(expected));
     });
@@ -48,19 +50,21 @@ void main() {
       final expected = [
         EducationState.saving(),
         EducationState.editing(
+          education: tEducation,
+          entryToEdit: tEntry,
           failed: true,
           failure: expectedFailure,
         )
       ];
       when(mockDao.save(any)).thenAnswer((_) async => Left(expectedFailure));
       //act
-      bloc.add(EducationEvent.save(tEducation));
+      bloc.add(EducationEvent.save(tEducation, tEntry));
       //assert
       expectLater(bloc, emitsInOrder(expected));
     });
   });
 
-  group('When EducationEvent.load is added to EducationBloc', () {
+  group('When EducationEvent.load is added to EducationBloc,', () {
     FurtherEducation tEducation = FurtherEducation([]);
     test('dao.load() is called.', () async {
       //arrange
@@ -99,6 +103,25 @@ void main() {
       bloc.add(EducationEvent.load());
       //assert
       expectLater(bloc, emitsInOrder(expected));
+    });
+  });
+
+  group('When EducationEvent.edit is added to EducationBloc,', () {
+    FurtherEducationEntry tEntry = FurtherEducationEntry();
+    FurtherEducation tEducation = FurtherEducation([tEntry]);
+    test('Editing state is emitted with given further education element.',
+        () async {
+      //arrange
+      final tExpected = [
+        EducationState.editing(
+          education: tEducation,
+          entryToEdit: tEntry,
+        )
+      ];
+      //act
+      bloc.add(EducationEvent.edit(tEducation, tEntry));
+      //assert
+      expectLater(bloc, emitsInOrder(tExpected));
     });
   });
 }

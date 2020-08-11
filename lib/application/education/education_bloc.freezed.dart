@@ -18,14 +18,18 @@ class _$EducationEventTearOff {
   }
 
 // ignore: unused_element
-  _Edit edit() {
-    return const _Edit();
+  _Edit edit(FurtherEducation education, [FurtherEducationEntry entry]) {
+    return _Edit(
+      education,
+      entry,
+    );
   }
 
 // ignore: unused_element
-  _Save save(FurtherEducation education) {
+  _Save save(FurtherEducation education, FurtherEducationEntry newEntry) {
     return _Save(
       education,
+      newEntry,
     );
   }
 
@@ -42,15 +46,17 @@ mixin _$EducationEvent {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result load(),
-    @required Result edit(),
-    @required Result save(FurtherEducation education),
+    @required
+        Result edit(FurtherEducation education, FurtherEducationEntry entry),
+    @required
+        Result save(FurtherEducation education, FurtherEducationEntry newEntry),
     @required Result delete(),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result load(),
-    Result edit(),
-    Result save(FurtherEducation education),
+    Result edit(FurtherEducation education, FurtherEducationEntry entry),
+    Result save(FurtherEducation education, FurtherEducationEntry newEntry),
     Result delete(),
     @required Result orElse(),
   });
@@ -120,8 +126,10 @@ class _$_Load implements _Load {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result load(),
-    @required Result edit(),
-    @required Result save(FurtherEducation education),
+    @required
+        Result edit(FurtherEducation education, FurtherEducationEntry entry),
+    @required
+        Result save(FurtherEducation education, FurtherEducationEntry newEntry),
     @required Result delete(),
   }) {
     assert(load != null);
@@ -135,8 +143,8 @@ class _$_Load implements _Load {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result load(),
-    Result edit(),
-    Result save(FurtherEducation education),
+    Result edit(FurtherEducation education, FurtherEducationEntry entry),
+    Result save(FurtherEducation education, FurtherEducationEntry newEntry),
     Result delete(),
     @required Result orElse(),
   }) {
@@ -186,6 +194,10 @@ abstract class _Load implements EducationEvent {
 abstract class _$EditCopyWith<$Res> {
   factory _$EditCopyWith(_Edit value, $Res Function(_Edit) then) =
       __$EditCopyWithImpl<$Res>;
+  $Res call({FurtherEducation education, FurtherEducationEntry entry});
+
+  $FurtherEducationCopyWith<$Res> get education;
+  $FurtherEducationEntryCopyWith<$Res> get entry;
 }
 
 class __$EditCopyWithImpl<$Res> extends _$EducationEventCopyWithImpl<$Res>
@@ -195,51 +207,102 @@ class __$EditCopyWithImpl<$Res> extends _$EducationEventCopyWithImpl<$Res>
 
   @override
   _Edit get _value => super._value as _Edit;
+
+  @override
+  $Res call({
+    Object education = freezed,
+    Object entry = freezed,
+  }) {
+    return _then(_Edit(
+      education == freezed ? _value.education : education as FurtherEducation,
+      entry == freezed ? _value.entry : entry as FurtherEducationEntry,
+    ));
+  }
+
+  @override
+  $FurtherEducationCopyWith<$Res> get education {
+    if (_value.education == null) {
+      return null;
+    }
+    return $FurtherEducationCopyWith<$Res>(_value.education, (value) {
+      return _then(_value.copyWith(education: value));
+    });
+  }
+
+  @override
+  $FurtherEducationEntryCopyWith<$Res> get entry {
+    if (_value.entry == null) {
+      return null;
+    }
+    return $FurtherEducationEntryCopyWith<$Res>(_value.entry, (value) {
+      return _then(_value.copyWith(entry: value));
+    });
+  }
 }
 
 class _$_Edit implements _Edit {
-  const _$_Edit();
+  const _$_Edit(this.education, [this.entry]) : assert(education != null);
+
+  @override
+  final FurtherEducation education;
+  @override
+  final FurtherEducationEntry entry;
 
   @override
   String toString() {
-    return 'EducationEvent.edit()';
+    return 'EducationEvent.edit(education: $education, entry: $entry)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Edit);
+    return identical(this, other) ||
+        (other is _Edit &&
+            (identical(other.education, education) ||
+                const DeepCollectionEquality()
+                    .equals(other.education, education)) &&
+            (identical(other.entry, entry) ||
+                const DeepCollectionEquality().equals(other.entry, entry)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(education) ^
+      const DeepCollectionEquality().hash(entry);
+
+  @override
+  _$EditCopyWith<_Edit> get copyWith =>
+      __$EditCopyWithImpl<_Edit>(this, _$identity);
 
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result load(),
-    @required Result edit(),
-    @required Result save(FurtherEducation education),
+    @required
+        Result edit(FurtherEducation education, FurtherEducationEntry entry),
+    @required
+        Result save(FurtherEducation education, FurtherEducationEntry newEntry),
     @required Result delete(),
   }) {
     assert(load != null);
     assert(edit != null);
     assert(save != null);
     assert(delete != null);
-    return edit();
+    return edit(education, entry);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result load(),
-    Result edit(),
-    Result save(FurtherEducation education),
+    Result edit(FurtherEducation education, FurtherEducationEntry entry),
+    Result save(FurtherEducation education, FurtherEducationEntry newEntry),
     Result delete(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (edit != null) {
-      return edit();
+      return edit(education, entry);
     }
     return orElse();
   }
@@ -277,15 +340,21 @@ class _$_Edit implements _Edit {
 }
 
 abstract class _Edit implements EducationEvent {
-  const factory _Edit() = _$_Edit;
+  const factory _Edit(FurtherEducation education,
+      [FurtherEducationEntry entry]) = _$_Edit;
+
+  FurtherEducation get education;
+  FurtherEducationEntry get entry;
+  _$EditCopyWith<_Edit> get copyWith;
 }
 
 abstract class _$SaveCopyWith<$Res> {
   factory _$SaveCopyWith(_Save value, $Res Function(_Save) then) =
       __$SaveCopyWithImpl<$Res>;
-  $Res call({FurtherEducation education});
+  $Res call({FurtherEducation education, FurtherEducationEntry newEntry});
 
   $FurtherEducationCopyWith<$Res> get education;
+  $FurtherEducationEntryCopyWith<$Res> get newEntry;
 }
 
 class __$SaveCopyWithImpl<$Res> extends _$EducationEventCopyWithImpl<$Res>
@@ -299,9 +368,11 @@ class __$SaveCopyWithImpl<$Res> extends _$EducationEventCopyWithImpl<$Res>
   @override
   $Res call({
     Object education = freezed,
+    Object newEntry = freezed,
   }) {
     return _then(_Save(
       education == freezed ? _value.education : education as FurtherEducation,
+      newEntry == freezed ? _value.newEntry : newEntry as FurtherEducationEntry,
     ));
   }
 
@@ -314,17 +385,31 @@ class __$SaveCopyWithImpl<$Res> extends _$EducationEventCopyWithImpl<$Res>
       return _then(_value.copyWith(education: value));
     });
   }
+
+  @override
+  $FurtherEducationEntryCopyWith<$Res> get newEntry {
+    if (_value.newEntry == null) {
+      return null;
+    }
+    return $FurtherEducationEntryCopyWith<$Res>(_value.newEntry, (value) {
+      return _then(_value.copyWith(newEntry: value));
+    });
+  }
 }
 
 class _$_Save implements _Save {
-  const _$_Save(this.education) : assert(education != null);
+  const _$_Save(this.education, this.newEntry)
+      : assert(education != null),
+        assert(newEntry != null);
 
   @override
   final FurtherEducation education;
+  @override
+  final FurtherEducationEntry newEntry;
 
   @override
   String toString() {
-    return 'EducationEvent.save(education: $education)';
+    return 'EducationEvent.save(education: $education, newEntry: $newEntry)';
   }
 
   @override
@@ -333,12 +418,17 @@ class _$_Save implements _Save {
         (other is _Save &&
             (identical(other.education, education) ||
                 const DeepCollectionEquality()
-                    .equals(other.education, education)));
+                    .equals(other.education, education)) &&
+            (identical(other.newEntry, newEntry) ||
+                const DeepCollectionEquality()
+                    .equals(other.newEntry, newEntry)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(education);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(education) ^
+      const DeepCollectionEquality().hash(newEntry);
 
   @override
   _$SaveCopyWith<_Save> get copyWith =>
@@ -348,29 +438,31 @@ class _$_Save implements _Save {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result load(),
-    @required Result edit(),
-    @required Result save(FurtherEducation education),
+    @required
+        Result edit(FurtherEducation education, FurtherEducationEntry entry),
+    @required
+        Result save(FurtherEducation education, FurtherEducationEntry newEntry),
     @required Result delete(),
   }) {
     assert(load != null);
     assert(edit != null);
     assert(save != null);
     assert(delete != null);
-    return save(education);
+    return save(education, newEntry);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result load(),
-    Result edit(),
-    Result save(FurtherEducation education),
+    Result edit(FurtherEducation education, FurtherEducationEntry entry),
+    Result save(FurtherEducation education, FurtherEducationEntry newEntry),
     Result delete(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (save != null) {
-      return save(education);
+      return save(education, newEntry);
     }
     return orElse();
   }
@@ -408,9 +500,11 @@ class _$_Save implements _Save {
 }
 
 abstract class _Save implements EducationEvent {
-  const factory _Save(FurtherEducation education) = _$_Save;
+  const factory _Save(
+      FurtherEducation education, FurtherEducationEntry newEntry) = _$_Save;
 
   FurtherEducation get education;
+  FurtherEducationEntry get newEntry;
   _$SaveCopyWith<_Save> get copyWith;
 }
 
@@ -448,8 +542,10 @@ class _$_Delete implements _Delete {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result load(),
-    @required Result edit(),
-    @required Result save(FurtherEducation education),
+    @required
+        Result edit(FurtherEducation education, FurtherEducationEntry entry),
+    @required
+        Result save(FurtherEducation education, FurtherEducationEntry newEntry),
     @required Result delete(),
   }) {
     assert(load != null);
@@ -463,8 +559,8 @@ class _$_Delete implements _Delete {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result load(),
-    Result edit(),
-    Result save(FurtherEducation education),
+    Result edit(FurtherEducation education, FurtherEducationEntry entry),
+    Result save(FurtherEducation education, FurtherEducationEntry newEntry),
     Result delete(),
     @required Result orElse(),
   }) {
@@ -533,8 +629,14 @@ class _$EducationStateTearOff {
   }
 
 // ignore: unused_element
-  _Editing editing({bool failed, RepoFailure failure}) {
+  _Editing editing(
+      {@required FurtherEducation education,
+      FurtherEducationEntry entryToEdit,
+      bool failed,
+      RepoFailure failure}) {
     return _Editing(
+      education: education,
+      entryToEdit: entryToEdit,
       failed: failed,
       failure: failure,
     );
@@ -560,7 +662,12 @@ mixin _$EducationState {
     @required Result initial(),
     @required Result loading(),
     @required Result viewing(bool failed, RepoFailure failure),
-    @required Result editing(bool failed, RepoFailure failure),
+    @required
+        Result editing(
+            FurtherEducation education,
+            FurtherEducationEntry entryToEdit,
+            bool failed,
+            RepoFailure failure),
     @required Result deleting(),
     @required Result saving(),
   });
@@ -569,7 +676,8 @@ mixin _$EducationState {
     Result initial(),
     Result loading(),
     Result viewing(bool failed, RepoFailure failure),
-    Result editing(bool failed, RepoFailure failure),
+    Result editing(FurtherEducation education,
+        FurtherEducationEntry entryToEdit, bool failed, RepoFailure failure),
     Result deleting(),
     Result saving(),
     @required Result orElse(),
@@ -646,7 +754,12 @@ class _$_Initial implements _Initial {
     @required Result initial(),
     @required Result loading(),
     @required Result viewing(bool failed, RepoFailure failure),
-    @required Result editing(bool failed, RepoFailure failure),
+    @required
+        Result editing(
+            FurtherEducation education,
+            FurtherEducationEntry entryToEdit,
+            bool failed,
+            RepoFailure failure),
     @required Result deleting(),
     @required Result saving(),
   }) {
@@ -665,7 +778,8 @@ class _$_Initial implements _Initial {
     Result initial(),
     Result loading(),
     Result viewing(bool failed, RepoFailure failure),
-    Result editing(bool failed, RepoFailure failure),
+    Result editing(FurtherEducation education,
+        FurtherEducationEntry entryToEdit, bool failed, RepoFailure failure),
     Result deleting(),
     Result saving(),
     @required Result orElse(),
@@ -755,7 +869,12 @@ class _$_Loading implements _Loading {
     @required Result initial(),
     @required Result loading(),
     @required Result viewing(bool failed, RepoFailure failure),
-    @required Result editing(bool failed, RepoFailure failure),
+    @required
+        Result editing(
+            FurtherEducation education,
+            FurtherEducationEntry entryToEdit,
+            bool failed,
+            RepoFailure failure),
     @required Result deleting(),
     @required Result saving(),
   }) {
@@ -774,7 +893,8 @@ class _$_Loading implements _Loading {
     Result initial(),
     Result loading(),
     Result viewing(bool failed, RepoFailure failure),
-    Result editing(bool failed, RepoFailure failure),
+    Result editing(FurtherEducation education,
+        FurtherEducationEntry entryToEdit, bool failed, RepoFailure failure),
     Result deleting(),
     Result saving(),
     @required Result orElse(),
@@ -905,7 +1025,12 @@ class _$_Viewing implements _Viewing {
     @required Result initial(),
     @required Result loading(),
     @required Result viewing(bool failed, RepoFailure failure),
-    @required Result editing(bool failed, RepoFailure failure),
+    @required
+        Result editing(
+            FurtherEducation education,
+            FurtherEducationEntry entryToEdit,
+            bool failed,
+            RepoFailure failure),
     @required Result deleting(),
     @required Result saving(),
   }) {
@@ -924,7 +1049,8 @@ class _$_Viewing implements _Viewing {
     Result initial(),
     Result loading(),
     Result viewing(bool failed, RepoFailure failure),
-    Result editing(bool failed, RepoFailure failure),
+    Result editing(FurtherEducation education,
+        FurtherEducationEntry entryToEdit, bool failed, RepoFailure failure),
     Result deleting(),
     Result saving(),
     @required Result orElse(),
@@ -985,8 +1111,14 @@ abstract class _Viewing implements EducationState {
 abstract class _$EditingCopyWith<$Res> {
   factory _$EditingCopyWith(_Editing value, $Res Function(_Editing) then) =
       __$EditingCopyWithImpl<$Res>;
-  $Res call({bool failed, RepoFailure failure});
+  $Res call(
+      {FurtherEducation education,
+      FurtherEducationEntry entryToEdit,
+      bool failed,
+      RepoFailure failure});
 
+  $FurtherEducationCopyWith<$Res> get education;
+  $FurtherEducationEntryCopyWith<$Res> get entryToEdit;
   $RepoFailureCopyWith<$Res> get failure;
 }
 
@@ -1000,13 +1132,41 @@ class __$EditingCopyWithImpl<$Res> extends _$EducationStateCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object education = freezed,
+    Object entryToEdit = freezed,
     Object failed = freezed,
     Object failure = freezed,
   }) {
     return _then(_Editing(
+      education: education == freezed
+          ? _value.education
+          : education as FurtherEducation,
+      entryToEdit: entryToEdit == freezed
+          ? _value.entryToEdit
+          : entryToEdit as FurtherEducationEntry,
       failed: failed == freezed ? _value.failed : failed as bool,
       failure: failure == freezed ? _value.failure : failure as RepoFailure,
     ));
+  }
+
+  @override
+  $FurtherEducationCopyWith<$Res> get education {
+    if (_value.education == null) {
+      return null;
+    }
+    return $FurtherEducationCopyWith<$Res>(_value.education, (value) {
+      return _then(_value.copyWith(education: value));
+    });
+  }
+
+  @override
+  $FurtherEducationEntryCopyWith<$Res> get entryToEdit {
+    if (_value.entryToEdit == null) {
+      return null;
+    }
+    return $FurtherEducationEntryCopyWith<$Res>(_value.entryToEdit, (value) {
+      return _then(_value.copyWith(entryToEdit: value));
+    });
   }
 
   @override
@@ -1021,8 +1181,14 @@ class __$EditingCopyWithImpl<$Res> extends _$EducationStateCopyWithImpl<$Res>
 }
 
 class _$_Editing implements _Editing {
-  const _$_Editing({this.failed, this.failure});
+  const _$_Editing(
+      {@required this.education, this.entryToEdit, this.failed, this.failure})
+      : assert(education != null);
 
+  @override
+  final FurtherEducation education;
+  @override
+  final FurtherEducationEntry entryToEdit;
   @override
   final bool failed;
   @override
@@ -1030,13 +1196,19 @@ class _$_Editing implements _Editing {
 
   @override
   String toString() {
-    return 'EducationState.editing(failed: $failed, failure: $failure)';
+    return 'EducationState.editing(education: $education, entryToEdit: $entryToEdit, failed: $failed, failure: $failure)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Editing &&
+            (identical(other.education, education) ||
+                const DeepCollectionEquality()
+                    .equals(other.education, education)) &&
+            (identical(other.entryToEdit, entryToEdit) ||
+                const DeepCollectionEquality()
+                    .equals(other.entryToEdit, entryToEdit)) &&
             (identical(other.failed, failed) ||
                 const DeepCollectionEquality().equals(other.failed, failed)) &&
             (identical(other.failure, failure) ||
@@ -1046,6 +1218,8 @@ class _$_Editing implements _Editing {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(education) ^
+      const DeepCollectionEquality().hash(entryToEdit) ^
       const DeepCollectionEquality().hash(failed) ^
       const DeepCollectionEquality().hash(failure);
 
@@ -1059,7 +1233,12 @@ class _$_Editing implements _Editing {
     @required Result initial(),
     @required Result loading(),
     @required Result viewing(bool failed, RepoFailure failure),
-    @required Result editing(bool failed, RepoFailure failure),
+    @required
+        Result editing(
+            FurtherEducation education,
+            FurtherEducationEntry entryToEdit,
+            bool failed,
+            RepoFailure failure),
     @required Result deleting(),
     @required Result saving(),
   }) {
@@ -1069,7 +1248,7 @@ class _$_Editing implements _Editing {
     assert(editing != null);
     assert(deleting != null);
     assert(saving != null);
-    return editing(failed, failure);
+    return editing(education, entryToEdit, failed, failure);
   }
 
   @override
@@ -1078,14 +1257,15 @@ class _$_Editing implements _Editing {
     Result initial(),
     Result loading(),
     Result viewing(bool failed, RepoFailure failure),
-    Result editing(bool failed, RepoFailure failure),
+    Result editing(FurtherEducation education,
+        FurtherEducationEntry entryToEdit, bool failed, RepoFailure failure),
     Result deleting(),
     Result saving(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (editing != null) {
-      return editing(failed, failure);
+      return editing(education, entryToEdit, failed, failure);
     }
     return orElse();
   }
@@ -1129,8 +1309,14 @@ class _$_Editing implements _Editing {
 }
 
 abstract class _Editing implements EducationState {
-  const factory _Editing({bool failed, RepoFailure failure}) = _$_Editing;
+  const factory _Editing(
+      {@required FurtherEducation education,
+      FurtherEducationEntry entryToEdit,
+      bool failed,
+      RepoFailure failure}) = _$_Editing;
 
+  FurtherEducation get education;
+  FurtherEducationEntry get entryToEdit;
   bool get failed;
   RepoFailure get failure;
   _$EditingCopyWith<_Editing> get copyWith;
@@ -1172,7 +1358,12 @@ class _$_Deleting implements _Deleting {
     @required Result initial(),
     @required Result loading(),
     @required Result viewing(bool failed, RepoFailure failure),
-    @required Result editing(bool failed, RepoFailure failure),
+    @required
+        Result editing(
+            FurtherEducation education,
+            FurtherEducationEntry entryToEdit,
+            bool failed,
+            RepoFailure failure),
     @required Result deleting(),
     @required Result saving(),
   }) {
@@ -1191,7 +1382,8 @@ class _$_Deleting implements _Deleting {
     Result initial(),
     Result loading(),
     Result viewing(bool failed, RepoFailure failure),
-    Result editing(bool failed, RepoFailure failure),
+    Result editing(FurtherEducation education,
+        FurtherEducationEntry entryToEdit, bool failed, RepoFailure failure),
     Result deleting(),
     Result saving(),
     @required Result orElse(),
@@ -1281,7 +1473,12 @@ class _$_Saving implements _Saving {
     @required Result initial(),
     @required Result loading(),
     @required Result viewing(bool failed, RepoFailure failure),
-    @required Result editing(bool failed, RepoFailure failure),
+    @required
+        Result editing(
+            FurtherEducation education,
+            FurtherEducationEntry entryToEdit,
+            bool failed,
+            RepoFailure failure),
     @required Result deleting(),
     @required Result saving(),
   }) {
@@ -1300,7 +1497,8 @@ class _$_Saving implements _Saving {
     Result initial(),
     Result loading(),
     Result viewing(bool failed, RepoFailure failure),
-    Result editing(bool failed, RepoFailure failure),
+    Result editing(FurtherEducation education,
+        FurtherEducationEntry entryToEdit, bool failed, RepoFailure failure),
     Result deleting(),
     Result saving(),
     @required Result orElse(),

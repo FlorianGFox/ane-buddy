@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:ane_buddy/domain/core/repositories/repo_failure.dart';
 import 'package:ane_buddy/domain/education/entities/further_education.dart';
+import 'package:ane_buddy/domain/education/entities/further_education_entry.dart';
 import 'package:ane_buddy/domain/education/repositories/education_dao.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -40,15 +41,23 @@ class EducationBloc extends Bloc<EducationEvent, EducationState> {
     );
   }
 
-  Stream<EducationState> _mapEdit(_Edit event) {
-    //Todo implement _mapEdit
+  Stream<EducationState> _mapEdit(_Edit event) async* {
+    yield EducationState.editing(
+      education: event.education,
+      entryToEdit: event.entry,
+    );
   }
 
   Stream<EducationState> _mapSave(_Save event) async* {
     yield EducationState.saving();
     final mayBeFailure = await dao.save(event.education);
     yield mayBeFailure.fold(
-      (failure) => EducationState.editing(failed: true, failure: failure),
+      (failure) => EducationState.editing(
+        education: event.education,
+        entryToEdit: event.newEntry,
+        failed: true,
+        failure: failure,
+      ),
       (_) => EducationState.viewing(),
     );
   }
