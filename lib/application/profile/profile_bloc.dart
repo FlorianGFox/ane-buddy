@@ -52,6 +52,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         unknown: (_) => ProfileState.ready(failed: true, failure: failure),
         notFound: (_) => _createReadyWithFailure(failure),
         conversion: (_) => _createReadyWithFailure(failure),
+        invalidState: (_) => _createReadyWithFailure(failure),
       ),
       (profile) => ProfileState.ready(failed: false, profile: profile),
     );

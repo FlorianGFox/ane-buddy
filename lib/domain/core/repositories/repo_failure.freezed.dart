@@ -27,6 +27,11 @@ class _$RepoFailureTearOff {
   _Conversion conversion() {
     return const _Conversion();
   }
+
+// ignore: unused_element
+  _InvalidState invalidState() {
+    return const _InvalidState();
+  }
 }
 
 // ignore: unused_element
@@ -38,12 +43,14 @@ mixin _$RepoFailure {
     @required Result unknown(),
     @required Result notFound(),
     @required Result conversion(),
+    @required Result invalidState(),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result unknown(),
     Result notFound(),
     Result conversion(),
+    Result invalidState(),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -51,12 +58,14 @@ mixin _$RepoFailure {
     @required Result unknown(_Unknown value),
     @required Result notFound(_NotFound value),
     @required Result conversion(_Conversion value),
+    @required Result invalidState(_InvalidState value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result unknown(_Unknown value),
     Result notFound(_NotFound value),
     Result conversion(_Conversion value),
+    Result invalidState(_InvalidState value),
     @required Result orElse(),
   });
 }
@@ -111,10 +120,12 @@ class _$_Unknown implements _Unknown {
     @required Result unknown(),
     @required Result notFound(),
     @required Result conversion(),
+    @required Result invalidState(),
   }) {
     assert(unknown != null);
     assert(notFound != null);
     assert(conversion != null);
+    assert(invalidState != null);
     return unknown();
   }
 
@@ -124,6 +135,7 @@ class _$_Unknown implements _Unknown {
     Result unknown(),
     Result notFound(),
     Result conversion(),
+    Result invalidState(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -139,10 +151,12 @@ class _$_Unknown implements _Unknown {
     @required Result unknown(_Unknown value),
     @required Result notFound(_NotFound value),
     @required Result conversion(_Conversion value),
+    @required Result invalidState(_InvalidState value),
   }) {
     assert(unknown != null);
     assert(notFound != null);
     assert(conversion != null);
+    assert(invalidState != null);
     return unknown(this);
   }
 
@@ -152,6 +166,7 @@ class _$_Unknown implements _Unknown {
     Result unknown(_Unknown value),
     Result notFound(_NotFound value),
     Result conversion(_Conversion value),
+    Result invalidState(_InvalidState value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -202,10 +217,12 @@ class _$_NotFound implements _NotFound {
     @required Result unknown(),
     @required Result notFound(),
     @required Result conversion(),
+    @required Result invalidState(),
   }) {
     assert(unknown != null);
     assert(notFound != null);
     assert(conversion != null);
+    assert(invalidState != null);
     return notFound();
   }
 
@@ -215,6 +232,7 @@ class _$_NotFound implements _NotFound {
     Result unknown(),
     Result notFound(),
     Result conversion(),
+    Result invalidState(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -230,10 +248,12 @@ class _$_NotFound implements _NotFound {
     @required Result unknown(_Unknown value),
     @required Result notFound(_NotFound value),
     @required Result conversion(_Conversion value),
+    @required Result invalidState(_InvalidState value),
   }) {
     assert(unknown != null);
     assert(notFound != null);
     assert(conversion != null);
+    assert(invalidState != null);
     return notFound(this);
   }
 
@@ -243,6 +263,7 @@ class _$_NotFound implements _NotFound {
     Result unknown(_Unknown value),
     Result notFound(_NotFound value),
     Result conversion(_Conversion value),
+    Result invalidState(_InvalidState value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -295,10 +316,12 @@ class _$_Conversion implements _Conversion {
     @required Result unknown(),
     @required Result notFound(),
     @required Result conversion(),
+    @required Result invalidState(),
   }) {
     assert(unknown != null);
     assert(notFound != null);
     assert(conversion != null);
+    assert(invalidState != null);
     return conversion();
   }
 
@@ -308,6 +331,7 @@ class _$_Conversion implements _Conversion {
     Result unknown(),
     Result notFound(),
     Result conversion(),
+    Result invalidState(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -323,10 +347,12 @@ class _$_Conversion implements _Conversion {
     @required Result unknown(_Unknown value),
     @required Result notFound(_NotFound value),
     @required Result conversion(_Conversion value),
+    @required Result invalidState(_InvalidState value),
   }) {
     assert(unknown != null);
     assert(notFound != null);
     assert(conversion != null);
+    assert(invalidState != null);
     return conversion(this);
   }
 
@@ -336,6 +362,7 @@ class _$_Conversion implements _Conversion {
     Result unknown(_Unknown value),
     Result notFound(_NotFound value),
     Result conversion(_Conversion value),
+    Result invalidState(_InvalidState value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -348,4 +375,103 @@ class _$_Conversion implements _Conversion {
 
 abstract class _Conversion implements RepoFailure {
   const factory _Conversion() = _$_Conversion;
+}
+
+abstract class _$InvalidStateCopyWith<$Res> {
+  factory _$InvalidStateCopyWith(
+          _InvalidState value, $Res Function(_InvalidState) then) =
+      __$InvalidStateCopyWithImpl<$Res>;
+}
+
+class __$InvalidStateCopyWithImpl<$Res> extends _$RepoFailureCopyWithImpl<$Res>
+    implements _$InvalidStateCopyWith<$Res> {
+  __$InvalidStateCopyWithImpl(
+      _InvalidState _value, $Res Function(_InvalidState) _then)
+      : super(_value, (v) => _then(v as _InvalidState));
+
+  @override
+  _InvalidState get _value => super._value as _InvalidState;
+}
+
+class _$_InvalidState implements _InvalidState {
+  const _$_InvalidState();
+
+  @override
+  String toString() {
+    return 'RepoFailure.invalidState()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _InvalidState);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result unknown(),
+    @required Result notFound(),
+    @required Result conversion(),
+    @required Result invalidState(),
+  }) {
+    assert(unknown != null);
+    assert(notFound != null);
+    assert(conversion != null);
+    assert(invalidState != null);
+    return invalidState();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result unknown(),
+    Result notFound(),
+    Result conversion(),
+    Result invalidState(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (invalidState != null) {
+      return invalidState();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result unknown(_Unknown value),
+    @required Result notFound(_NotFound value),
+    @required Result conversion(_Conversion value),
+    @required Result invalidState(_InvalidState value),
+  }) {
+    assert(unknown != null);
+    assert(notFound != null);
+    assert(conversion != null);
+    assert(invalidState != null);
+    return invalidState(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result unknown(_Unknown value),
+    Result notFound(_NotFound value),
+    Result conversion(_Conversion value),
+    Result invalidState(_InvalidState value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (invalidState != null) {
+      return invalidState(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _InvalidState implements RepoFailure {
+  const factory _InvalidState() = _$_InvalidState;
 }

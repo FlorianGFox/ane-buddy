@@ -68,7 +68,28 @@ class EducationBloc extends Bloc<EducationEvent, EducationState> {
     );
   }
 
-  Stream<EducationState> _mapDelete(_Delete event) {
-    //Todo implement _mapDelete
+  Stream<EducationState> _mapDelete(_Delete event) async* {
+    yield EducationState.deleting();
+    List<FurtherEducationEntry> entries = [...event.education.entries];
+    bool succeeded = entries.remove(event.entryToDelete);
+    if (succeeded) {
+      FurtherEducation education = FurtherEducation(entries);
+      yield EducationState.saving();
+      final mayBeFailure = await dao.save(education);
+      yield mayBeFailure.fold(
+        (failure) => EducationState.viewing(
+          education: event.education,
+          failed: true,
+          failure: failure,
+        ),
+        (_) => EducationState.viewing(education: education),
+      );
+    } else {
+      yield EducationState.viewing(
+        education: event.education,
+        failed: true,
+        failure: RepoFailure.invalidState(),
+      );
+    }
   }
 }

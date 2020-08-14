@@ -11,7 +11,10 @@ abstract class EducationEvent with _$EducationEvent {
     FurtherEducation education,
     FurtherEducationEntry newEntry,
   ) = _Save;
-  const factory EducationEvent.delete() = _Delete;
+  const factory EducationEvent.delete(
+    FurtherEducation education,
+    FurtherEducationEntry entryToDelete,
+  ) = _Delete;
   const factory EducationEvent.view(
     FurtherEducation education,
   ) = _View;

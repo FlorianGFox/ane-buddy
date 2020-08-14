@@ -34,8 +34,12 @@ class _$EducationEventTearOff {
   }
 
 // ignore: unused_element
-  _Delete delete() {
-    return const _Delete();
+  _Delete delete(
+      FurtherEducation education, FurtherEducationEntry entryToDelete) {
+    return _Delete(
+      education,
+      entryToDelete,
+    );
   }
 
 // ignore: unused_element
@@ -57,7 +61,9 @@ mixin _$EducationEvent {
         Result edit(FurtherEducation education, FurtherEducationEntry entry),
     @required
         Result save(FurtherEducation education, FurtherEducationEntry newEntry),
-    @required Result delete(),
+    @required
+        Result delete(
+            FurtherEducation education, FurtherEducationEntry entryToDelete),
     @required Result view(FurtherEducation education),
   });
   @optionalTypeArgs
@@ -65,7 +71,8 @@ mixin _$EducationEvent {
     Result load(),
     Result edit(FurtherEducation education, FurtherEducationEntry entry),
     Result save(FurtherEducation education, FurtherEducationEntry newEntry),
-    Result delete(),
+    Result delete(
+        FurtherEducation education, FurtherEducationEntry entryToDelete),
     Result view(FurtherEducation education),
     @required Result orElse(),
   });
@@ -141,7 +148,9 @@ class _$_Load implements _Load {
         Result edit(FurtherEducation education, FurtherEducationEntry entry),
     @required
         Result save(FurtherEducation education, FurtherEducationEntry newEntry),
-    @required Result delete(),
+    @required
+        Result delete(
+            FurtherEducation education, FurtherEducationEntry entryToDelete),
     @required Result view(FurtherEducation education),
   }) {
     assert(load != null);
@@ -158,7 +167,8 @@ class _$_Load implements _Load {
     Result load(),
     Result edit(FurtherEducation education, FurtherEducationEntry entry),
     Result save(FurtherEducation education, FurtherEducationEntry newEntry),
-    Result delete(),
+    Result delete(
+        FurtherEducation education, FurtherEducationEntry entryToDelete),
     Result view(FurtherEducation education),
     @required Result orElse(),
   }) {
@@ -299,7 +309,9 @@ class _$_Edit implements _Edit {
         Result edit(FurtherEducation education, FurtherEducationEntry entry),
     @required
         Result save(FurtherEducation education, FurtherEducationEntry newEntry),
-    @required Result delete(),
+    @required
+        Result delete(
+            FurtherEducation education, FurtherEducationEntry entryToDelete),
     @required Result view(FurtherEducation education),
   }) {
     assert(load != null);
@@ -316,7 +328,8 @@ class _$_Edit implements _Edit {
     Result load(),
     Result edit(FurtherEducation education, FurtherEducationEntry entry),
     Result save(FurtherEducation education, FurtherEducationEntry newEntry),
-    Result delete(),
+    Result delete(
+        FurtherEducation education, FurtherEducationEntry entryToDelete),
     Result view(FurtherEducation education),
     @required Result orElse(),
   }) {
@@ -465,7 +478,9 @@ class _$_Save implements _Save {
         Result edit(FurtherEducation education, FurtherEducationEntry entry),
     @required
         Result save(FurtherEducation education, FurtherEducationEntry newEntry),
-    @required Result delete(),
+    @required
+        Result delete(
+            FurtherEducation education, FurtherEducationEntry entryToDelete),
     @required Result view(FurtherEducation education),
   }) {
     assert(load != null);
@@ -482,7 +497,8 @@ class _$_Save implements _Save {
     Result load(),
     Result edit(FurtherEducation education, FurtherEducationEntry entry),
     Result save(FurtherEducation education, FurtherEducationEntry newEntry),
-    Result delete(),
+    Result delete(
+        FurtherEducation education, FurtherEducationEntry entryToDelete),
     Result view(FurtherEducation education),
     @required Result orElse(),
   }) {
@@ -540,6 +556,10 @@ abstract class _Save implements EducationEvent {
 abstract class _$DeleteCopyWith<$Res> {
   factory _$DeleteCopyWith(_Delete value, $Res Function(_Delete) then) =
       __$DeleteCopyWithImpl<$Res>;
+  $Res call({FurtherEducation education, FurtherEducationEntry entryToDelete});
+
+  $FurtherEducationCopyWith<$Res> get education;
+  $FurtherEducationEntryCopyWith<$Res> get entryToDelete;
 }
 
 class __$DeleteCopyWithImpl<$Res> extends _$EducationEventCopyWithImpl<$Res>
@@ -549,23 +569,77 @@ class __$DeleteCopyWithImpl<$Res> extends _$EducationEventCopyWithImpl<$Res>
 
   @override
   _Delete get _value => super._value as _Delete;
+
+  @override
+  $Res call({
+    Object education = freezed,
+    Object entryToDelete = freezed,
+  }) {
+    return _then(_Delete(
+      education == freezed ? _value.education : education as FurtherEducation,
+      entryToDelete == freezed
+          ? _value.entryToDelete
+          : entryToDelete as FurtherEducationEntry,
+    ));
+  }
+
+  @override
+  $FurtherEducationCopyWith<$Res> get education {
+    if (_value.education == null) {
+      return null;
+    }
+    return $FurtherEducationCopyWith<$Res>(_value.education, (value) {
+      return _then(_value.copyWith(education: value));
+    });
+  }
+
+  @override
+  $FurtherEducationEntryCopyWith<$Res> get entryToDelete {
+    if (_value.entryToDelete == null) {
+      return null;
+    }
+    return $FurtherEducationEntryCopyWith<$Res>(_value.entryToDelete, (value) {
+      return _then(_value.copyWith(entryToDelete: value));
+    });
+  }
 }
 
 class _$_Delete implements _Delete {
-  const _$_Delete();
+  const _$_Delete(this.education, this.entryToDelete)
+      : assert(education != null),
+        assert(entryToDelete != null);
+
+  @override
+  final FurtherEducation education;
+  @override
+  final FurtherEducationEntry entryToDelete;
 
   @override
   String toString() {
-    return 'EducationEvent.delete()';
+    return 'EducationEvent.delete(education: $education, entryToDelete: $entryToDelete)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Delete);
+    return identical(this, other) ||
+        (other is _Delete &&
+            (identical(other.education, education) ||
+                const DeepCollectionEquality()
+                    .equals(other.education, education)) &&
+            (identical(other.entryToDelete, entryToDelete) ||
+                const DeepCollectionEquality()
+                    .equals(other.entryToDelete, entryToDelete)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(education) ^
+      const DeepCollectionEquality().hash(entryToDelete);
+
+  @override
+  _$DeleteCopyWith<_Delete> get copyWith =>
+      __$DeleteCopyWithImpl<_Delete>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -575,7 +649,9 @@ class _$_Delete implements _Delete {
         Result edit(FurtherEducation education, FurtherEducationEntry entry),
     @required
         Result save(FurtherEducation education, FurtherEducationEntry newEntry),
-    @required Result delete(),
+    @required
+        Result delete(
+            FurtherEducation education, FurtherEducationEntry entryToDelete),
     @required Result view(FurtherEducation education),
   }) {
     assert(load != null);
@@ -583,7 +659,7 @@ class _$_Delete implements _Delete {
     assert(save != null);
     assert(delete != null);
     assert(view != null);
-    return delete();
+    return delete(education, entryToDelete);
   }
 
   @override
@@ -592,13 +668,14 @@ class _$_Delete implements _Delete {
     Result load(),
     Result edit(FurtherEducation education, FurtherEducationEntry entry),
     Result save(FurtherEducation education, FurtherEducationEntry newEntry),
-    Result delete(),
+    Result delete(
+        FurtherEducation education, FurtherEducationEntry entryToDelete),
     Result view(FurtherEducation education),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (delete != null) {
-      return delete();
+      return delete(education, entryToDelete);
     }
     return orElse();
   }
@@ -639,7 +716,13 @@ class _$_Delete implements _Delete {
 }
 
 abstract class _Delete implements EducationEvent {
-  const factory _Delete() = _$_Delete;
+  const factory _Delete(
+          FurtherEducation education, FurtherEducationEntry entryToDelete) =
+      _$_Delete;
+
+  FurtherEducation get education;
+  FurtherEducationEntry get entryToDelete;
+  _$DeleteCopyWith<_Delete> get copyWith;
 }
 
 abstract class _$ViewCopyWith<$Res> {
@@ -714,7 +797,9 @@ class _$_View implements _View {
         Result edit(FurtherEducation education, FurtherEducationEntry entry),
     @required
         Result save(FurtherEducation education, FurtherEducationEntry newEntry),
-    @required Result delete(),
+    @required
+        Result delete(
+            FurtherEducation education, FurtherEducationEntry entryToDelete),
     @required Result view(FurtherEducation education),
   }) {
     assert(load != null);
@@ -731,7 +816,8 @@ class _$_View implements _View {
     Result load(),
     Result edit(FurtherEducation education, FurtherEducationEntry entry),
     Result save(FurtherEducation education, FurtherEducationEntry newEntry),
-    Result delete(),
+    Result delete(
+        FurtherEducation education, FurtherEducationEntry entryToDelete),
     Result view(FurtherEducation education),
     @required Result orElse(),
   }) {

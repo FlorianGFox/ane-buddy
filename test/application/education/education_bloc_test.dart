@@ -34,7 +34,10 @@ void main() {
 
     test('[Saving, Viewing] is emitted, if no failure happened.', () async {
       //arrange
-      final expected = [EducationState.saving(), EducationState.viewing()];
+      final expected = [
+        EducationState.saving(),
+        EducationState.viewing(education: tEducation),
+      ];
       when(mockDao.save(any)).thenAnswer((_) async => Right(null));
       //act
       bloc.add(EducationEvent.save(tEducation, tEntry));
@@ -78,7 +81,10 @@ void main() {
 
     test('[Loading, Viewing] is emitted, if no failure happened.', () async {
       //arrange
-      final expected = [EducationState.loading(), EducationState.viewing()];
+      final expected = [
+        EducationState.loading(),
+        EducationState.viewing(education: tEducation)
+      ];
       when(mockDao.load()).thenAnswer((_) async => Right(tEducation));
       //act
       bloc.add(EducationEvent.load());
@@ -109,7 +115,7 @@ void main() {
   group('When EducationEvent.edit is added to EducationBloc,', () {
     FurtherEducationEntry tEntry = FurtherEducationEntry();
     FurtherEducation tEducation = FurtherEducation([tEntry]);
-    test('Editing state is emitted with given further education element.',
+    test('state editing is emitted with given further education element.',
         () async {
       //arrange
       final tExpected = [
@@ -120,6 +126,75 @@ void main() {
       ];
       //act
       bloc.add(EducationEvent.edit(tEducation, tEntry));
+      //assert
+      expectLater(bloc, emitsInOrder(tExpected));
+    });
+  });
+
+  group('When EducationEvent.delete is added to EducationBloc', () {
+    FurtherEducationEntry tEntry = FurtherEducationEntry();
+    FurtherEducation tEducation = FurtherEducation([tEntry]);
+    FurtherEducation tEducationDeleted = FurtherEducation([]);
+    test('states [Deleting, Saving, Viewing] are emitted.', () async {
+      //arrange
+      final tExpected = [
+        EducationState.deleting(),
+        EducationState.saving(),
+        EducationState.viewing(education: tEducationDeleted)
+      ];
+      when(mockDao.save(any)).thenAnswer((_) async => Right(null));
+      //act
+      bloc.add(EducationEvent.delete(tEducation, tEntry));
+      //assert
+      expectLater(bloc, emitsInOrder(tExpected));
+    });
+
+    test('it calls dao.save() with the entry removed.', () async {
+      //arrange
+      when(mockDao.save(any)).thenAnswer((_) async => Right(null));
+      //act
+      bloc.add(EducationEvent.delete(tEducation, tEntry));
+      await untilCalled(mockDao.save(any));
+      //assert
+      verify(mockDao.save(tEducationDeleted));
+    });
+
+    test(
+        'states [Deleting, Saving, Viewing] are emitted. With state Viewing containing a invalid state failure, if the entry to delete was not found.',
+        () async {
+      //arrange
+      final tExpected = [
+        EducationState.deleting(),
+        EducationState.viewing(
+          education: FurtherEducation([]),
+          failed: true,
+          failure: RepoFailure.invalidState(),
+        ),
+      ];
+      when(mockDao.save(any)).thenAnswer((_) async => Right(null));
+      //act
+      bloc.add(EducationEvent.delete(FurtherEducation([]), tEntry));
+      //assert
+      expectLater(bloc, emitsInOrder(tExpected));
+    });
+
+    test(
+        'and a failure happens while saving, states [Deleting, Saving, Viewing] are emitted. With state Viewing containing the failure.',
+        () async {
+      //arrange
+      RepoFailure tFailure = RepoFailure.unknown();
+      final tExpected = [
+        EducationState.deleting(),
+        EducationState.saving(),
+        EducationState.viewing(
+          education: tEducation,
+          failed: true,
+          failure: tFailure,
+        ),
+      ];
+      when(mockDao.save(any)).thenAnswer((_) async => Left(tFailure));
+      //act
+      bloc.add(EducationEvent.delete(tEducation, tEntry));
       //assert
       expectLater(bloc, emitsInOrder(tExpected));
     });

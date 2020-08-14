@@ -7,4 +7,5 @@ abstract class RepoFailure with _$RepoFailure {
   const factory RepoFailure.unknown() = _Unknown;
   const factory RepoFailure.notFound() = _NotFound;
   const factory RepoFailure.conversion() = _Conversion;
+  const factory RepoFailure.invalidState() = _InvalidState;
 }
