@@ -58,6 +58,20 @@ class _FurtherEducationListViewState extends State<FurtherEducationListView> {
           return ListTile(
             title: _buildTile(context, entry),
             subtitle: _buildSubtitle(context, entry),
+            onTap: () {
+              _showConfirmDialog(
+                context,
+                title: 'Eintrag löschen?',
+                content: 'Damit wird der Eintrag unwiderruflich entfernt.',
+                acceptText: 'Ok',
+                cancelText: 'Abbrechen',
+                onAccept: () {
+                  context
+                      .bloc<EducationBloc>()
+                      .add(EducationEvent.delete(education, entry));
+                },
+              );
+            },
           );
         } else {
           return RaisedButton(
@@ -82,5 +96,40 @@ class _FurtherEducationListViewState extends State<FurtherEducationListView> {
 
   Widget _buildSubtitle(BuildContext context, FurtherEducationEntry entry) {
     return Text((entry.startDate ?? '') + ' - ' + (entry.endDate ?? ''));
+  }
+
+  void _showConfirmDialog(
+    BuildContext context, {
+    @required String title,
+    @required String content,
+    @required String acceptText,
+    @required String cancelText,
+    @required Function() onAccept,
+  }) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(content),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(cancelText),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            FlatButton(
+              child: Text(acceptText),
+              onPressed: () {
+                Navigator.of(context).pop();
+                onAccept();
+              },
+            )
+          ],
+        );
+      },
+    );
   }
 }

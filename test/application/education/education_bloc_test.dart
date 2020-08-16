@@ -100,6 +100,7 @@ void main() {
       final expected = [
         EducationState.loading(),
         EducationState.viewing(
+          education: FurtherEducation([]),
           failed: true,
           failure: expectedFailure,
         )
