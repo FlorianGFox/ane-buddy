@@ -42,6 +42,7 @@ GetIt $initGetIt(
         pdfDao: get<PdfDao>(),
         pdfCreator: get<PdfCreator>(),
         profileDao: get<ProfileDao>(),
+        educationDao: get<EducationDao>(),
       ));
   gh.factory<ProfileBloc>(() => ProfileBloc(profileDao: get<ProfileDao>()));
   gh.factory<EducationBloc>(() => EducationBloc(get<EducationDao>()));

@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:ane_buddy/domain/education/entities/further_education.dart';
+import 'package:ane_buddy/domain/education/repositories/education_dao.dart';
 import 'package:ane_buddy/domain/profile/entities/profile.dart';
 import 'package:ane_buddy/domain/profile/repositories/profile_dao.dart';
 import 'package:bloc/bloc.dart';
@@ -21,11 +23,13 @@ class PrintBloc extends Bloc<PrintEvent, PrintState> {
   final PdfDao pdfDao;
   final PdfCreator pdfCreator;
   final ProfileDao profileDao;
+  final EducationDao educationDao;
 
   PrintBloc({
     @required this.pdfDao,
     @required this.pdfCreator,
     @required this.profileDao,
+    @required this.educationDao,
   }) : super(PrintState.initial());
 
   @override
@@ -40,18 +44,29 @@ class PrintBloc extends Bloc<PrintEvent, PrintState> {
 
   Stream<PrintState> _mapCreatePdf(_CreatePdf state) async* {
     yield PrintState.loadingData();
-    final profile = await profileDao.load();
-    yield* profile.fold(
+    final failureOrProfile = await profileDao.load();
+    yield* failureOrProfile.fold(
       (failure) async* {
         yield PrintState.failed(failure);
       },
-      _createPdf,
+      (profile) async* {
+        final failureOrEducation = await educationDao.load();
+        yield* failureOrEducation.fold(
+          (failure) async* {
+            yield PrintState.failed(failure);
+          },
+          (education) async* {
+            yield* _createPdf(profile, education);
+          },
+        );
+      },
     );
   }
 
-  Stream<PrintState> _createPdf(Profile profile) async* {
+  Stream<PrintState> _createPdf(
+      Profile profile, FurtherEducation education) async* {
     yield PrintState.creatingPdf();
-    Document pdf = pdfCreator.createPdf(profile);
+    Document pdf = pdfCreator.createPdf(profile, education);
     Either<RepoFailure, String> result = await pdfDao.save(pdf);
     yield result.fold(
       (failure) => PrintState.failed(failure),

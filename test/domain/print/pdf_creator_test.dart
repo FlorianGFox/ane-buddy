@@ -1,3 +1,4 @@
+import 'package:ane_buddy/domain/education/entities/further_education.dart';
 import 'package:ane_buddy/domain/print/pdf_creator.dart';
 import 'package:ane_buddy/domain/profile/entities/profile.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,7 +14,7 @@ void main() {
     test('Returns not null', () async {
       //arrange
       //act
-      final result = pdfCreator.createPdf(Profile());
+      final result = pdfCreator.createPdf(Profile(), FurtherEducation([]));
       //assert
       expect(result, isNotNull);
     });

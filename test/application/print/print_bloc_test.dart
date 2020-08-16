@@ -1,5 +1,7 @@
 import 'package:ane_buddy/application/print/print_bloc.dart';
 import 'package:ane_buddy/domain/core/repositories/repo_failure.dart';
+import 'package:ane_buddy/domain/education/entities/further_education.dart';
+import 'package:ane_buddy/domain/education/repositories/education_dao.dart';
 import 'package:ane_buddy/domain/print/pdf_creator.dart';
 import 'package:ane_buddy/domain/print/pdf_dao.dart';
 import 'package:ane_buddy/domain/profile/entities/profile.dart';
@@ -15,10 +17,13 @@ class MockPdfCreator extends Mock implements PdfCreator {}
 
 class MockProfileDao extends Mock implements ProfileDao {}
 
+class MockEducationDao extends Mock implements EducationDao {}
+
 void main() {
   MockPdfDao mockPdfDao;
   MockPdfCreator mockPdfCreator;
   MockProfileDao mockProfileDao;
+  MockEducationDao mockEducationDao;
   // ignore: close_sinks
   PrintBloc bloc;
 
@@ -26,35 +31,43 @@ void main() {
     mockPdfDao = MockPdfDao();
     mockPdfCreator = MockPdfCreator();
     mockProfileDao = MockProfileDao();
+    mockEducationDao = MockEducationDao();
     bloc = PrintBloc(
       pdfDao: mockPdfDao,
       pdfCreator: mockPdfCreator,
       profileDao: mockProfileDao,
+      educationDao: mockEducationDao,
     );
   });
 
   group('Creating Pdf', () {
     Document tPdf = Document();
     Profile tProfile = Profile();
-    test('Calls pdfCreator.createPdf with profile from profileDao.', () async {
+    FurtherEducation tEducation = FurtherEducation([]);
+    test('Calls pdfCreator.createPdf with profile and education from daos.',
+        () async {
       //arrange
       when(mockProfileDao.load())
           .thenAnswer((realInvocation) async => Right(tProfile));
-      when(mockPdfCreator.createPdf(any)).thenReturn(tPdf);
+      when(mockEducationDao.load())
+          .thenAnswer((realInvocation) async => Right(tEducation));
+      when(mockPdfCreator.createPdf(any, any)).thenReturn(tPdf);
       when(mockPdfDao.save(any))
           .thenAnswer((realInvocation) async => Right(null));
       //act
       bloc.add(PrintEvent.createPdf());
-      await untilCalled(mockPdfCreator.createPdf(any));
+      await untilCalled(mockPdfCreator.createPdf(any, any));
       //assert
-      verify(mockPdfCreator.createPdf(tProfile));
+      verify(mockPdfCreator.createPdf(tProfile, tEducation));
     });
 
     test('Calls pdfDao.save', () async {
       //arrange
+      when(mockEducationDao.load())
+          .thenAnswer((realInvocation) async => Right(tEducation));
       when(mockProfileDao.load())
           .thenAnswer((realInvocation) async => Right(tProfile));
-      when(mockPdfCreator.createPdf(any)).thenReturn(tPdf);
+      when(mockPdfCreator.createPdf(any, any)).thenReturn(tPdf);
       when(mockPdfDao.save(any))
           .thenAnswer((realInvocation) async => Right(null));
       //act
@@ -73,9 +86,11 @@ void main() {
     test('Emits [LoadingData, CreatingPdf, PdfCreated] when no error happens.',
         () async {
       //arrange
+      when(mockEducationDao.load())
+          .thenAnswer((realInvocation) async => Right(tEducation));
       when(mockProfileDao.load())
           .thenAnswer((realInvocation) async => Right(tProfile));
-      when(mockPdfCreator.createPdf(any)).thenReturn(tPdf);
+      when(mockPdfCreator.createPdf(any, any)).thenReturn(tPdf);
       when(mockPdfDao.save(any)).thenAnswer((_) async => Right(tPath));
       //assert
       expectLater(bloc, emitsInAnyOrder(expectedStates));
@@ -93,9 +108,11 @@ void main() {
         'Emits [LoadingData, CreatingPdf, Failed] when error happens during creation.',
         () async {
       //arrange
+      when(mockEducationDao.load())
+          .thenAnswer((realInvocation) async => Right(tEducation));
       when(mockProfileDao.load())
           .thenAnswer((realInvocation) async => Right(tProfile));
-      when(mockPdfCreator.createPdf(any)).thenReturn(tPdf);
+      when(mockPdfCreator.createPdf(any, any)).thenReturn(tPdf);
       when(mockPdfDao.save(any)).thenAnswer((_) async => Left(tFailure));
       //assert
       expectLater(bloc, emitsInAnyOrder(creationFailureStates));
@@ -112,7 +129,7 @@ void main() {
       //arrange
       when(mockProfileDao.load())
           .thenAnswer((realInvocation) async => Left(tFailure));
-      when(mockPdfCreator.createPdf(any)).thenReturn(tPdf);
+      when(mockPdfCreator.createPdf(any, any)).thenReturn(tPdf);
       //assert
       expectLater(bloc, emitsInAnyOrder(loadingFailureStates));
       //act
