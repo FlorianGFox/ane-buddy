@@ -1,4 +1,5 @@
 import 'package:ane_buddy/presentation/education/education_page.dart';
+import 'package:ane_buddy/presentation/logbook/logbook_page.dart';
 import 'package:ane_buddy/presentation/print/print_page.dart';
 import 'package:ane_buddy/presentation/profile/pages/profile_page.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,17 @@ class NavDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => ProfilePage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.edit),
+            title: Text('Logbuch'),
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LogbookPage()),
               );
             },
           ),

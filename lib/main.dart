@@ -1,4 +1,4 @@
-import 'package:ane_buddy/presentation/home/pages/home_page.dart';
+import 'package:ane_buddy/presentation/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
