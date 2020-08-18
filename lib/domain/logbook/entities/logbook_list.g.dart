@@ -6,6 +6,7 @@ part of 'logbook_list.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+// ignore: non_constant_identifier_names
 _$_LogbookList _$_$_LogbookListFromJson(Map<String, dynamic> json) {
   return _$_LogbookList(
     json['name'] as String,
@@ -16,6 +17,7 @@ _$_LogbookList _$_$_LogbookListFromJson(Map<String, dynamic> json) {
   );
 }
 
+// ignore: non_constant_identifier_names
 Map<String, dynamic> _$_$_LogbookListToJson(_$_LogbookList instance) =>
     <String, dynamic>{
       'name': instance.name,
