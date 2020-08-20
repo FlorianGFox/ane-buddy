@@ -16,9 +16,8 @@ class _$LogbookTearOff {
   const _$LogbookTearOff();
 
 // ignore: unused_element
-  _Logbook call(String name, List<LogbookList> lists) {
+  _Logbook call(List<LogbookList> lists) {
     return _Logbook(
-      name,
       lists,
     );
   }
@@ -28,7 +27,6 @@ class _$LogbookTearOff {
 const $Logbook = _$LogbookTearOff();
 
 mixin _$Logbook {
-  String get name;
   List<LogbookList> get lists;
 
   Map<String, dynamic> toJson();
@@ -38,7 +36,7 @@ mixin _$Logbook {
 abstract class $LogbookCopyWith<$Res> {
   factory $LogbookCopyWith(Logbook value, $Res Function(Logbook) then) =
       _$LogbookCopyWithImpl<$Res>;
-  $Res call({String name, List<LogbookList> lists});
+  $Res call({List<LogbookList> lists});
 }
 
 class _$LogbookCopyWithImpl<$Res> implements $LogbookCopyWith<$Res> {
@@ -50,11 +48,9 @@ class _$LogbookCopyWithImpl<$Res> implements $LogbookCopyWith<$Res> {
 
   @override
   $Res call({
-    Object name = freezed,
     Object lists = freezed,
   }) {
     return _then(_value.copyWith(
-      name: name == freezed ? _value.name : name as String,
       lists: lists == freezed ? _value.lists : lists as List<LogbookList>,
     ));
   }
@@ -64,7 +60,7 @@ abstract class _$LogbookCopyWith<$Res> implements $LogbookCopyWith<$Res> {
   factory _$LogbookCopyWith(_Logbook value, $Res Function(_Logbook) then) =
       __$LogbookCopyWithImpl<$Res>;
   @override
-  $Res call({String name, List<LogbookList> lists});
+  $Res call({List<LogbookList> lists});
 }
 
 class __$LogbookCopyWithImpl<$Res> extends _$LogbookCopyWithImpl<$Res>
@@ -77,11 +73,9 @@ class __$LogbookCopyWithImpl<$Res> extends _$LogbookCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object name = freezed,
     Object lists = freezed,
   }) {
     return _then(_Logbook(
-      name == freezed ? _value.name : name as String,
       lists == freezed ? _value.lists : lists as List<LogbookList>,
     ));
   }
@@ -89,38 +83,30 @@ class __$LogbookCopyWithImpl<$Res> extends _$LogbookCopyWithImpl<$Res>
 
 @JsonSerializable()
 class _$_Logbook implements _Logbook {
-  const _$_Logbook(this.name, this.lists)
-      : assert(name != null),
-        assert(lists != null);
+  const _$_Logbook(this.lists) : assert(lists != null);
 
   factory _$_Logbook.fromJson(Map<String, dynamic> json) =>
       _$_$_LogbookFromJson(json);
 
   @override
-  final String name;
-  @override
   final List<LogbookList> lists;
 
   @override
   String toString() {
-    return 'Logbook(name: $name, lists: $lists)';
+    return 'Logbook(lists: $lists)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Logbook &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.lists, lists) ||
                 const DeepCollectionEquality().equals(other.lists, lists)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(lists);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(lists);
 
   @override
   _$LogbookCopyWith<_Logbook> get copyWith =>
@@ -133,12 +119,10 @@ class _$_Logbook implements _Logbook {
 }
 
 abstract class _Logbook implements Logbook {
-  const factory _Logbook(String name, List<LogbookList> lists) = _$_Logbook;
+  const factory _Logbook(List<LogbookList> lists) = _$_Logbook;
 
   factory _Logbook.fromJson(Map<String, dynamic> json) = _$_Logbook.fromJson;
 
-  @override
-  String get name;
   @override
   List<LogbookList> get lists;
   @override

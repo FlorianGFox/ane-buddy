@@ -7,7 +7,7 @@ part 'logbook.g.dart';
 
 @freezed
 abstract class Logbook with _$Logbook {
-  const factory Logbook(String name, List<LogbookList> lists) = _Logbook;
+  const factory Logbook(List<LogbookList> lists) = _Logbook;
   factory Logbook.fromJson(Map<String, dynamic> json) =>
       _$LogbookFromJson(json);
 }
