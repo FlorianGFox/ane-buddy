@@ -13,6 +13,8 @@ import 'infrastructure/education/education_dao_impl.dart';
 import 'infrastructure/core/hive_repo.dart';
 import 'infrastructure/core/json_map_dao.dart';
 import 'infrastructure/core/json_repo.dart';
+import 'domain/logbook/repositories/logbook_dao.dart';
+import 'infrastructure/logbook/loogbook_dao_impl.dart';
 import 'infrastructure/print/path_provider.dart';
 import 'domain/print/pdf_creator.dart';
 import 'domain/print/pdf_dao.dart';
@@ -36,6 +38,7 @@ GetIt $initGetIt(
   gh.lazySingleton<PdfCreator>(() => PdfCreator());
   gh.lazySingleton<PdfDao>(() => PdfDaoImpl(pathProvider: get<PathProvider>()));
   gh.factory<JsonMapDao>(() => JsonMapDao(get<JsonRepo>()));
+  gh.lazySingleton<LogbookDao>(() => LogbookDaoImpl(get<JsonMapDao>()));
   gh.lazySingleton<ProfileDao>(() => ProfileDaoImpl(get<JsonMapDao>()));
   gh.lazySingleton<EducationDao>(() => EducationDaoImpl(get<JsonMapDao>()));
   gh.factory<PrintBloc>(() => PrintBloc(
