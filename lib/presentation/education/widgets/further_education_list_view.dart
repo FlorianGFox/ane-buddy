@@ -1,3 +1,4 @@
+import 'package:ane_buddy/presentation/core/widgets/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -59,12 +60,10 @@ class _FurtherEducationListViewState extends State<FurtherEducationListView> {
             title: _buildTile(context, entry),
             subtitle: _buildSubtitle(context, entry),
             onTap: () {
-              _showConfirmDialog(
+              ConfirmDialog.show(
                 context,
                 title: 'Eintrag löschen?',
                 content: 'Damit wird der Eintrag unwiderruflich entfernt.',
-                acceptText: 'Ok',
-                cancelText: 'Abbrechen',
                 onAccept: () {
                   context
                       .bloc<EducationBloc>()
@@ -96,40 +95,5 @@ class _FurtherEducationListViewState extends State<FurtherEducationListView> {
 
   Widget _buildSubtitle(BuildContext context, FurtherEducationEntry entry) {
     return Text((entry.startDate ?? '') + ' - ' + (entry.endDate ?? ''));
-  }
-
-  void _showConfirmDialog(
-    BuildContext context, {
-    @required String title,
-    @required String content,
-    @required String acceptText,
-    @required String cancelText,
-    @required Function() onAccept,
-  }) {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(title),
-          content: Text(content),
-          actions: <Widget>[
-            FlatButton(
-              child: Text(cancelText),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            FlatButton(
-              child: Text(acceptText),
-              onPressed: () {
-                Navigator.of(context).pop();
-                onAccept();
-              },
-            )
-          ],
-        );
-      },
-    );
   }
 }

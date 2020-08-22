@@ -2,6 +2,7 @@ import 'package:ane_buddy/application/logbook/logbook_bloc.dart';
 import 'package:ane_buddy/domain/logbook/entities/logbook.dart';
 import 'package:ane_buddy/domain/logbook/entities/logbook_entry.dart';
 import 'package:ane_buddy/presentation/core/widgets/ane_date_time_field.dart';
+import 'package:ane_buddy/presentation/core/widgets/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart' show DateFormat;
@@ -55,9 +56,7 @@ class _LogbookEditFormState extends State<LogbookEditForm> {
             onPressed: () {
               setState(() {
                 entry.dates.add(dateTimeFieldController.text);
-                context
-                    .bloc<LogbookBloc>()
-                    .add(LogbookEvent.save(widget.logbook));
+                context.bloc<LogbookBloc>().add(LogbookEvent.save(logbook));
               });
             },
           ),
@@ -67,6 +66,24 @@ class _LogbookEditFormState extends State<LogbookEditForm> {
               itemBuilder: (context, index) {
                 return ListTile(
                   title: Text(entry.dates[index]),
+                  onTap: () {
+                    setState(() {
+                      ConfirmDialog.show(
+                        context,
+                        title: 'Lösche Eintrag?',
+                        content:
+                            'Damit wird der Eintrag unwiderruflich entfernt.',
+                        onAccept: () {
+                          setState(() {
+                            entry.dates.removeAt(index);
+                            context
+                                .bloc<LogbookBloc>()
+                                .add(LogbookEvent.save(logbook));
+                          });
+                        },
+                      );
+                    });
+                  },
                 );
               },
             ),
