@@ -44,7 +44,8 @@ class AneDateTimeField extends StatelessWidget {
           TimeOfDay time = await showTimePicker(
               context: context, initialTime: TimeOfDay.now());
           if (time != null) {
-            result.add(new Duration(hours: time.hour, minutes: time.minute));
+            result = result
+                .add(new Duration(hours: time.hour, minutes: time.minute));
           }
         }
         return result;
