@@ -1,10 +1,14 @@
+import 'package:ane_buddy/domain/logbook/entities/logbook.dart';
 import 'package:ane_buddy/domain/logbook/entities/logbook_list.dart';
+import 'package:ane_buddy/presentation/logbook/logbook_edit_page.dart';
 import 'package:flutter/material.dart';
 
 class LogbookListPage extends StatelessWidget {
   final LogbookList logList;
+  final Logbook logbook;
 
-  const LogbookListPage(this.logList, {Key key}) : super(key: key);
+  const LogbookListPage(this.logbook, this.logList, {Key key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +21,15 @@ class LogbookListPage extends StatelessWidget {
         itemBuilder: (context, index) {
           return ListTile(
             title: Text(logList.entries[index].text),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      LogbookEditPage(logbook, logList.entries[index]),
+                ),
+              );
+            },
           );
         },
       ),

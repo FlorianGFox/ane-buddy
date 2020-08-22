@@ -10,6 +10,7 @@ class AneDateTimeField extends StatelessWidget {
   final String labelText;
   final TextEditingController controller;
   final Function(DateTime) onChanged;
+  final bool enableTimePicker;
 
   const AneDateTimeField({
     Key key,
@@ -20,6 +21,7 @@ class AneDateTimeField extends StatelessWidget {
     this.labelText,
     this.controller,
     this.onChanged,
+    this.enableTimePicker = false,
   }) : super(key: key);
 
   @override
@@ -31,13 +33,21 @@ class AneDateTimeField extends StatelessWidget {
       format: dateFormat,
       controller: controller,
       onChanged: onChanged,
-      onShowPicker: (context, currentValue) {
-        return showDatePicker(
+      onShowPicker: (context, currentValue) async {
+        DateTime result = await showDatePicker(
           context: context,
           firstDate: firstDate,
           initialDate: currentValue ?? initialDate,
           lastDate: lastDate,
         );
+        if (enableTimePicker && result != null) {
+          TimeOfDay time = await showTimePicker(
+              context: context, initialTime: TimeOfDay.now());
+          if (time != null) {
+            result.add(new Duration(hours: time.hour, minutes: time.minute));
+          }
+        }
+        return result;
       },
     );
   }

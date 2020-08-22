@@ -72,7 +72,8 @@ class LogbookPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => LogbookListPage(logbook.lists[index]),
+                  builder: (context) =>
+                      LogbookListPage(logbook, logbook.lists[index]),
                 ),
               );
             },
