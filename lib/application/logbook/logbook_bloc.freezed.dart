@@ -26,9 +26,10 @@ class _$LogbookEventTearOff {
   }
 
 // ignore: unused_element
-  _Save save(Logbook logbook) {
+  _Save save(Logbook logbook, LogbookEntry entry) {
     return _Save(
       logbook,
+      entry,
     );
   }
 
@@ -48,14 +49,14 @@ mixin _$LogbookEvent {
   Result when<Result extends Object>({
     @required Result load(),
     @required Result edit(Logbook logbook, LogbookEntry entry),
-    @required Result save(Logbook logbook),
+    @required Result save(Logbook logbook, LogbookEntry entry),
     @required Result view(Logbook logbook),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result load(),
     Result edit(Logbook logbook, LogbookEntry entry),
-    Result save(Logbook logbook),
+    Result save(Logbook logbook, LogbookEntry entry),
     Result view(Logbook logbook),
     @required Result orElse(),
   });
@@ -125,7 +126,7 @@ class _$_Load implements _Load {
   Result when<Result extends Object>({
     @required Result load(),
     @required Result edit(Logbook logbook, LogbookEntry entry),
-    @required Result save(Logbook logbook),
+    @required Result save(Logbook logbook, LogbookEntry entry),
     @required Result view(Logbook logbook),
   }) {
     assert(load != null);
@@ -140,7 +141,7 @@ class _$_Load implements _Load {
   Result maybeWhen<Result extends Object>({
     Result load(),
     Result edit(Logbook logbook, LogbookEntry entry),
-    Result save(Logbook logbook),
+    Result save(Logbook logbook, LogbookEntry entry),
     Result view(Logbook logbook),
     @required Result orElse(),
   }) {
@@ -277,7 +278,7 @@ class _$_Edit implements _Edit {
   Result when<Result extends Object>({
     @required Result load(),
     @required Result edit(Logbook logbook, LogbookEntry entry),
-    @required Result save(Logbook logbook),
+    @required Result save(Logbook logbook, LogbookEntry entry),
     @required Result view(Logbook logbook),
   }) {
     assert(load != null);
@@ -292,7 +293,7 @@ class _$_Edit implements _Edit {
   Result maybeWhen<Result extends Object>({
     Result load(),
     Result edit(Logbook logbook, LogbookEntry entry),
-    Result save(Logbook logbook),
+    Result save(Logbook logbook, LogbookEntry entry),
     Result view(Logbook logbook),
     @required Result orElse(),
   }) {
@@ -346,9 +347,10 @@ abstract class _Edit implements LogbookEvent {
 abstract class _$SaveCopyWith<$Res> {
   factory _$SaveCopyWith(_Save value, $Res Function(_Save) then) =
       __$SaveCopyWithImpl<$Res>;
-  $Res call({Logbook logbook});
+  $Res call({Logbook logbook, LogbookEntry entry});
 
   $LogbookCopyWith<$Res> get logbook;
+  $LogbookEntryCopyWith<$Res> get entry;
 }
 
 class __$SaveCopyWithImpl<$Res> extends _$LogbookEventCopyWithImpl<$Res>
@@ -362,9 +364,11 @@ class __$SaveCopyWithImpl<$Res> extends _$LogbookEventCopyWithImpl<$Res>
   @override
   $Res call({
     Object logbook = freezed,
+    Object entry = freezed,
   }) {
     return _then(_Save(
       logbook == freezed ? _value.logbook : logbook as Logbook,
+      entry == freezed ? _value.entry : entry as LogbookEntry,
     ));
   }
 
@@ -377,17 +381,31 @@ class __$SaveCopyWithImpl<$Res> extends _$LogbookEventCopyWithImpl<$Res>
       return _then(_value.copyWith(logbook: value));
     });
   }
+
+  @override
+  $LogbookEntryCopyWith<$Res> get entry {
+    if (_value.entry == null) {
+      return null;
+    }
+    return $LogbookEntryCopyWith<$Res>(_value.entry, (value) {
+      return _then(_value.copyWith(entry: value));
+    });
+  }
 }
 
 class _$_Save implements _Save {
-  const _$_Save(this.logbook) : assert(logbook != null);
+  const _$_Save(this.logbook, this.entry)
+      : assert(logbook != null),
+        assert(entry != null);
 
   @override
   final Logbook logbook;
+  @override
+  final LogbookEntry entry;
 
   @override
   String toString() {
-    return 'LogbookEvent.save(logbook: $logbook)';
+    return 'LogbookEvent.save(logbook: $logbook, entry: $entry)';
   }
 
   @override
@@ -395,12 +413,17 @@ class _$_Save implements _Save {
     return identical(this, other) ||
         (other is _Save &&
             (identical(other.logbook, logbook) ||
-                const DeepCollectionEquality().equals(other.logbook, logbook)));
+                const DeepCollectionEquality()
+                    .equals(other.logbook, logbook)) &&
+            (identical(other.entry, entry) ||
+                const DeepCollectionEquality().equals(other.entry, entry)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(logbook);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(logbook) ^
+      const DeepCollectionEquality().hash(entry);
 
   @override
   _$SaveCopyWith<_Save> get copyWith =>
@@ -411,14 +434,14 @@ class _$_Save implements _Save {
   Result when<Result extends Object>({
     @required Result load(),
     @required Result edit(Logbook logbook, LogbookEntry entry),
-    @required Result save(Logbook logbook),
+    @required Result save(Logbook logbook, LogbookEntry entry),
     @required Result view(Logbook logbook),
   }) {
     assert(load != null);
     assert(edit != null);
     assert(save != null);
     assert(view != null);
-    return save(logbook);
+    return save(logbook, entry);
   }
 
   @override
@@ -426,13 +449,13 @@ class _$_Save implements _Save {
   Result maybeWhen<Result extends Object>({
     Result load(),
     Result edit(Logbook logbook, LogbookEntry entry),
-    Result save(Logbook logbook),
+    Result save(Logbook logbook, LogbookEntry entry),
     Result view(Logbook logbook),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (save != null) {
-      return save(logbook);
+      return save(logbook, entry);
     }
     return orElse();
   }
@@ -470,9 +493,10 @@ class _$_Save implements _Save {
 }
 
 abstract class _Save implements LogbookEvent {
-  const factory _Save(Logbook logbook) = _$_Save;
+  const factory _Save(Logbook logbook, LogbookEntry entry) = _$_Save;
 
   Logbook get logbook;
+  LogbookEntry get entry;
   _$SaveCopyWith<_Save> get copyWith;
 }
 
@@ -544,7 +568,7 @@ class _$_View implements _View {
   Result when<Result extends Object>({
     @required Result load(),
     @required Result edit(Logbook logbook, LogbookEntry entry),
-    @required Result save(Logbook logbook),
+    @required Result save(Logbook logbook, LogbookEntry entry),
     @required Result view(Logbook logbook),
   }) {
     assert(load != null);
@@ -559,7 +583,7 @@ class _$_View implements _View {
   Result maybeWhen<Result extends Object>({
     Result load(),
     Result edit(Logbook logbook, LogbookEntry entry),
-    Result save(Logbook logbook),
+    Result save(Logbook logbook, LogbookEntry entry),
     Result view(Logbook logbook),
     @required Result orElse(),
   }) {

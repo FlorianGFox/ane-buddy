@@ -35,7 +35,6 @@ GetIt $initGetIt(
 }) {
   final gh = GetItHelper(get, environment, environmentFilter);
   gh.factory<JsonRepo>(() => HiveRepo());
-  gh.factory<LogbookBloc>(() => LogbookBloc());
   gh.lazySingleton<PathProvider>(() => PathProvider());
   gh.lazySingleton<PdfCreator>(() => PdfCreator());
   gh.lazySingleton<PdfDao>(() => PdfDaoImpl(pathProvider: get<PathProvider>()));
@@ -43,6 +42,7 @@ GetIt $initGetIt(
   gh.lazySingleton<LogbookDao>(() => LogbookDaoImpl(get<JsonMapDao>()));
   gh.lazySingleton<ProfileDao>(() => ProfileDaoImpl(get<JsonMapDao>()));
   gh.lazySingleton<EducationDao>(() => EducationDaoImpl(get<JsonMapDao>()));
+  gh.factory<LogbookBloc>(() => LogbookBloc(get<LogbookDao>()));
   gh.factory<PrintBloc>(() => PrintBloc(
         pdfDao: get<PdfDao>(),
         pdfCreator: get<PdfCreator>(),

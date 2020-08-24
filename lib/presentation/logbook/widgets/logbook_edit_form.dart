@@ -56,7 +56,9 @@ class _LogbookEditFormState extends State<LogbookEditForm> {
             onPressed: () {
               setState(() {
                 entry.dates.add(dateTimeFieldController.text);
-                context.bloc<LogbookBloc>().add(LogbookEvent.save(logbook));
+                context
+                    .bloc<LogbookBloc>()
+                    .add(LogbookEvent.save(logbook, entry));
               });
             },
           ),
@@ -78,7 +80,7 @@ class _LogbookEditFormState extends State<LogbookEditForm> {
                             entry.dates.removeAt(index);
                             context
                                 .bloc<LogbookBloc>()
-                                .add(LogbookEvent.save(logbook));
+                                .add(LogbookEvent.save(logbook, entry));
                           });
                         },
                       );
