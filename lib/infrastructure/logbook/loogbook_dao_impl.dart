@@ -1,9 +1,10 @@
-import 'package:ane_buddy/domain/logbook/entities/logbook.dart';
-import 'package:ane_buddy/domain/core/repositories/repo_failure.dart';
-import 'package:ane_buddy/domain/logbook/repositories/logbook_dao.dart';
-import 'package:ane_buddy/infrastructure/core/json_map_dao.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+
+import '../../domain/core/repositories/repo_failure.dart';
+import '../../domain/logbook/entities/logbook.dart';
+import '../../domain/logbook/repositories/logbook_dao.dart';
+import '../core/json_map_dao.dart';
 
 @LazySingleton(as: LogbookDao)
 class LogbookDaoImpl implements LogbookDao {
@@ -38,6 +39,7 @@ class LogbookDaoImpl implements LogbookDao {
 
   @override
   Future<Either<RepoFailure, void>> save(Logbook logbook) {
-    return jsonMapDao.save(logbook.toJson(), table, key);
+    Map<String, dynamic> jsonMap = logbook.toJson();
+    return jsonMapDao.save(jsonMap, table, key);
   }
 }

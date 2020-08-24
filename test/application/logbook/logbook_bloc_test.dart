@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:ane_buddy/application/logbook/logbook_bloc.dart';
 import 'package:ane_buddy/domain/core/repositories/repo_failure.dart';
 import 'package:ane_buddy/domain/logbook/entities/logbook.dart';
@@ -20,6 +23,13 @@ void main() {
 
   group('Load,', () {
     Logbook tLogbook = Logbook([]);
+
+    String jsonData = File(
+      'assets/data/initial_logbook.json',
+    ).readAsStringSync();
+    final jsonMap = json.decode(jsonData);
+    Logbook tInitialLogbook = Logbook.fromJson(jsonMap);
+
     test('dao.load() is called.', () async {
       //arrange
       when(mockDao.load()).thenAnswer((_) async => Right(tLogbook));
@@ -51,7 +61,7 @@ void main() {
       final expected = [
         LogbookState.loading(),
         LogbookState.viewing(
-          logbook: Logbook([]),
+          logbook: tInitialLogbook,
           failed: true,
           failure: expectedFailure,
         )

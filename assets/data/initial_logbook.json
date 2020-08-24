@@ -1,0 +1,51 @@
+{
+    "lists": [
+        {
+            "name": "list 1",
+            "entries": [
+                {
+                    "text": "entry 1",
+                    "dates": [
+                        "24.08.2020 10:46"
+                    ],
+                    "max": 10
+                },
+                {
+                    "text": "entry 2",
+                    "dates": [],
+                    "max": 10
+                }
+            ]
+        },
+        {
+            "name": "list 2",
+            "entries": [
+                {
+                    "text": "entry 1",
+                    "dates": [],
+                    "max": 10
+                },
+                {
+                    "text": "entry 2",
+                    "dates": [],
+                    "max": 10
+                }
+            ]
+        },
+        {
+            "name": "list 3",
+            "entries": [
+                {
+                    "text": "entry 1",
+                    "dates": [],
+                    "max": 10
+                },
+                {
+                    "text": "entry 2",
+                    "dates": [],
+                    "max": 10
+                }
+            ]
+        }
+    ]
+}
