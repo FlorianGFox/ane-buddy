@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:ane_buddy/domain/education/entities/further_education.dart';
 import 'package:ane_buddy/domain/education/repositories/education_dao.dart';
+import 'package:ane_buddy/domain/logbook/entities/logbook.dart';
+import 'package:ane_buddy/domain/logbook/repositories/logbook_dao.dart';
 import 'package:ane_buddy/domain/profile/entities/profile.dart';
 import 'package:ane_buddy/domain/profile/repositories/profile_dao.dart';
 import 'package:bloc/bloc.dart';
@@ -24,12 +26,14 @@ class PrintBloc extends Bloc<PrintEvent, PrintState> {
   final PdfCreator pdfCreator;
   final ProfileDao profileDao;
   final EducationDao educationDao;
+  final LogbookDao logbookDao;
 
   PrintBloc({
     @required this.pdfDao,
     @required this.pdfCreator,
     @required this.profileDao,
     @required this.educationDao,
+    @required this.logbookDao,
   }) : super(PrintState.initial());
 
   @override
@@ -56,7 +60,16 @@ class PrintBloc extends Bloc<PrintEvent, PrintState> {
             yield PrintState.failed(failure);
           },
           (education) async* {
-            yield* _createPdf(profile, education);
+            final failureOrLogbook = await logbookDao.load();
+
+            yield* failureOrLogbook.fold(
+              (failure) async* {
+                yield PrintState.failed(failure);
+              },
+              (logbook) async* {
+                yield* _createPdf(profile, education, logbook);
+              },
+            );
           },
         );
       },
@@ -64,9 +77,12 @@ class PrintBloc extends Bloc<PrintEvent, PrintState> {
   }
 
   Stream<PrintState> _createPdf(
-      Profile profile, FurtherEducation education) async* {
+    Profile profile,
+    FurtherEducation education,
+    Logbook logbook,
+  ) async* {
     yield PrintState.creatingPdf();
-    Document pdf = pdfCreator.createPdf(profile, education);
+    Document pdf = pdfCreator.createPdf(profile, education, logbook);
     Either<RepoFailure, String> result = await pdfDao.save(pdf);
     yield result.fold(
       (failure) => PrintState.failed(failure),
