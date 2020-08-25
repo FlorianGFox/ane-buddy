@@ -21,6 +21,13 @@ class LogbookListPage extends StatelessWidget {
         itemBuilder: (context, index) {
           return ListTile(
             title: Text(logList.entries[index].text),
+            subtitle: Text(
+              '(' +
+                  logList.entries[index].dates.length.toString() +
+                  ' von ' +
+                  logList.entries[index].max.toString() +
+                  ')',
+            ),
             onTap: () {
               Navigator.push(
                 context,
