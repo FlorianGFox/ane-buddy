@@ -127,6 +127,8 @@ void main() {
           .thenAnswer((realInvocation) async => Right(tEducation));
       when(mockProfileDao.load())
           .thenAnswer((realInvocation) async => Right(tProfile));
+      when(mockLogbookDao.load())
+          .thenAnswer((realInvocation) async => Right(tLogbook));
       when(mockPdfCreator.createPdf(any, any, any)).thenReturn(tPdf);
       when(mockPdfDao.save(any)).thenAnswer((_) async => Left(tFailure));
       //assert
