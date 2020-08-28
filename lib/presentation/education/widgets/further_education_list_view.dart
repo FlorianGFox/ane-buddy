@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../application/education/education_bloc.dart';
 import '../../../domain/education/entities/further_education.dart';
 import '../../../domain/education/entities/further_education_entry.dart';
-import '../education_edit_page.dart';
 
 class FurtherEducationListView extends StatefulWidget {
   final FurtherEducation education;
@@ -48,7 +47,7 @@ class _FurtherEducationListViewState extends State<FurtherEducationListView> {
   }
 
   Widget _buildTile(BuildContext context, FurtherEducationEntry entry) {
-    return Text(entry.educator ?? '');
+    return Text(entry.institution ?? '');
   }
 
   Widget _buildSubtitle(BuildContext context, FurtherEducationEntry entry) {
