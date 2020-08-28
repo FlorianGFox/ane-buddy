@@ -1,10 +1,11 @@
-import 'package:ane_buddy/domain/education/entities/further_education.dart';
-import 'package:ane_buddy/injection.dart';
-import 'package:ane_buddy/presentation/core/pages/loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/education/education_bloc.dart';
+import '../../domain/education/entities/further_education.dart';
+import '../../injection.dart';
+import '../core/pages/loading_page.dart';
+import 'education_edit_page.dart';
 import 'widgets/further_education_list_view.dart';
 
 class EducationPage extends StatelessWidget {
@@ -61,7 +62,18 @@ class _EducationPageState extends State<_EducationPage> {
   Widget _createPage(BuildContext context, FurtherEducation education) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Weiterbildung'),
+        title: Text('Bearbeite Weiterbildungen'),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.bloc<EducationBloc>().add(EducationEvent.edit(education));
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => EducationEditPage(education)),
+          );
+        },
+        child: Icon(Icons.add),
       ),
       body: SafeArea(
         minimum: const EdgeInsets.all(16.0),

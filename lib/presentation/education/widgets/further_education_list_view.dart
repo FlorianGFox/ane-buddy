@@ -24,39 +24,25 @@ class _FurtherEducationListViewState extends State<FurtherEducationListView> {
 
   Widget _buildList(BuildContext context, FurtherEducation education) {
     return ListView.builder(
-      itemCount: education.entries.length + 1,
+      itemCount: education.entries.length,
       itemBuilder: (context, index) {
-        if (index < education.entries.length) {
-          final entry = education.entries[index];
-          return ListTile(
-            title: _buildTile(context, entry),
-            subtitle: _buildSubtitle(context, entry),
-            onTap: () {
-              ConfirmDialog.show(
-                context,
-                title: 'Eintrag löschen?',
-                content: 'Damit wird der Eintrag unwiderruflich entfernt.',
-                onAccept: () {
-                  context
-                      .bloc<EducationBloc>()
-                      .add(EducationEvent.delete(education, entry));
-                },
-              );
-            },
-          );
-        } else {
-          return RaisedButton(
-            onPressed: () {
-              context.bloc<EducationBloc>().add(EducationEvent.edit(education));
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => EducationEditPage(education)),
-              );
-            },
-            child: Text('Weiterbildung hinzufügen'),
-          );
-        }
+        final entry = education.entries[index];
+        return ListTile(
+          title: _buildTile(context, entry),
+          subtitle: _buildSubtitle(context, entry),
+          onTap: () {
+            ConfirmDialog.show(
+              context,
+              title: 'Eintrag löschen?',
+              content: 'Damit wird der Eintrag unwiderruflich entfernt.',
+              onAccept: () {
+                context
+                    .bloc<EducationBloc>()
+                    .add(EducationEvent.delete(education, entry));
+              },
+            );
+          },
+        );
       },
     );
   }
