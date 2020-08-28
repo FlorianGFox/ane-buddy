@@ -25,15 +25,17 @@ void main() {
       //arrange
       when(mockDao.save(any)).thenAnswer((_) async => Right(null));
       //act
-      bloc.add(ProfileEvent.save(tProfile));
+      bloc.add(ProfileEvent.updateCachedProfile(tProfile));
+      bloc.add(ProfileEvent.saveCashedProfile());
       await untilCalled(mockDao.save(tProfile));
       //assert
       verify(mockDao.save(tProfile));
     });
 
     List<ProfileState> expected = [
-      ProfileState.saving(),
       ProfileState.ready(profile: tProfile, failed: false),
+      ProfileState.saving(),
+      ProfileState.finishedSaving(),
     ];
     test('Bloc emits [Saving, Ready].', () async {
       //arrange
@@ -41,11 +43,15 @@ void main() {
       //assert
       expectLater(bloc, emitsInOrder(expected));
       //act
-      bloc.add(ProfileEvent.save(tProfile));
+      bloc.add(ProfileEvent.updateCachedProfile(tProfile));
+      bloc.add(ProfileEvent.saveCashedProfile());
     });
 
     RepoFailure tFailure = RepoFailure.unknown();
     List<ProfileState> expectedWithFailure = [
+      ProfileState.ready(
+        profile: tProfile,
+      ),
       ProfileState.saving(),
       ProfileState.ready(
         profile: tProfile,
@@ -59,7 +65,8 @@ void main() {
       //assert
       expectLater(bloc, emitsInOrder(expectedWithFailure));
       //act
-      bloc.add(ProfileEvent.save(tProfile));
+      bloc.add(ProfileEvent.updateCachedProfile(tProfile));
+      bloc.add(ProfileEvent.saveCashedProfile());
     });
   });
 
@@ -79,7 +86,8 @@ void main() {
 
     final expected = [
       ProfileState.loading(),
-      ProfileState.ready(failed: false, profile: tProfile)
+      ProfileState.finishedLoading(tProfile),
+      ProfileState.ready(failed: false, profile: tProfile),
     ];
     test('Emits [Loading, Ready] with loaded profile when no error happens.',
         () async {
@@ -108,6 +116,19 @@ void main() {
       expectLater(bloc, emitsInAnyOrder(expectedWithFailure));
       //act
       bloc.add(ProfileEvent.load());
+    });
+  });
+
+  group('UpdateCashedProfile', () {
+    Profile tProfile = Profile();
+    test('Returns same profile.', () async {
+      //arrange
+      final expected = [ProfileState.ready(profile: tProfile)];
+
+      //assert
+      expectLater(bloc, emitsInOrder(expected));
+      //act
+      bloc.add(ProfileEvent.updateCachedProfile(tProfile));
     });
   });
 }

@@ -6,35 +6,19 @@ import '../../../application/profile/profile_bloc.dart';
 import '../../../domain/profile/entities/profile.dart';
 import '../../core/widgets/ane_date_time_field.dart';
 
-class ProfileForm extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ProfileBloc, ProfileState>(
-      builder: (context, state) {
-        return state.map(
-          initial: (_) => Container(),
-          loading: (_) => Container(),
-          ready: (state) => _Form(profile: state.profile),
-          saving: (_) => Container(),
-        );
-      },
-    );
-  }
-}
+class ProfileForm extends StatefulWidget {
+  final Profile _profile;
 
-class _Form extends StatefulWidget {
-  final Profile profile;
-
-  const _Form({Key key, this.profile = const Profile()}) : super(key: key);
+  ProfileForm(this._profile);
 
   @override
-  _FormState createState() => _FormState(profile);
+  _ProfileFormState createState() => _ProfileFormState(_profile);
 }
 
-class _FormState extends State<_Form> {
+class _ProfileFormState extends State<ProfileForm> {
   Profile profile;
 
-  _FormState([this.profile = const Profile()]);
+  _ProfileFormState(this.profile);
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +45,9 @@ class _FormState extends State<_Form> {
                 profile = profile.copyWith(
                   firstName: value,
                 );
+                context
+                    .bloc<ProfileBloc>()
+                    .add(ProfileEvent.updateCachedProfile(profile));
               },
             ),
             smallDistance,
@@ -73,6 +60,9 @@ class _FormState extends State<_Form> {
                 profile = profile.copyWith(
                   lastName: value,
                 );
+                context
+                    .bloc<ProfileBloc>()
+                    .add(ProfileEvent.updateCachedProfile(profile));
               },
             ),
             smallDistance,
@@ -87,6 +77,9 @@ class _FormState extends State<_Form> {
                 profile = profile.copyWith(
                   birthday: dateFormat.format(value),
                 );
+                context
+                    .bloc<ProfileBloc>()
+                    .add(ProfileEvent.updateCachedProfile(profile));
               },
             ),
             smallDistance,
@@ -99,6 +92,9 @@ class _FormState extends State<_Form> {
                 profile = profile.copyWith(
                   birthPlace: value,
                 );
+                context
+                    .bloc<ProfileBloc>()
+                    .add(ProfileEvent.updateCachedProfile(profile));
               },
             ),
             mediumDistance,
@@ -115,6 +111,9 @@ class _FormState extends State<_Form> {
                   profile = profile.copyWith(
                     hasDrMed: value,
                   );
+                  context
+                      .bloc<ProfileBloc>()
+                      .add(ProfileEvent.updateCachedProfile(profile));
                 });
               },
             ),
@@ -127,6 +126,9 @@ class _FormState extends State<_Form> {
                 profile = profile.copyWith(
                   otherDegrees: value,
                 );
+                context
+                    .bloc<ProfileBloc>()
+                    .add(ProfileEvent.updateCachedProfile(profile));
               },
             ),
             smallDistance,
@@ -138,6 +140,9 @@ class _FormState extends State<_Form> {
                   profile = profile.copyWith(
                     hasForeignDegree: value,
                   );
+                  context
+                      .bloc<ProfileBloc>()
+                      .add(ProfileEvent.updateCachedProfile(profile));
                 });
               },
             ),
@@ -150,6 +155,9 @@ class _FormState extends State<_Form> {
                 profile = profile.copyWith(
                   foreignDegrees: value,
                 );
+                context
+                    .bloc<ProfileBloc>()
+                    .add(ProfileEvent.updateCachedProfile(profile));
               },
             ),
             mediumDistance,
@@ -169,6 +177,9 @@ class _FormState extends State<_Form> {
                 profile = profile.copyWith(
                   medicalExamDate: dateFormat.format(value),
                 );
+                context
+                    .bloc<ProfileBloc>()
+                    .add(ProfileEvent.updateCachedProfile(profile));
               },
             ),
             smallDistance,
@@ -183,6 +194,9 @@ class _FormState extends State<_Form> {
                 profile = profile.copyWith(
                   dentalExamDate: dateFormat.format(value),
                 );
+                context
+                    .bloc<ProfileBloc>()
+                    .add(ProfileEvent.updateCachedProfile(profile));
               },
             ),
             smallDistance,
@@ -197,15 +211,12 @@ class _FormState extends State<_Form> {
                 profile = profile.copyWith(
                   approvalDate: dateFormat.format(value),
                 );
+                context
+                    .bloc<ProfileBloc>()
+                    .add(ProfileEvent.updateCachedProfile(profile));
               },
             ),
             mediumDistance,
-            RaisedButton(
-              onPressed: () {
-                context.bloc<ProfileBloc>().add(ProfileEvent.save(profile));
-              },
-              child: Text('Speichern'),
-            ),
           ],
         ),
       ),

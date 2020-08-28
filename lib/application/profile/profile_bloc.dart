@@ -17,6 +17,8 @@ part 'profile_state.dart';
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final ProfileDao profileDao;
 
+  Profile _currentProfile;
+
   ProfileBloc({
     @required this.profileDao,
   }) : super(ProfileState.initial());
@@ -26,35 +28,48 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     ProfileEvent event,
   ) async* {
     yield* event.map(
-      save: _mapSave,
+      saveCashedProfile: _mapSaveCashedProfile,
       load: _mapLoad,
+      updateCachedProfile: _mapUpdateCachedProfile,
     );
   }
 
-  Stream<ProfileState> _mapSave(_Save event) async* {
+  Stream<ProfileState> _mapUpdateCachedProfile(
+      _UpdateCachedProfile event) async* {
+    _currentProfile = event.profile;
+    yield ProfileState.ready(profile: _currentProfile);
+  }
+
+  Stream<ProfileState> _mapSaveCashedProfile(_SaveCashedProfile event) async* {
     yield ProfileState.saving();
-    var result = await profileDao.save(event.profile);
+    var result = await profileDao.save(_currentProfile);
     yield result.fold(
       (failure) => ProfileState.ready(
-        profile: event.profile,
+        profile: _currentProfile,
         failed: true,
         failure: failure,
       ),
-      (_) => ProfileState.ready(profile: event.profile),
+      (_) => ProfileState.finishedSaving(),
     );
   }
 
   Stream<ProfileState> _mapLoad(_Load event) async* {
     yield ProfileState.loading();
-    var result = await profileDao.load();
-    yield result.fold(
-      (failure) => failure.map(
-        unknown: (_) => ProfileState.ready(failed: true, failure: failure),
-        notFound: (_) => _createReadyWithFailure(failure),
-        conversion: (_) => _createReadyWithFailure(failure),
-        invalidState: (_) => _createReadyWithFailure(failure),
-      ),
-      (profile) => ProfileState.ready(failed: false, profile: profile),
+    var failureOrProfile = await profileDao.load();
+    yield* failureOrProfile.fold(
+      (failure) async* {
+        yield failure.map(
+          unknown: (_) => ProfileState.ready(failed: true, failure: failure),
+          notFound: (_) => _createReadyWithFailure(failure),
+          conversion: (_) => _createReadyWithFailure(failure),
+          invalidState: (_) => _createReadyWithFailure(failure),
+        );
+      },
+      (profile) async* {
+        _currentProfile = profile;
+        yield ProfileState.finishedLoading(profile);
+        yield ProfileState.ready(failed: false, profile: _currentProfile);
+      },
     );
   }
 

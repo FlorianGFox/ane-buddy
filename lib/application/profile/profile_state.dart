@@ -4,10 +4,13 @@ part of 'profile_bloc.dart';
 abstract class ProfileState with _$ProfileState {
   const factory ProfileState.initial() = _Initial;
   const factory ProfileState.loading() = _Loading;
+  const factory ProfileState.finishedLoading(Profile profile) =
+      _FinishedLoading;
   const factory ProfileState.ready({
     Profile profile,
     @Default(false) bool failed,
     RepoFailure failure,
   }) = _Ready;
   const factory ProfileState.saving() = _Saving;
+  const factory ProfileState.finishedSaving() = _FinishedSaving;
 }

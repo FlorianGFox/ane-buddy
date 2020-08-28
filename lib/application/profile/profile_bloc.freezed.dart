@@ -13,15 +13,20 @@ class _$ProfileEventTearOff {
   const _$ProfileEventTearOff();
 
 // ignore: unused_element
-  _Save save(Profile profile) {
-    return _Save(
-      profile,
-    );
+  _SaveCashedProfile saveCashedProfile() {
+    return const _SaveCashedProfile();
   }
 
 // ignore: unused_element
   _Load load() {
     return const _Load();
+  }
+
+// ignore: unused_element
+  _UpdateCachedProfile updateCachedProfile(Profile profile) {
+    return _UpdateCachedProfile(
+      profile,
+    );
   }
 }
 
@@ -31,24 +36,28 @@ const $ProfileEvent = _$ProfileEventTearOff();
 mixin _$ProfileEvent {
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result save(Profile profile),
+    @required Result saveCashedProfile(),
     @required Result load(),
+    @required Result updateCachedProfile(Profile profile),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result save(Profile profile),
+    Result saveCashedProfile(),
     Result load(),
+    Result updateCachedProfile(Profile profile),
     @required Result orElse(),
   });
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result save(_Save value),
+    @required Result saveCashedProfile(_SaveCashedProfile value),
     @required Result load(_Load value),
+    @required Result updateCachedProfile(_UpdateCachedProfile value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result save(_Save value),
+    Result saveCashedProfile(_SaveCashedProfile value),
     Result load(_Load value),
+    Result updateCachedProfile(_UpdateCachedProfile value),
     @required Result orElse(),
   });
 }
@@ -67,90 +76,63 @@ class _$ProfileEventCopyWithImpl<$Res> implements $ProfileEventCopyWith<$Res> {
   final $Res Function(ProfileEvent) _then;
 }
 
-abstract class _$SaveCopyWith<$Res> {
-  factory _$SaveCopyWith(_Save value, $Res Function(_Save) then) =
-      __$SaveCopyWithImpl<$Res>;
-  $Res call({Profile profile});
-
-  $ProfileCopyWith<$Res> get profile;
+abstract class _$SaveCashedProfileCopyWith<$Res> {
+  factory _$SaveCashedProfileCopyWith(
+          _SaveCashedProfile value, $Res Function(_SaveCashedProfile) then) =
+      __$SaveCashedProfileCopyWithImpl<$Res>;
 }
 
-class __$SaveCopyWithImpl<$Res> extends _$ProfileEventCopyWithImpl<$Res>
-    implements _$SaveCopyWith<$Res> {
-  __$SaveCopyWithImpl(_Save _value, $Res Function(_Save) _then)
-      : super(_value, (v) => _then(v as _Save));
+class __$SaveCashedProfileCopyWithImpl<$Res>
+    extends _$ProfileEventCopyWithImpl<$Res>
+    implements _$SaveCashedProfileCopyWith<$Res> {
+  __$SaveCashedProfileCopyWithImpl(
+      _SaveCashedProfile _value, $Res Function(_SaveCashedProfile) _then)
+      : super(_value, (v) => _then(v as _SaveCashedProfile));
 
   @override
-  _Save get _value => super._value as _Save;
-
-  @override
-  $Res call({
-    Object profile = freezed,
-  }) {
-    return _then(_Save(
-      profile == freezed ? _value.profile : profile as Profile,
-    ));
-  }
-
-  @override
-  $ProfileCopyWith<$Res> get profile {
-    if (_value.profile == null) {
-      return null;
-    }
-    return $ProfileCopyWith<$Res>(_value.profile, (value) {
-      return _then(_value.copyWith(profile: value));
-    });
-  }
+  _SaveCashedProfile get _value => super._value as _SaveCashedProfile;
 }
 
-class _$_Save implements _Save {
-  const _$_Save(this.profile) : assert(profile != null);
-
-  @override
-  final Profile profile;
+class _$_SaveCashedProfile implements _SaveCashedProfile {
+  const _$_SaveCashedProfile();
 
   @override
   String toString() {
-    return 'ProfileEvent.save(profile: $profile)';
+    return 'ProfileEvent.saveCashedProfile()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _Save &&
-            (identical(other.profile, profile) ||
-                const DeepCollectionEquality().equals(other.profile, profile)));
+    return identical(this, other) || (other is _SaveCashedProfile);
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(profile);
-
-  @override
-  _$SaveCopyWith<_Save> get copyWith =>
-      __$SaveCopyWithImpl<_Save>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result save(Profile profile),
+    @required Result saveCashedProfile(),
     @required Result load(),
+    @required Result updateCachedProfile(Profile profile),
   }) {
-    assert(save != null);
+    assert(saveCashedProfile != null);
     assert(load != null);
-    return save(profile);
+    assert(updateCachedProfile != null);
+    return saveCashedProfile();
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result save(Profile profile),
+    Result saveCashedProfile(),
     Result load(),
+    Result updateCachedProfile(Profile profile),
     @required Result orElse(),
   }) {
     assert(orElse != null);
-    if (save != null) {
-      return save(profile);
+    if (saveCashedProfile != null) {
+      return saveCashedProfile();
     }
     return orElse();
   }
@@ -158,34 +140,34 @@ class _$_Save implements _Save {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result save(_Save value),
+    @required Result saveCashedProfile(_SaveCashedProfile value),
     @required Result load(_Load value),
+    @required Result updateCachedProfile(_UpdateCachedProfile value),
   }) {
-    assert(save != null);
+    assert(saveCashedProfile != null);
     assert(load != null);
-    return save(this);
+    assert(updateCachedProfile != null);
+    return saveCashedProfile(this);
   }
 
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result save(_Save value),
+    Result saveCashedProfile(_SaveCashedProfile value),
     Result load(_Load value),
+    Result updateCachedProfile(_UpdateCachedProfile value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
-    if (save != null) {
-      return save(this);
+    if (saveCashedProfile != null) {
+      return saveCashedProfile(this);
     }
     return orElse();
   }
 }
 
-abstract class _Save implements ProfileEvent {
-  const factory _Save(Profile profile) = _$_Save;
-
-  Profile get profile;
-  _$SaveCopyWith<_Save> get copyWith;
+abstract class _SaveCashedProfile implements ProfileEvent {
+  const factory _SaveCashedProfile() = _$_SaveCashedProfile;
 }
 
 abstract class _$LoadCopyWith<$Res> {
@@ -221,19 +203,22 @@ class _$_Load implements _Load {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result save(Profile profile),
+    @required Result saveCashedProfile(),
     @required Result load(),
+    @required Result updateCachedProfile(Profile profile),
   }) {
-    assert(save != null);
+    assert(saveCashedProfile != null);
     assert(load != null);
+    assert(updateCachedProfile != null);
     return load();
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result save(Profile profile),
+    Result saveCashedProfile(),
     Result load(),
+    Result updateCachedProfile(Profile profile),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -246,19 +231,22 @@ class _$_Load implements _Load {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result save(_Save value),
+    @required Result saveCashedProfile(_SaveCashedProfile value),
     @required Result load(_Load value),
+    @required Result updateCachedProfile(_UpdateCachedProfile value),
   }) {
-    assert(save != null);
+    assert(saveCashedProfile != null);
     assert(load != null);
+    assert(updateCachedProfile != null);
     return load(this);
   }
 
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result save(_Save value),
+    Result saveCashedProfile(_SaveCashedProfile value),
     Result load(_Load value),
+    Result updateCachedProfile(_UpdateCachedProfile value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -271,6 +259,137 @@ class _$_Load implements _Load {
 
 abstract class _Load implements ProfileEvent {
   const factory _Load() = _$_Load;
+}
+
+abstract class _$UpdateCachedProfileCopyWith<$Res> {
+  factory _$UpdateCachedProfileCopyWith(_UpdateCachedProfile value,
+          $Res Function(_UpdateCachedProfile) then) =
+      __$UpdateCachedProfileCopyWithImpl<$Res>;
+  $Res call({Profile profile});
+
+  $ProfileCopyWith<$Res> get profile;
+}
+
+class __$UpdateCachedProfileCopyWithImpl<$Res>
+    extends _$ProfileEventCopyWithImpl<$Res>
+    implements _$UpdateCachedProfileCopyWith<$Res> {
+  __$UpdateCachedProfileCopyWithImpl(
+      _UpdateCachedProfile _value, $Res Function(_UpdateCachedProfile) _then)
+      : super(_value, (v) => _then(v as _UpdateCachedProfile));
+
+  @override
+  _UpdateCachedProfile get _value => super._value as _UpdateCachedProfile;
+
+  @override
+  $Res call({
+    Object profile = freezed,
+  }) {
+    return _then(_UpdateCachedProfile(
+      profile == freezed ? _value.profile : profile as Profile,
+    ));
+  }
+
+  @override
+  $ProfileCopyWith<$Res> get profile {
+    if (_value.profile == null) {
+      return null;
+    }
+    return $ProfileCopyWith<$Res>(_value.profile, (value) {
+      return _then(_value.copyWith(profile: value));
+    });
+  }
+}
+
+class _$_UpdateCachedProfile implements _UpdateCachedProfile {
+  const _$_UpdateCachedProfile(this.profile) : assert(profile != null);
+
+  @override
+  final Profile profile;
+
+  @override
+  String toString() {
+    return 'ProfileEvent.updateCachedProfile(profile: $profile)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _UpdateCachedProfile &&
+            (identical(other.profile, profile) ||
+                const DeepCollectionEquality().equals(other.profile, profile)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(profile);
+
+  @override
+  _$UpdateCachedProfileCopyWith<_UpdateCachedProfile> get copyWith =>
+      __$UpdateCachedProfileCopyWithImpl<_UpdateCachedProfile>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result saveCashedProfile(),
+    @required Result load(),
+    @required Result updateCachedProfile(Profile profile),
+  }) {
+    assert(saveCashedProfile != null);
+    assert(load != null);
+    assert(updateCachedProfile != null);
+    return updateCachedProfile(profile);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result saveCashedProfile(),
+    Result load(),
+    Result updateCachedProfile(Profile profile),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (updateCachedProfile != null) {
+      return updateCachedProfile(profile);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result saveCashedProfile(_SaveCashedProfile value),
+    @required Result load(_Load value),
+    @required Result updateCachedProfile(_UpdateCachedProfile value),
+  }) {
+    assert(saveCashedProfile != null);
+    assert(load != null);
+    assert(updateCachedProfile != null);
+    return updateCachedProfile(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result saveCashedProfile(_SaveCashedProfile value),
+    Result load(_Load value),
+    Result updateCachedProfile(_UpdateCachedProfile value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (updateCachedProfile != null) {
+      return updateCachedProfile(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateCachedProfile implements ProfileEvent {
+  const factory _UpdateCachedProfile(Profile profile) = _$_UpdateCachedProfile;
+
+  Profile get profile;
+  _$UpdateCachedProfileCopyWith<_UpdateCachedProfile> get copyWith;
 }
 
 class _$ProfileStateTearOff {
@@ -287,6 +406,13 @@ class _$ProfileStateTearOff {
   }
 
 // ignore: unused_element
+  _FinishedLoading finishedLoading(Profile profile) {
+    return _FinishedLoading(
+      profile,
+    );
+  }
+
+// ignore: unused_element
   _Ready ready({Profile profile, bool failed = false, RepoFailure failure}) {
     return _Ready(
       profile: profile,
@@ -299,6 +425,11 @@ class _$ProfileStateTearOff {
   _Saving saving() {
     return const _Saving();
   }
+
+// ignore: unused_element
+  _FinishedSaving finishedSaving() {
+    return const _FinishedSaving();
+  }
 }
 
 // ignore: unused_element
@@ -309,30 +440,38 @@ mixin _$ProfileState {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
+    @required Result finishedLoading(Profile profile),
     @required Result ready(Profile profile, bool failed, RepoFailure failure),
     @required Result saving(),
+    @required Result finishedSaving(),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
+    Result finishedLoading(Profile profile),
     Result ready(Profile profile, bool failed, RepoFailure failure),
     Result saving(),
+    Result finishedSaving(),
     @required Result orElse(),
   });
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result initial(_Initial value),
     @required Result loading(_Loading value),
+    @required Result finishedLoading(_FinishedLoading value),
     @required Result ready(_Ready value),
     @required Result saving(_Saving value),
+    @required Result finishedSaving(_FinishedSaving value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result initial(_Initial value),
     Result loading(_Loading value),
+    Result finishedLoading(_FinishedLoading value),
     Result ready(_Ready value),
     Result saving(_Saving value),
+    Result finishedSaving(_FinishedSaving value),
     @required Result orElse(),
   });
 }
@@ -386,13 +525,17 @@ class _$_Initial implements _Initial {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
+    @required Result finishedLoading(Profile profile),
     @required Result ready(Profile profile, bool failed, RepoFailure failure),
     @required Result saving(),
+    @required Result finishedSaving(),
   }) {
     assert(initial != null);
     assert(loading != null);
+    assert(finishedLoading != null);
     assert(ready != null);
     assert(saving != null);
+    assert(finishedSaving != null);
     return initial();
   }
 
@@ -401,8 +544,10 @@ class _$_Initial implements _Initial {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
+    Result finishedLoading(Profile profile),
     Result ready(Profile profile, bool failed, RepoFailure failure),
     Result saving(),
+    Result finishedSaving(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -417,13 +562,17 @@ class _$_Initial implements _Initial {
   Result map<Result extends Object>({
     @required Result initial(_Initial value),
     @required Result loading(_Loading value),
+    @required Result finishedLoading(_FinishedLoading value),
     @required Result ready(_Ready value),
     @required Result saving(_Saving value),
+    @required Result finishedSaving(_FinishedSaving value),
   }) {
     assert(initial != null);
     assert(loading != null);
+    assert(finishedLoading != null);
     assert(ready != null);
     assert(saving != null);
+    assert(finishedSaving != null);
     return initial(this);
   }
 
@@ -432,8 +581,10 @@ class _$_Initial implements _Initial {
   Result maybeMap<Result extends Object>({
     Result initial(_Initial value),
     Result loading(_Loading value),
+    Result finishedLoading(_FinishedLoading value),
     Result ready(_Ready value),
     Result saving(_Saving value),
+    Result finishedSaving(_FinishedSaving value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -483,13 +634,17 @@ class _$_Loading implements _Loading {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
+    @required Result finishedLoading(Profile profile),
     @required Result ready(Profile profile, bool failed, RepoFailure failure),
     @required Result saving(),
+    @required Result finishedSaving(),
   }) {
     assert(initial != null);
     assert(loading != null);
+    assert(finishedLoading != null);
     assert(ready != null);
     assert(saving != null);
+    assert(finishedSaving != null);
     return loading();
   }
 
@@ -498,8 +653,10 @@ class _$_Loading implements _Loading {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
+    Result finishedLoading(Profile profile),
     Result ready(Profile profile, bool failed, RepoFailure failure),
     Result saving(),
+    Result finishedSaving(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -514,13 +671,17 @@ class _$_Loading implements _Loading {
   Result map<Result extends Object>({
     @required Result initial(_Initial value),
     @required Result loading(_Loading value),
+    @required Result finishedLoading(_FinishedLoading value),
     @required Result ready(_Ready value),
     @required Result saving(_Saving value),
+    @required Result finishedSaving(_FinishedSaving value),
   }) {
     assert(initial != null);
     assert(loading != null);
+    assert(finishedLoading != null);
     assert(ready != null);
     assert(saving != null);
+    assert(finishedSaving != null);
     return loading(this);
   }
 
@@ -529,8 +690,10 @@ class _$_Loading implements _Loading {
   Result maybeMap<Result extends Object>({
     Result initial(_Initial value),
     Result loading(_Loading value),
+    Result finishedLoading(_FinishedLoading value),
     Result ready(_Ready value),
     Result saving(_Saving value),
+    Result finishedSaving(_FinishedSaving value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -543,6 +706,154 @@ class _$_Loading implements _Loading {
 
 abstract class _Loading implements ProfileState {
   const factory _Loading() = _$_Loading;
+}
+
+abstract class _$FinishedLoadingCopyWith<$Res> {
+  factory _$FinishedLoadingCopyWith(
+          _FinishedLoading value, $Res Function(_FinishedLoading) then) =
+      __$FinishedLoadingCopyWithImpl<$Res>;
+  $Res call({Profile profile});
+
+  $ProfileCopyWith<$Res> get profile;
+}
+
+class __$FinishedLoadingCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res>
+    implements _$FinishedLoadingCopyWith<$Res> {
+  __$FinishedLoadingCopyWithImpl(
+      _FinishedLoading _value, $Res Function(_FinishedLoading) _then)
+      : super(_value, (v) => _then(v as _FinishedLoading));
+
+  @override
+  _FinishedLoading get _value => super._value as _FinishedLoading;
+
+  @override
+  $Res call({
+    Object profile = freezed,
+  }) {
+    return _then(_FinishedLoading(
+      profile == freezed ? _value.profile : profile as Profile,
+    ));
+  }
+
+  @override
+  $ProfileCopyWith<$Res> get profile {
+    if (_value.profile == null) {
+      return null;
+    }
+    return $ProfileCopyWith<$Res>(_value.profile, (value) {
+      return _then(_value.copyWith(profile: value));
+    });
+  }
+}
+
+class _$_FinishedLoading implements _FinishedLoading {
+  const _$_FinishedLoading(this.profile) : assert(profile != null);
+
+  @override
+  final Profile profile;
+
+  @override
+  String toString() {
+    return 'ProfileState.finishedLoading(profile: $profile)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _FinishedLoading &&
+            (identical(other.profile, profile) ||
+                const DeepCollectionEquality().equals(other.profile, profile)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(profile);
+
+  @override
+  _$FinishedLoadingCopyWith<_FinishedLoading> get copyWith =>
+      __$FinishedLoadingCopyWithImpl<_FinishedLoading>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result initial(),
+    @required Result loading(),
+    @required Result finishedLoading(Profile profile),
+    @required Result ready(Profile profile, bool failed, RepoFailure failure),
+    @required Result saving(),
+    @required Result finishedSaving(),
+  }) {
+    assert(initial != null);
+    assert(loading != null);
+    assert(finishedLoading != null);
+    assert(ready != null);
+    assert(saving != null);
+    assert(finishedSaving != null);
+    return finishedLoading(profile);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result initial(),
+    Result loading(),
+    Result finishedLoading(Profile profile),
+    Result ready(Profile profile, bool failed, RepoFailure failure),
+    Result saving(),
+    Result finishedSaving(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (finishedLoading != null) {
+      return finishedLoading(profile);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result initial(_Initial value),
+    @required Result loading(_Loading value),
+    @required Result finishedLoading(_FinishedLoading value),
+    @required Result ready(_Ready value),
+    @required Result saving(_Saving value),
+    @required Result finishedSaving(_FinishedSaving value),
+  }) {
+    assert(initial != null);
+    assert(loading != null);
+    assert(finishedLoading != null);
+    assert(ready != null);
+    assert(saving != null);
+    assert(finishedSaving != null);
+    return finishedLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result initial(_Initial value),
+    Result loading(_Loading value),
+    Result finishedLoading(_FinishedLoading value),
+    Result ready(_Ready value),
+    Result saving(_Saving value),
+    Result finishedSaving(_FinishedSaving value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (finishedLoading != null) {
+      return finishedLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FinishedLoading implements ProfileState {
+  const factory _FinishedLoading(Profile profile) = _$_FinishedLoading;
+
+  Profile get profile;
+  _$FinishedLoadingCopyWith<_FinishedLoading> get copyWith;
 }
 
 abstract class _$ReadyCopyWith<$Res> {
@@ -642,13 +953,17 @@ class _$_Ready implements _Ready {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
+    @required Result finishedLoading(Profile profile),
     @required Result ready(Profile profile, bool failed, RepoFailure failure),
     @required Result saving(),
+    @required Result finishedSaving(),
   }) {
     assert(initial != null);
     assert(loading != null);
+    assert(finishedLoading != null);
     assert(ready != null);
     assert(saving != null);
+    assert(finishedSaving != null);
     return ready(profile, failed, failure);
   }
 
@@ -657,8 +972,10 @@ class _$_Ready implements _Ready {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
+    Result finishedLoading(Profile profile),
     Result ready(Profile profile, bool failed, RepoFailure failure),
     Result saving(),
+    Result finishedSaving(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -673,13 +990,17 @@ class _$_Ready implements _Ready {
   Result map<Result extends Object>({
     @required Result initial(_Initial value),
     @required Result loading(_Loading value),
+    @required Result finishedLoading(_FinishedLoading value),
     @required Result ready(_Ready value),
     @required Result saving(_Saving value),
+    @required Result finishedSaving(_FinishedSaving value),
   }) {
     assert(initial != null);
     assert(loading != null);
+    assert(finishedLoading != null);
     assert(ready != null);
     assert(saving != null);
+    assert(finishedSaving != null);
     return ready(this);
   }
 
@@ -688,8 +1009,10 @@ class _$_Ready implements _Ready {
   Result maybeMap<Result extends Object>({
     Result initial(_Initial value),
     Result loading(_Loading value),
+    Result finishedLoading(_FinishedLoading value),
     Result ready(_Ready value),
     Result saving(_Saving value),
+    Result finishedSaving(_FinishedSaving value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -745,13 +1068,17 @@ class _$_Saving implements _Saving {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
+    @required Result finishedLoading(Profile profile),
     @required Result ready(Profile profile, bool failed, RepoFailure failure),
     @required Result saving(),
+    @required Result finishedSaving(),
   }) {
     assert(initial != null);
     assert(loading != null);
+    assert(finishedLoading != null);
     assert(ready != null);
     assert(saving != null);
+    assert(finishedSaving != null);
     return saving();
   }
 
@@ -760,8 +1087,10 @@ class _$_Saving implements _Saving {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
+    Result finishedLoading(Profile profile),
     Result ready(Profile profile, bool failed, RepoFailure failure),
     Result saving(),
+    Result finishedSaving(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -776,13 +1105,17 @@ class _$_Saving implements _Saving {
   Result map<Result extends Object>({
     @required Result initial(_Initial value),
     @required Result loading(_Loading value),
+    @required Result finishedLoading(_FinishedLoading value),
     @required Result ready(_Ready value),
     @required Result saving(_Saving value),
+    @required Result finishedSaving(_FinishedSaving value),
   }) {
     assert(initial != null);
     assert(loading != null);
+    assert(finishedLoading != null);
     assert(ready != null);
     assert(saving != null);
+    assert(finishedSaving != null);
     return saving(this);
   }
 
@@ -791,8 +1124,10 @@ class _$_Saving implements _Saving {
   Result maybeMap<Result extends Object>({
     Result initial(_Initial value),
     Result loading(_Loading value),
+    Result finishedLoading(_FinishedLoading value),
     Result ready(_Ready value),
     Result saving(_Saving value),
+    Result finishedSaving(_FinishedSaving value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -805,4 +1140,116 @@ class _$_Saving implements _Saving {
 
 abstract class _Saving implements ProfileState {
   const factory _Saving() = _$_Saving;
+}
+
+abstract class _$FinishedSavingCopyWith<$Res> {
+  factory _$FinishedSavingCopyWith(
+          _FinishedSaving value, $Res Function(_FinishedSaving) then) =
+      __$FinishedSavingCopyWithImpl<$Res>;
+}
+
+class __$FinishedSavingCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res>
+    implements _$FinishedSavingCopyWith<$Res> {
+  __$FinishedSavingCopyWithImpl(
+      _FinishedSaving _value, $Res Function(_FinishedSaving) _then)
+      : super(_value, (v) => _then(v as _FinishedSaving));
+
+  @override
+  _FinishedSaving get _value => super._value as _FinishedSaving;
+}
+
+class _$_FinishedSaving implements _FinishedSaving {
+  const _$_FinishedSaving();
+
+  @override
+  String toString() {
+    return 'ProfileState.finishedSaving()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _FinishedSaving);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result initial(),
+    @required Result loading(),
+    @required Result finishedLoading(Profile profile),
+    @required Result ready(Profile profile, bool failed, RepoFailure failure),
+    @required Result saving(),
+    @required Result finishedSaving(),
+  }) {
+    assert(initial != null);
+    assert(loading != null);
+    assert(finishedLoading != null);
+    assert(ready != null);
+    assert(saving != null);
+    assert(finishedSaving != null);
+    return finishedSaving();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result initial(),
+    Result loading(),
+    Result finishedLoading(Profile profile),
+    Result ready(Profile profile, bool failed, RepoFailure failure),
+    Result saving(),
+    Result finishedSaving(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (finishedSaving != null) {
+      return finishedSaving();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result initial(_Initial value),
+    @required Result loading(_Loading value),
+    @required Result finishedLoading(_FinishedLoading value),
+    @required Result ready(_Ready value),
+    @required Result saving(_Saving value),
+    @required Result finishedSaving(_FinishedSaving value),
+  }) {
+    assert(initial != null);
+    assert(loading != null);
+    assert(finishedLoading != null);
+    assert(ready != null);
+    assert(saving != null);
+    assert(finishedSaving != null);
+    return finishedSaving(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result initial(_Initial value),
+    Result loading(_Loading value),
+    Result finishedLoading(_FinishedLoading value),
+    Result ready(_Ready value),
+    Result saving(_Saving value),
+    Result finishedSaving(_FinishedSaving value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (finishedSaving != null) {
+      return finishedSaving(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FinishedSaving implements ProfileState {
+  const factory _FinishedSaving() = _$_FinishedSaving;
 }

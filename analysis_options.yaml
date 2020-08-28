@@ -1,0 +1,4 @@
+analyzer:
+  errors:
+    missing_required_param: error
+    non_constant_identifier_names: ignore
