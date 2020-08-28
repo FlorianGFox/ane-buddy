@@ -1,10 +1,10 @@
-import 'package:ane_buddy/domain/profile/entities/profile.dart';
-import 'package:ane_buddy/presentation/core/pages/loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/profile/profile_bloc.dart';
+import '../../../domain/profile/entities/profile.dart';
 import '../../../injection.dart';
+import '../../core/pages/loading_page.dart';
 import '../widgets/profile_form.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -25,11 +25,11 @@ class _ProfilePage extends StatefulWidget {
   _ProfilePage({Key key}) : super(key: key);
 
   @override
-  __ProfilePageState createState() => __ProfilePageState();
+  _ProfilePageState createState() => _ProfilePageState();
 }
 
-class __ProfilePageState extends State<_ProfilePage> {
-  Widget pageToBuild = Container(child: Text('loading'));
+class _ProfilePageState extends State<_ProfilePage> {
+  Widget pageToBuild = Container();
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,7 @@ class __ProfilePageState extends State<_ProfilePage> {
   }
 
   Widget _createLodingPage(BuildContext context, String text) {
-    return Scaffold(body: LoadingPage(text: text));
+    return LoadingPage(text: text);
   }
 
   Widget _createProfilePage(BuildContext context, Profile profile) {
