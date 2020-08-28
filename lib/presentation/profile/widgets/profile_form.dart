@@ -78,7 +78,7 @@ class _ProfileFormState extends State<ProfileForm> {
               controller: TextEditingController(text: profile?.birthday),
               onChanged: (value) {
                 profile = profile.copyWith(
-                  birthday: dateFormat.format(value),
+                  birthday: value != null ? dateFormat.format(value) : null,
                 );
                 context
                     .bloc<ProfileBloc>()
@@ -182,7 +182,8 @@ class _ProfileFormState extends State<ProfileForm> {
               controller: TextEditingController(text: profile.medicalExamDate),
               onChanged: (value) {
                 profile = profile.copyWith(
-                  medicalExamDate: dateFormat.format(value),
+                  medicalExamDate:
+                      value != null ? dateFormat.format(value) : null,
                 );
                 context
                     .bloc<ProfileBloc>()
@@ -199,7 +200,8 @@ class _ProfileFormState extends State<ProfileForm> {
               controller: TextEditingController(text: profile.dentalExamDate),
               onChanged: (value) {
                 profile = profile.copyWith(
-                  dentalExamDate: dateFormat.format(value),
+                  dentalExamDate:
+                      value != null ? dateFormat.format(value) : null,
                 );
                 context
                     .bloc<ProfileBloc>()
@@ -216,7 +218,7 @@ class _ProfileFormState extends State<ProfileForm> {
               controller: TextEditingController(text: profile.approvalDate),
               onChanged: (value) {
                 profile = profile.copyWith(
-                  approvalDate: dateFormat.format(value),
+                  approvalDate: value != null ? dateFormat.format(value) : null,
                 );
                 context
                     .bloc<ProfileBloc>()
