@@ -1,3 +1,4 @@
+import 'package:ane_buddy/presentation/core/widgets/ane_input_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart' show DateFormat;
@@ -27,17 +28,19 @@ class _ProfileFormState extends State<ProfileForm> {
     final SizedBox mediumDistance = SizedBox(height: 30.0);
     final TextStyle subTitle = Theme.of(context).textTheme.subtitle1;
 
-    return Container(
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 15.0),
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
+            smallDistance,
             Text(
               'Angaben zur Person',
               style: subTitle,
             ),
             smallDistance,
             TextField(
-              decoration: InputDecoration(
+              decoration: AneInputDecoration(
                 labelText: 'Vorname',
               ),
               controller: TextEditingController(text: profile.firstName),
@@ -52,7 +55,7 @@ class _ProfileFormState extends State<ProfileForm> {
             ),
             smallDistance,
             TextField(
-              decoration: InputDecoration(
+              decoration: AneInputDecoration(
                 labelText: 'Nachname',
               ),
               controller: TextEditingController(text: profile.lastName),
@@ -84,7 +87,7 @@ class _ProfileFormState extends State<ProfileForm> {
             ),
             smallDistance,
             TextField(
-              decoration: InputDecoration(
+              decoration: AneInputDecoration(
                 labelText: 'Geburtsort/ggf. -land',
               ),
               controller: TextEditingController(text: profile?.birthPlace),
@@ -97,7 +100,9 @@ class _ProfileFormState extends State<ProfileForm> {
                     .add(ProfileEvent.updateCachedProfile(profile));
               },
             ),
-            mediumDistance,
+            smallDistance,
+            Divider(),
+            smallDistance,
             Text(
               'Akademische Grade',
               style: subTitle,
@@ -118,7 +123,7 @@ class _ProfileFormState extends State<ProfileForm> {
               },
             ),
             TextField(
-              decoration: InputDecoration(
+              decoration: AneInputDecoration(
                 labelText: 'Sonstige akademische Grade',
               ),
               controller: TextEditingController(text: profile.otherDegrees),
@@ -147,7 +152,7 @@ class _ProfileFormState extends State<ProfileForm> {
               },
             ),
             TextField(
-              decoration: InputDecoration(
+              decoration: AneInputDecoration(
                 labelText: 'Welche ausländische Grade',
               ),
               controller: TextEditingController(text: profile.foreignDegrees),
@@ -160,9 +165,11 @@ class _ProfileFormState extends State<ProfileForm> {
                     .add(ProfileEvent.updateCachedProfile(profile));
               },
             ),
-            mediumDistance,
+            smallDistance,
+            Divider(),
+            smallDistance,
             Text(
-              'Angaben zu Prüfungen and Approbation',
+              'Prüfungen und Approbation',
               style: subTitle,
             ),
             smallDistance,

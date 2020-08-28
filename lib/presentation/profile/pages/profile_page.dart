@@ -56,7 +56,7 @@ class __ProfilePageState extends State<_ProfilePage> {
   Widget _createPage(BuildContext context, Profile profile) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profil'),
+        title: Text('Bearbeite Profil'),
         leading: IconButton(
           icon: Icon(Icons.clear),
           onPressed: () {

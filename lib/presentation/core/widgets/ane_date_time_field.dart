@@ -29,6 +29,8 @@ class AneDateTimeField extends StatelessWidget {
     return DateTimeField(
       decoration: InputDecoration(
         labelText: labelText,
+        border: OutlineInputBorder(),
+        prefixIcon: Icon(Icons.calendar_today),
       ),
       format: dateFormat,
       controller: controller,
