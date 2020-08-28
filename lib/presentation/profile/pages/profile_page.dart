@@ -1,4 +1,5 @@
 import 'package:ane_buddy/domain/profile/entities/profile.dart';
+import 'package:ane_buddy/presentation/core/pages/loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,10 +37,14 @@ class __ProfilePageState extends State<_ProfilePage> {
       listener: (context, state) {
         state.map(
           initial: (_) {},
-          loading: (_) {},
+          loading: (_) {
+            setState(() {
+              pageToBuild = _createLodingPage(context, 'Lade Profil...');
+            });
+          },
           finishedLoading: (state) {
             setState(() {
-              pageToBuild = _createPage(context, state.profile);
+              pageToBuild = _createProfilePage(context, state.profile);
             });
           },
           ready: (_) {},
@@ -53,7 +58,11 @@ class __ProfilePageState extends State<_ProfilePage> {
     );
   }
 
-  Widget _createPage(BuildContext context, Profile profile) {
+  Widget _createLodingPage(BuildContext context, String text) {
+    return Scaffold(body: LoadingPage(text: text));
+  }
+
+  Widget _createProfilePage(BuildContext context, Profile profile) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Bearbeite Profil'),
