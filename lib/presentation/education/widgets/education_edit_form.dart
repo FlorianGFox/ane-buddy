@@ -10,26 +10,30 @@ import '../../core/widgets/ane_input_decoration.dart';
 import '../education_page.dart';
 
 class EducationEditForm extends StatefulWidget {
-  final FurtherEducationEntry _entry;
+  final int _entryToEditIndex;
   final FurtherEducation _education;
 
-  EducationEditForm(FurtherEducation education, FurtherEducationEntry entry,
-      {Key key})
-      : _entry = entry,
-        _education = education,
-        super(key: key);
+  EducationEditForm(FurtherEducation education, [int entryToEditIndex])
+      : _entryToEditIndex = entryToEditIndex,
+        _education = education;
 
   @override
   _EducationEditFormState createState() =>
-      _EducationEditFormState(_education, _entry);
+      _EducationEditFormState(_education, _entryToEditIndex);
 }
 
 class _EducationEditFormState extends State<EducationEditForm> {
   final FurtherEducation education;
+  final bool isNewEntry;
+  final int entryToEditIndex;
+
   FurtherEducationEntry entry;
 
-  _EducationEditFormState(this.education, FurtherEducationEntry entryToEdit)
-      : entry = entryToEdit ?? FurtherEducationEntry();
+  _EducationEditFormState(this.education, this.entryToEditIndex)
+      : isNewEntry = entryToEditIndex == null ? true : false,
+        entry = entryToEditIndex == null
+            ? FurtherEducationEntry()
+            : education.entries[entryToEditIndex];
 
   @override
   Widget build(BuildContext context) {
@@ -144,10 +148,7 @@ class _EducationEditFormState extends State<EducationEditForm> {
                 mediumDistance,
                 RaisedButton(
                   onPressed: () {
-                    education.entries.add(entry);
-                    context
-                        .bloc<EducationBloc>()
-                        .add(EducationEvent.save(education, entry));
+                    _saveEntry(education, entry);
                   },
                   child: Text('Speichern'),
                 ),
@@ -157,5 +158,14 @@ class _EducationEditFormState extends State<EducationEditForm> {
         );
       },
     );
+  }
+
+  void _saveEntry(FurtherEducation education, FurtherEducationEntry entry) {
+    if (isNewEntry) {
+      education.entries.add(entry);
+    } else {
+      education.entries[entryToEditIndex] = entry;
+    }
+    context.bloc<EducationBloc>().add(EducationEvent.save(education, entry));
   }
 }

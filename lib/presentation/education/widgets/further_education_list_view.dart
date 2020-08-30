@@ -1,10 +1,11 @@
-import 'package:ane_buddy/presentation/core/widgets/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/education/education_bloc.dart';
 import '../../../domain/education/entities/further_education.dart';
 import '../../../domain/education/entities/further_education_entry.dart';
+import '../../core/widgets/confirm_dialog.dart';
+import '../education_edit_page.dart';
 
 class FurtherEducationListView extends StatefulWidget {
   final FurtherEducation education;
@@ -30,16 +31,7 @@ class _FurtherEducationListViewState extends State<FurtherEducationListView> {
           title: _buildTile(context, entry),
           subtitle: _buildSubtitle(context, entry),
           onTap: () {
-            ConfirmDialog.show(
-              context,
-              title: 'Eintrag löschen?',
-              content: 'Damit wird der Eintrag unwiderruflich entfernt.',
-              onAccept: () {
-                context
-                    .bloc<EducationBloc>()
-                    .add(EducationEvent.delete(education, entry));
-              },
-            );
+            _editEntry(education, index);
           },
         );
       },
@@ -52,5 +44,30 @@ class _FurtherEducationListViewState extends State<FurtherEducationListView> {
 
   Widget _buildSubtitle(BuildContext context, FurtherEducationEntry entry) {
     return Text((entry.startDate ?? '') + ' - ' + (entry.endDate ?? ''));
+  }
+
+  void _editEntry(FurtherEducation education, int index) {
+    context
+        .bloc<EducationBloc>()
+        .add(EducationEvent.edit(education, education.entries[index]));
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => EducationEditPage(education, index)),
+    );
+  }
+
+  void _showDeleteDialog(
+      FurtherEducation education, FurtherEducationEntry entry) {
+    ConfirmDialog.show(
+      context,
+      title: 'Eintrag löschen?',
+      content: 'Damit wird der Eintrag unwiderruflich entfernt.',
+      onAccept: () {
+        context
+            .bloc<EducationBloc>()
+            .add(EducationEvent.delete(education, entry));
+      },
+    );
   }
 }
