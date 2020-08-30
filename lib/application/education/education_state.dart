@@ -4,6 +4,8 @@ part of 'education_bloc.dart';
 abstract class EducationState with _$EducationState {
   const factory EducationState.initial() = _Initial;
   const factory EducationState.loading() = _Loading;
+  const factory EducationState.finishedLoading({FurtherEducation education}) =
+      _FinishedLoading;
   const factory EducationState.viewing({
     FurtherEducation education,
     bool failed,
@@ -12,6 +14,7 @@ abstract class EducationState with _$EducationState {
   const factory EducationState.editing({
     @required FurtherEducation education,
     FurtherEducationEntry entryToEdit,
+    int indexOfEntry,
     bool failed,
     RepoFailure failure,
   }) = _Editing;

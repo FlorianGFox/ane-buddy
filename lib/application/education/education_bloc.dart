@@ -18,6 +18,10 @@ part 'education_bloc.freezed.dart';
 class EducationBloc extends Bloc<EducationEvent, EducationState> {
   final EducationDao dao;
 
+  FurtherEducation _currentEducation;
+  FurtherEducationEntry _currentEntry;
+  int _currentEntryIndex;
+
   EducationBloc(this.dao) : super(EducationState.initial());
 
   @override
@@ -27,7 +31,8 @@ class EducationBloc extends Bloc<EducationEvent, EducationState> {
     yield* event.map(
       load: _mapLoad,
       edit: _mapEdit,
-      save: _mapSave,
+      updateCashedEntry: _mapUpdateCashedEntry,
+      saveCashedEntry: _mapSaveCashedEntry,
       delete: _mapDelete,
       view: _mapView,
     );
@@ -40,31 +45,61 @@ class EducationBloc extends Bloc<EducationEvent, EducationState> {
   Stream<EducationState> _mapLoad(_Load event) async* {
     yield EducationState.loading();
     final failureOrEducation = await dao.load();
-    yield failureOrEducation.fold(
-      (failure) => EducationState.viewing(
-          education: FurtherEducation([]), failed: true, failure: failure),
-      (education) => EducationState.viewing(education: education),
+    yield* failureOrEducation.fold(
+      (failure) async* {
+        yield EducationState.viewing(
+            education: FurtherEducation([]), failed: true, failure: failure);
+      },
+      (education) async* {
+        _currentEducation = education;
+        yield EducationState.finishedLoading(education: education);
+        yield EducationState.viewing(education: education);
+      },
     );
   }
 
   Stream<EducationState> _mapEdit(_Edit event) async* {
+    if (event.education != null) {
+      _currentEducation = event.education;
+    }
+    if (event.entry != null) {
+      _currentEntry = event.entry;
+    }
+    if (event.editEntryAtIndex != null) {
+      _currentEntryIndex = event.editEntryAtIndex;
+      _currentEntry = _currentEducation.entries[_currentEntryIndex];
+    } else {
+      _currentEntry = FurtherEducationEntry();
+    }
     yield EducationState.editing(
-      education: event.education,
-      entryToEdit: event.entry,
+      education: _currentEducation,
+      entryToEdit: _currentEntry,
+      indexOfEntry: _currentEntryIndex,
     );
   }
 
-  Stream<EducationState> _mapSave(_Save event) async* {
+  Stream<EducationState> _mapUpdateCashedEntry(
+      _UpdateCashedEntry event) async* {
+    _currentEntry = event.entry;
+  }
+
+  Stream<EducationState> _mapSaveCashedEntry(_SaveCashedEntry event) async* {
     yield EducationState.saving();
-    final mayBeFailure = await dao.save(event.education);
+    FurtherEducation educationBeforeEdit = _currentEducation.copyWith();
+    if (_currentEntryIndex != null) {
+      _currentEducation.entries[_currentEntryIndex] = _currentEntry;
+    } else {
+      _currentEducation.entries.add(_currentEntry);
+    }
+    final mayBeFailure = await dao.save(_currentEducation);
     yield mayBeFailure.fold(
       (failure) => EducationState.editing(
-        education: event.education,
-        entryToEdit: event.newEntry,
+        education: educationBeforeEdit,
+        entryToEdit: _currentEntry,
         failed: true,
         failure: failure,
       ),
-      (_) => EducationState.viewing(education: event.education),
+      (_) => EducationState.viewing(education: _currentEducation),
     );
   }
 

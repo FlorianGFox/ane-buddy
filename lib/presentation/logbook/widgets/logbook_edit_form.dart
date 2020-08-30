@@ -31,67 +31,62 @@ class _LogbookEditFormState extends State<LogbookEditForm> {
         TextEditingController(text: lastTime);
     final DateFormat dateFormat = DateFormat('dd.MM.yyyy HH:mm');
 
-    return BlocListener<LogbookBloc, LogbookState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
-      child: Column(
-        children: <Widget>[
-          AneDateTimeField(
-            labelText: 'Datum und Uhrzeit',
-            dateFormat: dateFormat,
-            enableTimePicker: true,
-            firstDate: DateTime(1900),
-            initialDate: DateTime.now(),
-            lastDate: DateTime.now(),
-            controller: dateTimeFieldController,
-            onChanged: (value) {
-              setState(() {
-                lastTime = dateFormat.format(value);
-              });
+    return Column(
+      children: <Widget>[
+        AneDateTimeField(
+          labelText: 'Datum und Uhrzeit',
+          dateFormat: dateFormat,
+          enableTimePicker: true,
+          firstDate: DateTime(1900),
+          initialDate: DateTime.now(),
+          lastDate: DateTime.now(),
+          controller: dateTimeFieldController,
+          onChanged: (value) {
+            setState(() {
+              lastTime = dateFormat.format(value);
+            });
+          },
+        ),
+        RaisedButton(
+          child: Text('Hinzufügen'),
+          onPressed: () {
+            setState(() {
+              entry.dates.add(dateTimeFieldController.text);
+              context
+                  .bloc<LogbookBloc>()
+                  .add(LogbookEvent.save(logbook, entry));
+            });
+          },
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemCount: entry.dates.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(entry.dates[index]),
+                onTap: () {
+                  setState(() {
+                    ConfirmDialog.show(
+                      context,
+                      title: 'Lösche Eintrag?',
+                      content:
+                          'Damit wird der Eintrag unwiderruflich entfernt.',
+                      onAccept: () {
+                        setState(() {
+                          entry.dates.removeAt(index);
+                          context
+                              .bloc<LogbookBloc>()
+                              .add(LogbookEvent.save(logbook, entry));
+                        });
+                      },
+                    );
+                  });
+                },
+              );
             },
           ),
-          RaisedButton(
-            child: Text('Hinzufügen'),
-            onPressed: () {
-              setState(() {
-                entry.dates.add(dateTimeFieldController.text);
-                context
-                    .bloc<LogbookBloc>()
-                    .add(LogbookEvent.save(logbook, entry));
-              });
-            },
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: entry.dates.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(entry.dates[index]),
-                  onTap: () {
-                    setState(() {
-                      ConfirmDialog.show(
-                        context,
-                        title: 'Lösche Eintrag?',
-                        content:
-                            'Damit wird der Eintrag unwiderruflich entfernt.',
-                        onAccept: () {
-                          setState(() {
-                            entry.dates.removeAt(index);
-                            context
-                                .bloc<LogbookBloc>()
-                                .add(LogbookEvent.save(logbook, entry));
-                          });
-                        },
-                      );
-                    });
-                  },
-                );
-              },
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

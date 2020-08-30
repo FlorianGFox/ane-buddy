@@ -3,49 +3,36 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart' show DateFormat;
 
 import '../../../application/education/education_bloc.dart';
-import '../../../domain/education/entities/further_education.dart';
 import '../../../domain/education/entities/further_education_entry.dart';
 import '../../core/widgets/ane_date_time_field.dart';
 import '../../core/widgets/ane_input_decoration.dart';
 import '../education_page.dart';
 
 class EducationEditForm extends StatefulWidget {
-  final int _entryToEditIndex;
-  final FurtherEducation _education;
+  final FurtherEducationEntry _entry;
 
-  EducationEditForm(FurtherEducation education, [int entryToEditIndex])
-      : _entryToEditIndex = entryToEditIndex,
-        _education = education;
+  EducationEditForm(FurtherEducationEntry entry) : _entry = entry;
 
   @override
-  _EducationEditFormState createState() =>
-      _EducationEditFormState(_education, _entryToEditIndex);
+  _EducationEditFormState createState() => _EducationEditFormState(_entry);
 }
 
 class _EducationEditFormState extends State<EducationEditForm> {
-  final FurtherEducation education;
-  final bool isNewEntry;
-  final int entryToEditIndex;
-
   FurtherEducationEntry entry;
 
-  _EducationEditFormState(this.education, this.entryToEditIndex)
-      : isNewEntry = entryToEditIndex == null ? true : false,
-        entry = entryToEditIndex == null
-            ? FurtherEducationEntry()
-            : education.entries[entryToEditIndex];
+  _EducationEditFormState(this.entry);
 
   @override
   Widget build(BuildContext context) {
     final DateFormat dateFormat = DateFormat('dd.MM.yyyy');
     final SizedBox smallDistance = SizedBox(height: 15.0);
-    final SizedBox mediumDistance = SizedBox(height: 30.0);
 
     return BlocConsumer<EducationBloc, EducationState>(
       listener: (context, state) {
         state.map(
           initial: (_) {},
           loading: (_) {},
+          finishedLoading: (_) {},
           viewing: (_) {
             Navigator.popUntil(
               context,
@@ -78,6 +65,9 @@ class _EducationEditFormState extends State<EducationEditForm> {
                     entry = entry.copyWith(
                       institution: value,
                     );
+                    context
+                        .bloc<EducationBloc>()
+                        .add(EducationEvent.updateCashedEntry(entry));
                   },
                 ),
                 smallDistance,
@@ -90,6 +80,9 @@ class _EducationEditFormState extends State<EducationEditForm> {
                     entry = entry.copyWith(
                       place: value,
                     );
+                    context
+                        .bloc<EducationBloc>()
+                        .add(EducationEvent.updateCashedEntry(entry));
                   },
                 ),
                 smallDistance,
@@ -102,6 +95,9 @@ class _EducationEditFormState extends State<EducationEditForm> {
                     entry = entry.copyWith(
                       educator: value,
                     );
+                    context
+                        .bloc<EducationBloc>()
+                        .add(EducationEvent.updateCashedEntry(entry));
                   },
                 ),
                 smallDistance,
@@ -114,6 +110,9 @@ class _EducationEditFormState extends State<EducationEditForm> {
                     entry = entry.copyWith(
                       topic: value,
                     );
+                    context
+                        .bloc<EducationBloc>()
+                        .add(EducationEvent.updateCashedEntry(entry));
                   },
                 ),
                 smallDistance,
@@ -127,8 +126,12 @@ class _EducationEditFormState extends State<EducationEditForm> {
                       TextEditingController(text: entry.startDate ?? ''),
                   onChanged: (value) {
                     entry = entry.copyWith(
-                      startDate: dateFormat.format(value),
+                      startDate:
+                          value == null ? null : dateFormat.format(value),
                     );
+                    context
+                        .bloc<EducationBloc>()
+                        .add(EducationEvent.updateCashedEntry(entry));
                   },
                 ),
                 smallDistance,
@@ -141,16 +144,12 @@ class _EducationEditFormState extends State<EducationEditForm> {
                   controller: TextEditingController(text: entry.endDate ?? ''),
                   onChanged: (value) {
                     entry = entry.copyWith(
-                      endDate: dateFormat.format(value),
+                      endDate: value == null ? null : dateFormat.format(value),
                     );
+                    context
+                        .bloc<EducationBloc>()
+                        .add(EducationEvent.updateCashedEntry(entry));
                   },
-                ),
-                mediumDistance,
-                RaisedButton(
-                  onPressed: () {
-                    _saveEntry(education, entry);
-                  },
-                  child: Text('Speichern'),
                 ),
               ],
             ),
@@ -158,14 +157,5 @@ class _EducationEditFormState extends State<EducationEditForm> {
         );
       },
     );
-  }
-
-  void _saveEntry(FurtherEducation education, FurtherEducationEntry entry) {
-    if (isNewEntry) {
-      education.entries.add(entry);
-    } else {
-      education.entries[entryToEditIndex] = entry;
-    }
-    context.bloc<EducationBloc>().add(EducationEvent.save(education, entry));
   }
 }

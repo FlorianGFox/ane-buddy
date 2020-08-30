@@ -41,6 +41,7 @@ class _EducationPageState extends State<_EducationPage> {
               pageToBuild = LoadingPage(text: 'Lade Weiterbildungen...');
             });
           },
+          finishedLoading: (_) {},
           viewing: (state) {
             setState(() {
               pageToBuild = _createPage(context, state.education);
@@ -50,6 +51,15 @@ class _EducationPageState extends State<_EducationPage> {
             context
                 .bloc<EducationBloc>()
                 .add(EducationEvent.view(editingState.education));
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => EducationEditPage(
+                        editingState.education,
+                        editingState.entryToEdit,
+                        editingState.indexOfEntry,
+                      )),
+            );
           },
           deleting: (_) {},
           saving: (_) {},
@@ -66,12 +76,7 @@ class _EducationPageState extends State<_EducationPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          context.bloc<EducationBloc>().add(EducationEvent.edit(education));
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => EducationEditPage(education)),
-          );
+          context.bloc<EducationBloc>().add(EducationEvent.edit());
         },
         child: Icon(Icons.add),
       ),
