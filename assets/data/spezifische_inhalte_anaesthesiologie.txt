@@ -1,0 +1,100 @@
+# Spezifische Inhalte der Facharzt-Weiterbildung Anästhesiologie
+
+## Übergreifende Inhalte der Facharzt-Weiterbildung Anästhesiologie
+Wesentliche Gesetze, Verordnungen und Richtlinien
+Basisbehandlung palliativmedizinisch zu versorgender Patienten
+
+## Präanästhesiologische Vorbereitung
+Aufklärung von Patienten über Risiken von Anästhesieverfahren und -medikamenten sowie Einholung der rechtsgültigen Einwilligung
+Präanästhesiologische Risikoevaluation, insbesondere Prädiktoren für schwierige Atemwege und schwierige Beatmung
+Identifikation und Umgang mit relevanten kardiovaskulären pulmonalen, neurologischen und muskulären Risikofaktoren
+Auswahl eines geeigneten Anästhesieverfahrens einschließlich
+- präanästhesiologischer Vorbereitung unter Berücksichtigung einer Dauermedikation
+- medikamentöser Prämedikation
+- erforderlichem Monitoring
+- Berücksichtigung des Erfordernisses präanästhesiologischer Nüchternheit
+
+## Anästhesiologische Verfahren und Techniken
+Atemwegsmanagement, technische Maßnahmen zur Behandlung des einfachen und des schwierigen Atemweges einschließlich der schwierigen Intubation (Difficult Airway), davon
+- fiberoptische Techniken einschließlich fiberoptische Intubationen, davon können bis zu 50% durch Simulation erfolgen 25
+- videoassistierte Intubationsverfahren 20
+Anästhesiologische Überwachung
+Postanästhesiologische Patientenversorgung
+Anästhesierelevante Ultraschallverfahren, insbesondere Notfallsonographie, transösophageale und transthorakale Echokardiographie
+Durchführung anästhesierelevanter Ultraschallverfahren bei unterschiedlichen Maßnahmen, insbesondere bei ZVK-Anlage, Pleurapunktion, sonographisch gesteuerter Gefäßpunktion und Regionalanästhesie 50
+Allgemeinanästhesien und intraoperative Beatmung einschließlich Einleitung, intraoperative Überwachung, Ausleitung, postoperative Patientenversorgung, postoperative Schmerztherapie
+Durchführung von Anästhesieverfahren, davon 1.800
+- bei abdominellen Eingriffen 300
+- bei Patienten mit mindestens ASA 3-Klassifikation 100
+
+## Anästhesie bei neurochirurgischen und neurointerventionellen Eingriffen
+Risiken und Vorteile unterschiedlicher anästhesiologischer Verfahren bei neurochirurgischen und neurointerventionellen Eingriffen
+Prinzipien und Besonderheiten der Anästhesiologie bei intrakraniellen Eingriffen
+Mitwirkung bei Anästhesien für intrakranielle Eingriffe 25
+
+## Kinderanästhesie
+Besonderheiten der pädiatrischen Anästhesiologie einschließlich Monitoring, Atemwegsmanagement, intravenöse und intraossäre Zugänge, Narkoseeinleitung, Narkoseaufrechterhaltung, Narkoseausleitung, postanästhesiologische Versorgung, Flüssigkeits- und Volumentherapie
+Durchführung von Anästhesien bei Säuglingen und Kleinkindern bis zum vollendeten 5. Lebensjahr 50
+Reanimationstraining
+
+## Anästhesie bei Schwangeren und in der Geburtshilfe
+Durchführung von Allgemeinanästhesien, Regionalanästhesien und perioperativer Behandlung bei Schwangeren
+Schmerztherapie in der Geburtshilfe einschließlich bei Kaiserschnitten
+Durchführung von Anästhesieverfahren in der Geburtshilfe, davon 50
+- bei Kaiserschnitten 25
+
+## Anästhesie bei Thoraxeingriffen
+Prinzipien und Besonderheiten der Anästhesiologie bei throraxchirurgischen Eingriffen
+Perioperative Schmerztherapie einschließlich epiduraler, paravertebraler und intervertebraler Blockaden in der Thoraxchirurgie
+Mitwirkung bei Anästhesien für intrathorakale Eingriffe 25
+
+## Kardiovaskuläre Anästhesie
+Prinzipien und Besonderheiten der Anästhesiologie bei kardiochirurgischen und herznahen gefäßchirurgischen Eingriffen, insbesondere des kardiopulmonalen Bypasses und anderer kreislaufunterstützender Maßnahmen
+Anästhesie bei Operationen im Kopf-Hals-Bereich Anästhesien bei Eingriffen im Kopf-Hals-Bereich auch mit schwierigem Zugang zum Atemweg in der Augenheilkunde, Hals-Nasen-Ohrenheilkunde, Mund-Kiefer-Gesichtschirurgie, Neurochirurgie oder Plastischen, Rekonstruktiven und Ästhetischen Chirurgie 100
+
+## Regionalanästhesie
+Durchführung rückenmarksnaher Regionalanästhesien einschließlich intraoperativer Überwachung, postoperativer Patientenversorgung, postoperativer Schmerztherapie 50
+Durchführung peripher-regionalanästhesiologischer Verfahren einschließlich intraoperativer Überwachung, postoperativer Patientenversorgung, postoperativer Schmerztherapie 50
+
+## Anästhesie bei ambulanten Patienten
+Mindestanforderungen für die Anwendung anästhesiologischer Verfahren bei ambulanten Eingriffen
+Durchführung von Anästhesien bei ambulanten Eingriffen unter Beachtung der Rahmenbedingungen und des spezifischen Risikos sowie Sicherstellung der perioperativen Versorgung 50
+
+## Anästhesiologische Verfahren außerhalb des Operationssaales
+Gewährleisten von Sicherheitsstandards im Zusammenhang mit anästhesiologischen Verfahren bei CT-und MRT-Untersuchungen oder anderen minimal-invasiven und diagnostischen Eingriffen
+Transport des Patienten zu Untersuchungen und Eingriffen
+
+## Intensivmedizin
+Diagnostik und Therapie vital bedrohlicher Erkrankungen und Zustände auf einer Intensivstation oder Intermediate Care Station, insbesondere bei
+- respiratorischer Insuffizienz
+- kardialer Insuffizienz
+- Ein- und Mehrorganversagen
+- Delir
+- endokrinen Störungen
+- erhöhtem Hirndruck
+- Sepsis
+- Schock
+- Trauma/Polytrauma
+Prävention, Diagnostik, Therapie und Management von Infektionen
+Intensivmedizinische Behandlung von Patienten mit Funktionsstörungen von mindestens zwei vitalen Organsystemen 100
+Analgosedierung von intensivmedizinischen Patienten
+Atemunterstützende Maßnahmen bei nichtintubierten Patienten, differenzierte Beatmungstechniken einschließlich Beatmungsentwöhnung bei langzeitbeatmeten Patienten 50
+Differenzierte Flüssigkeits- und Volumentherapie einschließlich Transfusions- und Blutersatztherapie
+Enterale und parenterale Ernährung, Erstellung eines Ernährungsplans sowie Therapie von Stoffwechselentgleisungen
+Punktions- und Katheterisierungstechniken, auch sonographisch gesteuert, davon
+- zentralvenöse Zugänge 30
+- arterielle Zugänge 30
+- Pleurapunktionen, Pleuradrainagen 5
+Tracheo- und Bronchoskopien 25
+Perkutane Tracheotomien
+
+## Schmerzmedizinische Verfahren
+Nervenblockaden, insbesondere zur perioperativen regionalen Schmerztherapie einschließlich Katheterverfahren
+Verfahren zur pharmakologischen und nichtpharmakologischen Schmerztherapie
+Grundlagen der Behandlung chronischer Schmerzen
+
+## Notfall- und Zwischenfallmanagement, Trauma und Verbrennungen, Rettungswesen
+Reanimation von Patienten aller Altersgruppen Transportbegleitung von Intensivpatienten einschließlich der Vorbereitung zum Interhospitaltransfer
+Ossärer Zugang
+Erstversorgung beim Traumapatienten einschließlich Brandverletzten
+Zwischenfalltraining 5
