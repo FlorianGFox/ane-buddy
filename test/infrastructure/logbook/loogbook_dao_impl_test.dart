@@ -1,21 +1,28 @@
+import 'dart:io';
+
 import 'package:ane_buddy/domain/core/repositories/repo_failure.dart';
 import 'package:ane_buddy/domain/logbook/entities/logbook.dart';
 import 'package:ane_buddy/domain/logbook/repositories/logbook_dao.dart';
 import 'package:ane_buddy/infrastructure/core/json_map_dao.dart';
 import 'package:ane_buddy/infrastructure/logbook/loogbook_dao_impl.dart';
+import 'package:ane_buddy/infrastructure/logbook/logbook_content_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
 class MockJsonMapDao extends Mock implements JsonMapDao {}
 
+class MockLogbookContentRepo extends Mock implements LogbookContentRepo {}
+
 void main() {
   LogbookDao dao;
   MockJsonMapDao mockDao;
+  MockLogbookContentRepo mockContentRepo;
 
   setUp(() {
     mockDao = MockJsonMapDao();
-    dao = LogbookDaoImpl(mockDao);
+    mockContentRepo = MockLogbookContentRepo();
+    dao = LogbookDaoImpl(mockDao, mockContentRepo);
   });
 
   group('Save', () {
@@ -71,6 +78,29 @@ void main() {
       await dao.dispose();
       //assert
       verify(mockDao.dispose());
+    });
+  });
+
+  group('LoadInital', () {
+    Logbook tLogbook = Logbook([]);
+    IOException tException = FileSystemException();
+    test('Returns failure when exception happens.', () async {
+      //arrange
+      when(mockContentRepo.load()).thenThrow(tException);
+      //act
+      final result = await dao.loadInitial();
+      //assert
+      expect(result, Left(RepoFailure.notFound()));
+    });
+
+    test('Returns result from content repo.', () async {
+      //arrange
+      when(mockContentRepo.load())
+          .thenAnswer((realInvocation) async => tLogbook);
+      //act
+      final result = await dao.loadInitial();
+      //assert
+      expect(result, Right(tLogbook));
     });
   });
 }

@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 
 abstract class LogbookDao {
   Future<Either<RepoFailure, Logbook>> load();
+  Future<Either<RepoFailure, Logbook>> loadInitial();
   Future<Either<RepoFailure, void>> save(Logbook logbook);
   Future<void> dispose();
 }

@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:ane_buddy/infrastructure/logbook/logbook_content_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
@@ -12,8 +15,9 @@ class LogbookDaoImpl implements LogbookDao {
   static const String key = 'logbook0';
 
   final JsonMapDao jsonMapDao;
+  final LogbookContentRepo textLogbookRepo;
 
-  LogbookDaoImpl(this.jsonMapDao);
+  LogbookDaoImpl(this.jsonMapDao, this.textLogbookRepo);
 
   @override
   Future<void> dispose() {
@@ -41,5 +45,15 @@ class LogbookDaoImpl implements LogbookDao {
   Future<Either<RepoFailure, void>> save(Logbook logbook) {
     Map<String, dynamic> jsonMap = logbook.toJson();
     return jsonMapDao.save(jsonMap, table, key);
+  }
+
+  @override
+  Future<Either<RepoFailure, Logbook>> loadInitial() async {
+    try {
+      final result = await textLogbookRepo.load();
+      return Right(result);
+    } on FileSystemException {
+      return Left(RepoFailure.notFound());
+    }
   }
 }

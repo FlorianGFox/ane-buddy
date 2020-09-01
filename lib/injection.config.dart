@@ -14,6 +14,7 @@ import 'infrastructure/core/hive_repo.dart';
 import 'infrastructure/core/json_map_dao.dart';
 import 'infrastructure/core/json_repo.dart';
 import 'application/logbook/logbook_bloc.dart';
+import 'infrastructure/logbook/logbook_content_repo.dart';
 import 'domain/logbook/repositories/logbook_dao.dart';
 import 'infrastructure/logbook/loogbook_dao_impl.dart';
 import 'infrastructure/print/path_provider.dart';
@@ -35,11 +36,13 @@ GetIt $initGetIt(
 }) {
   final gh = GetItHelper(get, environment, environmentFilter);
   gh.factory<JsonRepo>(() => HiveRepo());
+  gh.lazySingleton<LogbookContentRepo>(() => LogbookContentRepo());
   gh.lazySingleton<PathProvider>(() => PathProvider());
   gh.lazySingleton<PdfCreator>(() => PdfCreator());
   gh.lazySingleton<PdfDao>(() => PdfDaoImpl(pathProvider: get<PathProvider>()));
   gh.factory<JsonMapDao>(() => JsonMapDao(get<JsonRepo>()));
-  gh.lazySingleton<LogbookDao>(() => LogbookDaoImpl(get<JsonMapDao>()));
+  gh.lazySingleton<LogbookDao>(
+      () => LogbookDaoImpl(get<JsonMapDao>(), get<LogbookContentRepo>()));
   gh.lazySingleton<ProfileDao>(() => ProfileDaoImpl(get<JsonMapDao>()));
   gh.lazySingleton<EducationDao>(() => EducationDaoImpl(get<JsonMapDao>()));
   gh.factory<LogbookBloc>(() => LogbookBloc(get<LogbookDao>()));
