@@ -4,6 +4,7 @@
 // InjectableConfigGenerator
 // **************************************************************************
 
+import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
@@ -17,6 +18,7 @@ import 'application/logbook/logbook_bloc.dart';
 import 'infrastructure/logbook/logbook_content_repo.dart';
 import 'domain/logbook/repositories/logbook_dao.dart';
 import 'infrastructure/logbook/loogbook_dao_impl.dart';
+import 'infrastructure/logbook/logbook_mapper.dart';
 import 'infrastructure/print/path_provider.dart';
 import 'domain/print/pdf_creator.dart';
 import 'domain/print/pdf_dao.dart';
@@ -36,7 +38,8 @@ GetIt $initGetIt(
 }) {
   final gh = GetItHelper(get, environment, environmentFilter);
   gh.factory<JsonRepo>(() => HiveRepo());
-  gh.lazySingleton<LogbookContentRepo>(() => LogbookContentRepo());
+  gh.lazySingleton<LogbookContentRepo>(
+      () => LogbookContentRepo(get<LogbookMapper>(), get<AssetBundle>()));
   gh.lazySingleton<PathProvider>(() => PathProvider());
   gh.lazySingleton<PdfCreator>(() => PdfCreator());
   gh.lazySingleton<PdfDao>(() => PdfDaoImpl(pathProvider: get<PathProvider>()));
