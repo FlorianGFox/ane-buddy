@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
 
 import 'package:ane_buddy/domain/core/repositories/repo_failure.dart';
 import 'package:ane_buddy/domain/logbook/entities/logbook.dart';
@@ -36,16 +34,20 @@ class LogbookBloc extends Bloc<LogbookEvent, LogbookState> {
   Stream<LogbookState> _mapLoad(_Load event) async* {
     yield LogbookState.loading();
     final failureOrLogbook = await dao.load();
-    yield failureOrLogbook.fold(
-      (failure) {
-        String jsonData = File(
-          'assets/data/initial_logbook.json',
-        ).readAsStringSync();
-        final jsonMap = json.decode(jsonData);
-        return LogbookState.viewing(
-          logbook: Logbook.fromJson(jsonMap),
-          failed: true,
-          failure: failure,
+    yield await failureOrLogbook.fold(
+      (failure) async {
+        final failureOrInitial = await dao.loadInitial();
+        return failureOrInitial.fold(
+          (initialFailure) => LogbookState.viewing(
+            logbook: null,
+            failed: true,
+            failure: initialFailure,
+          ),
+          (initial) => LogbookState.viewing(
+            logbook: initial,
+            failed: true,
+            failure: failure,
+          ),
         );
       },
       (logbook) => LogbookState.viewing(logbook: logbook),

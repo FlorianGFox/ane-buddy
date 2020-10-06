@@ -54,7 +54,7 @@ void main() {
     });
 
     test(
-        '[Loading, Viewing] is emitted with correct failure a failure happend.',
+        '[Loading, Viewing] is emitted with correct failure if initial can be loaded.',
         () async {
       //arrange
       final expectedFailure = RepoFailure.unknown();
@@ -67,10 +67,46 @@ void main() {
         )
       ];
       when(mockDao.load()).thenAnswer((_) async => Left(expectedFailure));
+      when(mockDao.loadInitial())
+          .thenAnswer((_) async => Right(tInitialLogbook));
       //act
       bloc.add(LogbookEvent.load());
       //assert
       expectLater(bloc, emitsInOrder(expected));
+    });
+
+    test(
+        '[Loading, Viewing] is emitted with correct failure if initial cannot be loaded.',
+        () async {
+      final expectedFailure = RepoFailure.unknown();
+      final expected = [
+        LogbookState.loading(),
+        LogbookState.viewing(
+          logbook: null,
+          failed: true,
+          failure: expectedFailure,
+        )
+      ];
+      when(mockDao.load()).thenAnswer((_) async => Left(expectedFailure));
+      when(mockDao.loadInitial())
+          .thenAnswer((_) async => Left(expectedFailure));
+      //act
+      bloc.add(LogbookEvent.load());
+      //assert
+      expectLater(bloc, emitsInOrder(expected));
+    });
+
+    test('Initial values are loaded when loading fails.', () async {
+      //arrange
+      final expectedFailure = RepoFailure.unknown();
+      when(mockDao.load()).thenAnswer((_) async => Left(expectedFailure));
+      when(mockDao.loadInitial())
+          .thenAnswer((_) async => Right(tInitialLogbook));
+      //act
+      bloc.add(LogbookEvent.load());
+      await untilCalled(mockDao.loadInitial());
+      //assert
+      verify(mockDao.loadInitial());
     });
   });
 

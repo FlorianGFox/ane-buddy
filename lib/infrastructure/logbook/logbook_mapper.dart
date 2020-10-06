@@ -1,7 +1,10 @@
+import 'package:injectable/injectable.dart';
+
 import '../../domain/logbook/entities/logbook.dart';
 import '../../domain/logbook/entities/logbook_entry.dart';
 import '../../domain/logbook/entities/logbook_list.dart';
 
+@lazySingleton
 class LogbookMapper {
   Logbook stringToLogbook(String string) {
     //final mainHeaderRegex = RegExp(r'^#[^#](.+)');

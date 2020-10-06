@@ -17,7 +17,8 @@ void main() {
   setUp(() {
     assetBundle = MockAssetBundle();
     logMapper = MockLogbookMapper();
-    repo = LogbookContentRepo(logMapper, assetBundle);
+    repo = LogbookContentRepo(logMapper);
+    repo.assetBundle = assetBundle;
   });
 
   group('Load', () {

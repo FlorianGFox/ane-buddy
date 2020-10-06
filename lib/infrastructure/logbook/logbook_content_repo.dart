@@ -6,19 +6,22 @@ import '../../domain/logbook/entities/logbook.dart';
 
 @lazySingleton
 class LogbookContentRepo {
-  final AssetBundle bundle;
+  AssetBundle _bundle = rootBundle;
+  void set assetBundle(AssetBundle bundle) {
+    _bundle = bundle;
+  }
+
   final LogbookMapper logbookMapper;
 
   final String generalContentPath = 'assets/data/allgemeine_inhalte.txt';
   final String specificContentPath =
       'assets/data/spezifische_inhalte_anaesthesiologie.txt';
 
-  LogbookContentRepo(this.logbookMapper, [AssetBundle assetBundle])
-      : this.bundle = assetBundle ?? rootBundle;
+  LogbookContentRepo(this.logbookMapper);
 
   Future<Logbook> load() async {
-    final generalContentString = await bundle.loadString(generalContentPath);
-    final specificContentString = await bundle.loadString(specificContentPath);
+    final generalContentString = await _bundle.loadString(generalContentPath);
+    final specificContentString = await _bundle.loadString(specificContentPath);
     return logbookMapper
         .stringToLogbook(generalContentString + '\n' + specificContentString);
   }
