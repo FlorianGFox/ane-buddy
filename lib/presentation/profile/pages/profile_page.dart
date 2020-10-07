@@ -47,7 +47,11 @@ class _ProfilePageState extends State<_ProfilePage> {
               pageToBuild = _createProfilePage(context, state.profile);
             });
           },
-          ready: (_) {},
+          ready: (state) {
+            setState(() {
+              pageToBuild = _createProfilePage(context, state.profile);
+            });
+          },
           saving: (_) {},
           finishedSaving: (_) {
             Navigator.pop(context);

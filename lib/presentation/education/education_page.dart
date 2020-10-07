@@ -41,7 +41,11 @@ class _EducationPageState extends State<_EducationPage> {
               pageToBuild = LoadingPage(text: 'Lade Weiterbildungen...');
             });
           },
-          finishedLoading: (_) {},
+          finishedLoading: (state) {
+            setState(() {
+              pageToBuild = _createPage(context, state.education);
+            });
+          },
           viewing: (state) {
             setState(() {
               pageToBuild = _createPage(context, state.education);
